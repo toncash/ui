@@ -32,12 +32,11 @@ function App() {
 
   return (
     <StyledApp>
-{/* 
       <AppContainer>
         <FlexBoxCol>
-          <FlexBoxRow> */}
-            <Auth/>
-            {/* <Button>
+          <FlexBoxRow>
+            <Auth />
+            <Button>
               {network
                 ? network === CHAIN.MAINNET
                   ? "mainnet"
@@ -49,7 +48,7 @@ function App() {
           <TransferTon />
           <Jetton />
         </FlexBoxCol>
-      </AppContainer> */}
+      </AppContainer>
     </StyledApp>
   );
 }
