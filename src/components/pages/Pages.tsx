@@ -1,24 +1,61 @@
-import React from 'react'
-import {BrowserRouter, Route, Navigate} from 'react-router-dom'
-import { Auth } from './Auth'
-// import Error404 from './pages/Error404'
 
-export const PATH = {
-    AUTH: '/auth',
-    EXCHANGE: 'exchange'
+import { TonConnectButton } from "@tonconnect/ui-react";
+import { Counter } from "../Counter";
+import { Jetton } from "../Jetton";
+import { TransferTon } from "../TransferTon";
+import styled from "styled-components";
+import { Button, FlexBoxCol, FlexBoxRow } from "../styled/styled";
+import { useTonConnect } from "../../hooks/useTonConnect";
+import { CHAIN } from "@tonconnect/protocol";
+import "@twa-dev/sdk";
+import { Auth } from "./Auth";
+import { MainInfo } from "./MainInfo";
+import { Routes } from "react-router-dom";
+
+export const StyledApp = styled.div`
+  background-color: #d7f1f7;
+  color: black;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #222;
+    color: white;
+  }
+  min-height: 100vh;
+  padding: 20px 20px;
+`;
+
+const AppContainer = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+`;
+
+export const Pages = () => {
+  const { network } = useTonConnect();
+
+  return (
+  
+<Routes>
+    <StyledApp>
+    <MainInfo />
+    {/* <AppContainer>
+      <FlexBoxCol>
+        <FlexBoxRow>
+          <Auth />
+          <Button>
+            {network
+              ? network === CHAIN.MAINNET
+                ? "mainnet"
+                : "testnet"
+              : "N/A"}
+          </Button>
+        </FlexBoxRow>
+        <Counter />
+        <TransferTon />
+        <Jetton />
+      </FlexBoxCol>
+    </AppContainer> */}
+  </StyledApp>
+  </Routes>      
+  );
 }
 
-export function Pages() {
-    return (
-        <div>
-            <BrowserRouter>
-            <Route path='/' element={<Navigate to={'/auth'} />} />
-            <Route path='/auth' element={<Auth />} />
-
-            </BrowserRouter>
-
-        </div>
-    )
-}
-
-export default Pages
