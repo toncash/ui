@@ -2,6 +2,7 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { useCounterContract } from "../hooks/useCounterContract";
 import { useTonConnect } from "../hooks/useTonConnect";
 
+
 import {
   Card,
   FlexBoxCol,
@@ -16,7 +17,7 @@ export function Counter() {
 
   return (
     <div className="Container">
-      <TonConnectButton />
+      {/* <TonConnectButton /> */}
 
       <Card>
         <FlexBoxCol>
@@ -30,8 +31,8 @@ export function Counter() {
             <div>{value ?? "Loading..."}</div>
           </FlexBoxRow>
           <Button
-            disabled={!connected}
-            className={`Button ${connected ? "Active" : "Disabled"}`}
+            disabled={connected} //т.к стр вторая он будет коннектед всегда
+            className={`Button Active`}
             onClick={() => {
               sendIncrement();
             }}

@@ -35,7 +35,7 @@ function App() {
       <AppContainer>
         <FlexBoxCol>
           <FlexBoxRow>
-            <Auth />
+            {/* <Auth /> */}
             <Button>
               {network
                 ? network === CHAIN.MAINNET

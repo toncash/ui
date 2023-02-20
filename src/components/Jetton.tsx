@@ -26,7 +26,7 @@ export function Jetton() {
           <div>{balance ?? "Loading..."}</div>
         </FlexBoxRow>
         <Button
-          disabled={!connected}
+          disabled={connected}
           onClick={async () => {
             mint();
           }}
