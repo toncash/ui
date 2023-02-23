@@ -2,6 +2,8 @@ import { ImageAvatar } from '@twa-dev/mark42';
 import styled from 'styled-components';
 import { Button, FlexBoxCol, FlexBoxRow } from '../styled/styled';
 import { AuthStyle } from './Auth';
+import { MapComponent } from '../map/MapComponent';
+
 // type AuthType = {
 
 // }
@@ -86,6 +88,8 @@ export const MainInfo = () => {
                     <ButtonOrder onClick={()=>{console.log('MAke order')}}>Make order</ButtonOrder>
                     <ButtonOrder onClick={()=>{console.log('Find order')}}>Find order</ButtonOrder>
                 </FlexBoxRow1>
+
+                <MapComponent/>
 
             </FlexBoxCol>
 
