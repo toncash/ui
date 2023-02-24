@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FlexBoxCol, Input } from "../styled/styled";
-import { ButtonOrder, FlexBoxRow1 } from "./MainInfo"
+import { ButtonOrder, FlexBoxRow1 } from "./Profile"
 // import SelectCurrency from '../../../src'
 
 export const TextTitle = styled.div`

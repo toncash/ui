@@ -1,7 +1,7 @@
 import { ImageAvatar } from '@twa-dev/mark42';
 import styled from 'styled-components';
 import { Button, FlexBoxCol, FlexBoxRow } from '../styled/styled';
-import { AuthStyle } from './Auth';
+import { LoginStyle } from './Login';
 import { MapComponent } from '../map/MapComponent';
 
 // type AuthType = {
@@ -61,9 +61,9 @@ font-weight: 700;
 `;
 
 
-export const MainInfo = () => {
+export const Profile = () => {
     return (
-        <AuthStyle>
+        <LoginStyle>
             <Button>Out</Button>
             <FlexBoxCol>
                 <CenterImg>
@@ -94,6 +94,6 @@ export const MainInfo = () => {
             </FlexBoxCol>
 
 
-        </AuthStyle>
+        </LoginStyle>
     )
 }

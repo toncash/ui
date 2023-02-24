@@ -8,8 +8,8 @@ import { Button, FlexBoxCol, FlexBoxRow } from "../styled/styled";
 import { useTonConnect } from "../../hooks/useTonConnect";
 import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
-import { Auth } from "./Auth";
-import { MainInfo } from "./MainInfo";
+import { Login } from "./Login";
+import { Profile } from "./Profile";
 import { Routes } from "react-router-dom";
 
 export const StyledApp = styled.div`
@@ -36,11 +36,11 @@ export const Pages = () => {
   
 <Routes>
     <StyledApp>
-    <MainInfo />
+    <Profile />
     {/* <AppContainer>
       <FlexBoxCol>
         <FlexBoxRow>
-          <Auth />
+          <Login />
           <Button>
             {network
               ? network === CHAIN.MAINNET
