@@ -7,7 +7,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ReactNode, useState } from "react";
 import { PATH_LOGIN, PATH_PROFILE, routes } from "./components/config/routes-config";
 import {useTonConnect} from "./hooks/useTonConnect";
-
+import "@twa-dev/sdk";
 
 
 const App = () => {
