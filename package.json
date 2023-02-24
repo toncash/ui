@@ -1,5 +1,6 @@
 {
   "name": "ton-starter-twa-vite",
+  "homepage": "https://toncash.github.io/ui/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,17 +8,22 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "configbot": "node configure.js"
+    "configbot": "node configure.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@orbs-network/ton-access": "^2.2.2",
+    "@react-google-maps/api": "^2.18.1",
     "@tanstack/react-query": "^4.24.4",
     "@tonconnect/ui-react": "^0.0.14",
+    "@twa-dev/mark42": "^0.0.37",
     "@twa-dev/sdk": "^6.4.2",
     "buffer": "^6.0.3",
     "is-mobile": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
     "styled-components": "^5.3.6",
     "ton": "13.3.0",
     "ton-core": "^0.46.0",
@@ -31,6 +37,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^3.0.1",
+    "gh-pages": "^5.0.0",
     "typescript": "^4.9.5",
     "vite": "^4.0.4"
   }

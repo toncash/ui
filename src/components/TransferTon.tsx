@@ -34,7 +34,7 @@ export function TransferTon() {
           ></Input>
         </FlexBoxRow>
         <Button
-          disabled={!connected}
+          disabled={connected}
           style={{ marginTop: 18 }}
           onClick={async () => {
             sender.send({
