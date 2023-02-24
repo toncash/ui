@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@orbs-network/ton-access": "^2.2.2",
+    "@react-google-maps/api": "^2.18.1",
     "@tanstack/react-query": "^4.24.4",
     "@tonconnect/ui-react": "^0.0.14",
     "@twa-dev/mark42": "^0.0.37",
@@ -20,6 +21,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
+    "react-select-currency": "^1.0.7",
+    "react-select-currency-2": "^1.0.6",
     "styled-components": "^5.3.6",
     "ton": "13.3.0",
     "ton-core": "^0.46.0",
