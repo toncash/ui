@@ -15,7 +15,7 @@ export const Login = () => {
   return (
       <LoginStyle>
               <CenterImg>
-                  <ImageAvatar src='https://api.telegram.org/file/bot6274692659:AAE8iBiGQdXJczgmig85FBbTzxwwZ1k3rhY/photos/file_0.jpg' size={300} style={{
+                  <ImageAvatar src='https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png' size={300} style={{
                       marginTop: 50
                   }} />
               </CenterImg>
