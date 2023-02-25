@@ -22,7 +22,7 @@ const App = () => {
     }
     return (
         <StyledApp>
-            <TonConnectButton style={{ minWidth: 300, height: 50, padding: 25  }} />
+            <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} />
             {connected?
                 <BrowserRouter>
                     <Routes>
