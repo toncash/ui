@@ -6,6 +6,6 @@ export const PATH_LOGIN = "/login"
 export const PATH_PROFILE = "/profile"
 
 export const routes: RouteType[] = [
-    {path: PATH_LOGIN, element: <Login/>, label: "Login"},
-    {path: PATH_PROFILE, element: <Profile/>, label: "Profile"}
+    {path: PATH_LOGIN, element: <Login/>, label: "Login", authenticated: false},
+    {path: PATH_PROFILE, element: <Profile/>, label: "Profile", authenticated: true}
 ]

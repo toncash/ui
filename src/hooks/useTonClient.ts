@@ -7,7 +7,6 @@ import { CHAIN } from "@tonconnect/protocol";
 
 export function useTonClient() {
   const { network } = useTonConnect();
-
   return {
     client: useAsyncInitialize(async () => {
       if (!network) return;

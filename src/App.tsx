@@ -3,15 +3,18 @@ import "./App.css";
 import { Profile } from "./components/pages/Profile";
 import { Login } from "./components/pages/Login";
 import { Order } from "./components/pages/Order";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { ReactNode, useState } from "react";
-import { PATH_LOGIN, PATH_PROFILE, routes } from "./components/config/routes-config";
+import {BrowserRouter, Navigate, Route, Routes, useNavigate} from "react-router-dom";
+import React, {ReactNode, useEffect, useState} from "react";
+import { PATH_LOGIN, PATH_PROFILE, routes } from "./config/routes-config";
 import {useTonConnect} from "./hooks/useTonConnect";
 import "@twa-dev/sdk";
+import {TonConnectButton, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
+import {RouteType} from "./models/common/route-type";
 
 
 const App = () => {
-    const {connected} = useTonConnect()
+    const { connected } = useTonConnect();
+
 
     function getRoutes(): ReactNode[] {
         return routes.map(r => (
@@ -19,14 +22,20 @@ const App = () => {
     }
     return (
         <StyledApp>
-            <BrowserRouter>
-                <Routes>
-                    {getRoutes()}
-                    {
-                        <Route path="/" element={<Navigate to={connected ? PATH_PROFILE : PATH_LOGIN} />} />
-                    }
-                </Routes>
-            </BrowserRouter>
+            <TonConnectButton style={{ minWidth: 300, height: 50, padding: 25  }} />
+            {connected?
+                <BrowserRouter>
+                    <Routes>
+                        {getRoutes()}
+                        {
+                            <Route path="/" element={<Navigate to={PATH_PROFILE} />} />
+                        }
+                    </Routes>
+                </BrowserRouter>
+                :
+                <Login/>
+            }
+
         </StyledApp>
     )
 }

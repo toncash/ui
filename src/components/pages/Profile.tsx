@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Button, FlexBoxCol, FlexBoxRow } from '../styled/styled';
 import { LoginStyle } from './Login';
 import { MapComponent } from '../map/MapComponent';
+import {TonConnectButton} from "@tonconnect/ui-react";
+import React from "react";
 
 // type AuthType = {
 
@@ -64,8 +66,9 @@ font-weight: 700;
 export const Profile = () => {
     return (
         <LoginStyle>
-            <Button>Out</Button>
+
             <FlexBoxCol>
+
                 <CenterImg>
                     <ImageAvatar src='https://api.telegram.org/file/bot6274692659:AAE8iBiGQdXJczgmig85FBbTzxwwZ1k3rhY/photos/file_0.jpg' size={200} style={{
                         marginTop:50
