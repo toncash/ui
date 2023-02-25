@@ -15,7 +15,7 @@ export const Login = () => {
   return (
       <LoginStyle>
               <CenterImg>
-                  <ImageAvatar src='https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png' size={300} style={{
+                  <ImageAvatar src='https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png' size={150} style={{
                       marginTop: 50
                   }} />
               </CenterImg>
