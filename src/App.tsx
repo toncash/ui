@@ -28,7 +28,7 @@ const App = () => {
                     <Routes>
                         {getRoutes()}
                         {
-                            <Route path="/" element={<Navigate to={PATH_PROFILE} />} />
+                            <Route path="/ui/" element={<Navigate to={PATH_PROFILE} />} />
                         }
                     </Routes>
                 </BrowserRouter>
