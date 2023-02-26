@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { OrderMapComponent } from "../map/OrderMapComponent";
 import { FlexBoxCol, Input } from "../styled/styled";
 import { ButtonOrder, FlexBoxRow1 } from "./Profile"
 // import SelectCurrency from '../../../src'
@@ -20,11 +22,17 @@ font-weight: 700;
 font-size: 20px;
 `;
 
-
 export const Order = () => {
+    const [location, setLocation] = useState({ lat: -3.745, lng: -38.523 })
+
+    function onLocationChange(location) {
+        console.log(location)
+    }
+
     return (
         <FlexBoxCol>
             <TextTitle>New order</TextTitle>
+            <OrderMapComponent location={location} onLocationChange={onLocationChange} />
             <FlexBoxRow1>
                 <ButtonOrder onClick={() => { console.log('sell') }}>I want sell</ButtonOrder>
                 <ButtonOrder onClick={() => { console.log('buy') }}>I want buy</ButtonOrder>
