@@ -2,8 +2,8 @@ import React, { Component, useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, InfoBox, MarkerF, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
-    width: '400px',
-    height: '400px'
+    width: '100%',
+    height: '300px'
 };
 
 const markers = [{
@@ -18,11 +18,6 @@ const markers = [{
     lng: -38.533
 }
 ];
-
-const mapContainerStyle = {
-    height: "400px",
-    width: "800px"
-};
 
 const options = { closeBoxURL: '', enableEventPropagation: true };
 
