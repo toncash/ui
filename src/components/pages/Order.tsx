@@ -35,9 +35,6 @@ export const Order = () => {
             </FlexBoxRow1>
             <TextCommon>Currency</TextCommon>
             <SelectCountry />
-            {/* <CurrencySelect /> */}
-            {/* <Select/> */}
-                {/* <SelectCurrency value={'USD'} /> */}
                 <FlexBoxRow1>
                     <TextCommon>Price</TextCommon>
                     <TextCommon>Amount</TextCommon>

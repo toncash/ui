@@ -1,14 +1,12 @@
 import { Autocomplete, Grid, Skeleton, TextField } from "@mui/material"
 import { useAxios } from "../hooks/useAxios";
+import {useState} from "react";
 
 
 
-const SelectCountry = (props: any) => {
-  const { value, setValue, label } = props;
+const SelectCountry = () => {
   const [data, loaded, error] = useAxios("https://restcountries.com/v3.1/all");
-
-
-
+  const [value, setValue] = useState()
   if(loaded) {
     return (
       <Grid item xs={12} md={3}>
@@ -26,10 +24,10 @@ const SelectCountry = (props: any) => {
 
  
   const dataCountries = dataFilter.map((item: any) => {
-    return  ` ${Object.keys(item.currencies)[0]}`
+    return `${Object.keys(item.currencies)[0]}`
     
   });
-
+  console.log(dataCountries)
 
   // const dataCountries = dataFilter.map((item:any)=>{
 
@@ -54,7 +52,7 @@ const SelectCountry = (props: any) => {
           setValue(newValue);
         }}
         options={dataCountries}
-        renderInput={(params) => <TextField {...params} label={label} />}
+        renderInput={(params) => <TextField {...params} label={"Currencies"} />}
       />
   )
 }
