@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, Dispatch, SetStateAction} from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -6,20 +6,30 @@ const containerStyle = {
     height: '300px'
 };
 
-export function OrderMapComponent({location, onLocationChange}) {
-    
+type LocationProps = {
+    location: {
+        lat: number,
+        lng: number
+    },
+    setLocation: Dispatch<SetStateAction<{ lat: number; lng: number; }>>
+}
+
+export function OrderMapComponent(props: LocationProps) {
+    const {location, setLocation} = props
     const refMap = useRef(null);
-    const [markerPosition, setMarkerPosition] = useState(location)
+
 
     const updateCenter = () => {
         const mapCenter = refMap.current.state.map.center
-        setMarkerPosition(mapCenter)
-        onLocationChange(mapCenter)
+        setLocation(mapCenter)
+        console.log(refMap)
+        console.log(mapCenter.lat())
+        console.log(mapCenter.lng())
     }
-
+    // console.log(process.env.MAP_API)
     return (
         <LoadScript
-            googleMapsApiKey="AIzaSyCGvLoWBYgZhpX4GHbQf9q1tsrp6tPhbr4"
+            googleMapsApiKey={"AIzaSyCGvLoWBYgZhpX4GHbQf9q1tsrp6tPhbr4"}
         >
             <GoogleMap
                 ref={refMap}
@@ -29,7 +39,7 @@ export function OrderMapComponent({location, onLocationChange}) {
                 center={location}
             >
                 <MarkerF
-                    position={markerPosition} >
+                    position={location} >
                 </MarkerF>
             </GoogleMap>
         </LoadScript >
