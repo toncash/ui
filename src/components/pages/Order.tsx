@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { OrderMapComponent } from "../map/OrderMapComponent";
+import SelectCountry from "../Select/SelectCountry";
 import { FlexBoxCol, Input } from "../styled/styled";
 import { ButtonOrder, FlexBoxRow1 } from "./Profile"
 // import SelectCurrency from '../../../src'
@@ -33,19 +34,22 @@ export const Order = () => {
                 <ButtonOrder onClick={() => { console.log('buy') }}>I want buy</ButtonOrder>
             </FlexBoxRow1>
             <TextCommon>Currency</TextCommon>
-            {/* <SelectCurrency value={'USD'} /> */}
-            <FlexBoxRow1>
-                <TextCommon>Price</TextCommon>
-                <TextCommon>Amount</TextCommon>
-            </FlexBoxRow1>
-            <FlexBoxRow1>
-                <Input value={'2,4'}></Input>
-                <Input value={'1000 TON'}></Input>
-            </FlexBoxRow1>
-            <FlexBoxRow1>
-                <ButtonOrder onClick={() => { console.log('cancel') }}>Cancel</ButtonOrder>
-                <ButtonOrder onClick={() => { console.log('next') }}> Next</ButtonOrder>
-            </FlexBoxRow1>
+            <SelectCountry />
+            {/* <CurrencySelect /> */}
+            {/* <Select/> */}
+                {/* <SelectCurrency value={'USD'} /> */}
+                <FlexBoxRow1>
+                    <TextCommon>Price</TextCommon>
+                    <TextCommon>Amount</TextCommon>
+                </FlexBoxRow1>
+                <FlexBoxRow1>
+                    <Input value={'2,4'}></Input>
+                    <Input value={'1000 TON'}></Input>
+                </FlexBoxRow1>
+                <FlexBoxRow1>
+                    <ButtonOrder onClick={() => { console.log('cancel') }} style={{ background: 'red' }}>Cancel</ButtonOrder>
+                    <ButtonOrder onClick={() => { console.log('next') }}> Next</ButtonOrder>
+                </FlexBoxRow1>
         </FlexBoxCol>
     )
 }

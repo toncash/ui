@@ -22,8 +22,10 @@ const App = () => {
     }
     return (
         <StyledApp>
-            <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} />
-            {connected?
+            
+            {/* <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} /> */}
+            <Order/>
+            {/* {connected?
                 <BrowserRouter>
                     <Routes>
                         {getRoutes()}
@@ -34,7 +36,7 @@ const App = () => {
                 </BrowserRouter>
                 :
                 <Login/>
-            }
+            } */}
 
         </StyledApp>
     )
