@@ -1,5 +1,7 @@
 import React, {useState, useRef, Dispatch, SetStateAction} from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
+import {Button} from "../styled/styled";
+import {ButtonOrder, FlexBoxRow1} from "../pages/Profile";
 
 const containerStyle = {
     width: '100%',
@@ -10,24 +12,28 @@ type LocationProps = {
     location: {
         lat: number,
         lng: number
-    },
-    setLocation: Dispatch<SetStateAction<{ lat: number; lng: number; }>>
+    }
 }
 
 export function OrderMapComponent(props: LocationProps) {
-    const {location, setLocation} = props
+    const {location} = props
+    const [markerPosition, setMarkerPosition] = useState(location)
+
     const refMap = useRef(null);
 
 
     const updateCenter = () => {
         const mapCenter = refMap.current.state.map.center
-        setLocation(mapCenter)
-        console.log(refMap)
-        console.log(mapCenter.lat())
-        console.log(mapCenter.lng())
+        setMarkerPosition(mapCenter)
     }
-    // console.log(process.env.MAP_API)
+
+    const handleConfirm = ()=>{
+        console.log(markerPosition.lng())
+        console.log(markerPosition.lat())
+    }
+
     return (
+        <div>
         <LoadScript
             googleMapsApiKey={"AIzaSyCGvLoWBYgZhpX4GHbQf9q1tsrp6tPhbr4"}
         >
@@ -39,9 +45,14 @@ export function OrderMapComponent(props: LocationProps) {
                 center={location}
             >
                 <MarkerF
-                    position={location} >
+                    position={markerPosition} >
                 </MarkerF>
             </GoogleMap>
         </LoadScript >
+            <FlexBoxRow1>
+                <ButtonOrder onClick={() => { console.log('sell') }}>Cancel</ButtonOrder>
+                <ButtonOrder onClick={handleConfirm}>Confirm</ButtonOrder>
+            </FlexBoxRow1>
+        </div>
     )
 }

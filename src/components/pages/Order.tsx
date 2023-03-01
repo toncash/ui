@@ -23,11 +23,11 @@ font-size: 20px;
 `;
 
 export const Order = () => {
-    const [markerPosition, setMarkerPosition] = useState({ lat: -3.745, lng: -38.523 })
+
     return (
         <FlexBoxCol>
             <TextTitle>New order</TextTitle>
-            <OrderMapComponent location={markerPosition} setLocation={setMarkerPosition} />
+            <OrderMapComponent location={{ lat: -3.745, lng: -38.523 }} />
             <FlexBoxRow1>
                 <ButtonOrder onClick={() => { console.log('sell') }}>I want sell</ButtonOrder>
                 <ButtonOrder onClick={() => { console.log('buy') }}>I want buy</ButtonOrder>
