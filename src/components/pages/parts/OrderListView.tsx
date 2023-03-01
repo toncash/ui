@@ -5,7 +5,7 @@ import { Card, FlexBoxRow } from "../../styled/styled";
 import { TextCommon } from "../Order";
 import { UserName } from "../Profile";
 
-const OrderListView = ({ username, amount, price, currency, orderType }) => {
+const OrderListView = ({ order }: {order: any}) => {
   return (
     <Card
       style={{
@@ -36,21 +36,21 @@ const OrderListView = ({ username, amount, price, currency, orderType }) => {
             }
           }
         />
-        <UserName style={{ margin: 0, padding: 0 }}>@{username}</UserName>
+        <UserName style={{ margin: 0, padding: 0 }}>@{order.username}</UserName>
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
         <TextCommon>
-          Amount <br/> <p style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{amount} TON</p>
+          Amount <br/> <span style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{order.amount} TON</span>
         </TextCommon>
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
         <TextCommon>
-          Price <br /> <p style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{price} {currency}</p>
+          Price <br /> <span style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{order.price} {order.currency}</span>
         </TextCommon>
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
-        <TextCommon>
-          <p style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{orderType}</p>
+        <TextCommon style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>
+          {order.orderType}
         </TextCommon>
       </div>
     </Card>

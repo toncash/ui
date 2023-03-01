@@ -5,9 +5,9 @@ export const Card = styled.div`
   border-radius: 8px;
   background-color: white;
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #111;
-  }
+  // @media (prefers-color-scheme: dark) {
+  //   background-color: #111;
+  // }
 `;
 
 export const FlexBoxRow = styled.div`
@@ -52,23 +52,5 @@ export const Input = styled("input")`
   }
 `;
 
-const Link = styled.a`
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  background: papayawhip;
-  color: palevioletred;
-`;
-
-export const Icon = styled.svg`
-  flex: none;
-  transition: fill 0.25s;
-  width: 48px;
-  height: 48px;
-
-  ${Link}:hover & {
-    fill: rebeccapurple;
-  }
-`;
 
 

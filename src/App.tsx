@@ -11,6 +11,7 @@ import "@twa-dev/sdk";
 import {TonConnectButton, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
 import {RouteType} from "./models/common/route-type";
 import FindOrders from "./components/pages/FindOrders";
+import OrderInfoSmall from "./components/pages/parts/OrderInfoSmall";
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <StyledApp>
             
             {/* <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} /> */}
+            {/* <OrderInfoSmall/> */}
             <FindOrders/>
             {/* <Order/> */}
             {/* {connected?
