@@ -1,58 +1,55 @@
-import React, {useState, useRef, Dispatch, SetStateAction} from 'react';
-import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
-import {Button} from "../styled/styled";
-import {ButtonOrder, FlexBoxRow1} from "../pages/Profile";
+import { useRef } from "react";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMapRedMarker } from "../styled/styled";
+import { ButtonOrder, FlexBoxRow1 } from "../pages/Profile";
 
 const containerStyle = {
-    width: '100%',
-    height: '300px'
+  width: "100%",
+  height: "300px",
 };
 
 type LocationProps = {
-    location: {
-        lat: number,
-        lng: number
-    }
-}
+  location: {
+    lat: number;
+    lng: number;
+  };
+};
 
 export function OrderMapComponent(props: LocationProps) {
-    const {location} = props
-    const [markerPosition, setMarkerPosition] = useState(location)
+  const { location } = props;
 
-    const refMap = useRef(null);
+  const refMap = useRef<GoogleMap>(null);
 
+  const handleConfirm = () => {
+    const mapCenter = refMap.current?.state.map?.getCenter();
+    if (!mapCenter) throw Error("Missing map center");
 
-    const updateCenter = () => {
-        const mapCenter = refMap.current.state.map.center
-        setMarkerPosition(mapCenter)
-    }
+    console.log(mapCenter.lng());
+    console.log(mapCenter.lat());
+  };
 
-    const handleConfirm = ()=>{
-        console.log(markerPosition.lng())
-        console.log(markerPosition.lat())
-    }
-
-    return (
-        <div>
-        <LoadScript
-            googleMapsApiKey={"AIzaSyCGvLoWBYgZhpX4GHbQf9q1tsrp6tPhbr4"}
+  return (
+    <div>
+      <LoadScript googleMapsApiKey={"AIzaSyCGvLoWBYgZhpX4GHbQf9q1tsrp6tPhbr4"}>
+        <GoogleMap
+          ref={refMap}
+          mapContainerStyle={containerStyle}
+          zoom={10}
+          center={location}
         >
-            <GoogleMap
-                ref={refMap}
-                mapContainerStyle={containerStyle}
-                zoom={10}
-                onBoundsChanged={updateCenter}
-                center={location}
-            >
-                <MarkerF
-                    position={markerPosition} >
-                </MarkerF>
-            </GoogleMap>
-        </LoadScript >
-            <FlexBoxRow1>
-                <ButtonOrder onClick={() => { console.log('sell') }}>Cancel</ButtonOrder>
-                <ButtonOrder onClick={handleConfirm}>Confirm</ButtonOrder>
-            </FlexBoxRow1>
-        </div>
-    )
+          <GoogleMapRedMarker />
+        </GoogleMap>
+      </LoadScript>
+      <FlexBoxRow1>
+        <ButtonOrder
+          onClick={() => {
+            console.log("sell");
+          }}
+        >
+          Cancel
+        </ButtonOrder>
+        <ButtonOrder onClick={handleConfirm}>Confirm</ButtonOrder>
+      </FlexBoxRow1>
+    </div>
+  );
 }

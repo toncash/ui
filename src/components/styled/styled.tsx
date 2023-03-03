@@ -51,3 +51,20 @@ export const Input = styled("input")`
     border: 1px solid #fefefe;
   }
 `;
+
+export const GoogleMapRedMarker = styled.div`
+  position: absolute;
+  z-index: 1;
+
+  background: url(https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi3_hdpi.png)
+    no-repeat;
+  background-size: contain;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+
+  height: 37px;
+  width: 26px;
+
+  cursor: pointer;
+`;
