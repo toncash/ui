@@ -13,30 +13,30 @@ import {RouteType} from "./models/common/route-type";
 
 
 const App = () => {
-    const { connected } = useTonConnect();
+    const { connected, isLoading} = useTonConnect();
 
 
     function getRoutes(): ReactNode[] {
         return routes.map(r => (
             <Route key={r.path} path={r.path} element={r.element} ></Route>))
     }
+    
+    if (isLoading) return null;
+
     return (
         <StyledApp>
             
-            {/* <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} /> */}
-            <Order/>
-            {/* {connected?
+            <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} />
+            {connected?
                 <BrowserRouter>
                     <Routes>
                         {getRoutes()}
-                        {
                             <Route path="/ui/" element={<Navigate to={PATH_PROFILE} />} />
-                        }
                     </Routes>
                 </BrowserRouter>
                 :
                 <Login/>
-            } */}
+            }
 
         </StyledApp>
     )
