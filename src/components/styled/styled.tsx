@@ -5,9 +5,9 @@ export const Card = styled.div`
   border-radius: 8px;
   background-color: white;
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #111;
-  }
+  // @media (prefers-color-scheme: dark) {
+  //   background-color: #111;
+  // }
 `;
 
 export const FlexBoxRow = styled.div`
@@ -68,3 +68,4 @@ export const GoogleMapRedMarker = styled.div`
 
   cursor: pointer;
 `;
+

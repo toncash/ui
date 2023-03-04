@@ -8,6 +8,8 @@ import { PATH_LOGIN, PATH_PROFILE } from "./components/config/routes-config";
 import {useTonConnect} from "./hooks/useTonConnect";
 import "@twa-dev/sdk";
 import {RouteType} from "./models/common/route-type";
+import FindOrders from "./components/pages/FindOrders";
+import OrderInfoSmall from "./components/pages/parts/OrderInfoSmall";
 
 
 const App = () => {
@@ -22,8 +24,7 @@ const App = () => {
     if (isLoading) return null;
 
     return (
-        <StyledApp>
-            
+        <StyledApp
             {connected?
                 <BrowserRouter>
                     <Routes>
