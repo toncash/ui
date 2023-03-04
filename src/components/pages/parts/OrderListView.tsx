@@ -2,7 +2,7 @@ import { ImageAvatar } from "@twa-dev/mark42";
 import { Avatar } from "@twa-dev/mark42/dist/Components/Avatar";
 import React from "react";
 import { Card, FlexBoxRow } from "../../styled/styled";
-import { TextCommon } from "../Order";
+import { TextCommon } from "../FindOrder"
 import { UserName } from "../Profile";
 
 const OrderListView = ({ order }: {order: any}) => {
