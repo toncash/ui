@@ -23,11 +23,11 @@ font-weight: 700;
 font-size: 20px;
 `;
 
-export const Order = () => {
+export const FindOrder = () => {
 
     return (
         <FlexBoxCol>
-            <TextTitle>New order</TextTitle>
+            <TextTitle>Find order</TextTitle>
             <OrderMapComponent location={{ lat: -3.745, lng: -38.523 }} />
             <FlexBoxRow1>
                 <ButtonOrder onClick={() => { console.log('sell') }}>I want sell</ButtonOrder>
