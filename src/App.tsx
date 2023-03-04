@@ -24,7 +24,7 @@ const App = () => {
     if (isLoading) return null;
 
     return (
-        <StyledApp
+        <StyledApp>
             {connected?
                 <BrowserRouter>
                     <Routes>
