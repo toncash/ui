@@ -1,14 +1,14 @@
 import {RouteType} from "../models/common/route-type";
 import {Login} from "../components/pages/Login";
 import {Profile} from "../components/pages/Profile";
-import {Order} from "../components/pages/Order";
+import {CreateOrder} from "../components/pages/CreateOrder";
+import {FindOrder} from "../components/pages/FindOrder";
 
-export const PATH_LOGIN = "/ui/login"
-export const PATH_PROFILE = "/ui/profile"
-export const PATH_ORDER = "/ui/order"
+import {PATH_LOGIN, PATH_PROFILE, PATH_CREATEORDER, PATH_FINDORDER} from "../components/config/routes-config"
 
 export const routes: RouteType[] = [
     {path: PATH_LOGIN, element: <Login/>, label: "Login"},
     {path: PATH_PROFILE, element: <Profile/>, label: "Profile"},
-    {path: PATH_ORDER, element: <Order/>, label: "Order"}
+    {path: PATH_CREATEORDER, element: <CreateOrder/>, label: "CreateOrder"},
+    {path: PATH_FINDORDER, element: <FindOrder/>, label: "FindOrder"}
 ]
