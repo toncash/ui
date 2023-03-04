@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Icon } from "../styled/styled";
+import { Button } from "../styled/styled";
 import { orders } from "../test_data/data";
 import OrderListView from "./parts/OrderListView";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
-import { TextCommon } from "./Order";
+import { TextCommon } from "./FindOrder";
 
 const FindOrders = () => {
   function order(

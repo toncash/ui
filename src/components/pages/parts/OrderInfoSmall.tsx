@@ -7,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { ImageAvatar } from "@twa-dev/mark42";
 import { UserName } from "../Profile";
-import { TextCommon } from "../Order";
+import { TextCommon } from "../FindOrder";
 import { Button } from "../../styled/styled";
 
 const OrderInfoSmall = () => {
