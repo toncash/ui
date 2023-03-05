@@ -6,7 +6,7 @@ import { MapComponent } from '../map/MapComponent';
 import {TonConnectButton} from "@tonconnect/ui-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {PATH_CREATEORDER, PATH_FINDORDER} from '../../config/routes-config';
+import {PATH_CREATEORDER, PATH_FINDORDERS} from '../../config/routes-config';
 
 // type AuthType = {
 
@@ -94,7 +94,7 @@ export const Profile = () => {
                 <Button onClick={()=>{console.log('Current orders')}} style={{ minWidth: 300, height: 50, fontSize: 20 }}>Current orders</Button>
                 <FlexBoxRow1>
                     <ButtonOrder onClick={()=> {navigate(PATH_CREATEORDER)}}>Make order</ButtonOrder>
-                    <ButtonOrder onClick={()=> {navigate(PATH_FINDORDER)}}>Find order</ButtonOrder>
+                    <ButtonOrder onClick={()=> {navigate(PATH_FINDORDERS)}}>Find order</ButtonOrder>
                 </FlexBoxRow1>
 
                 {/* <MapComponent/> */}

@@ -6,8 +6,12 @@ import OrderListView from "./parts/OrderListView";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { TextCommon } from "./FindOrder";
+import {PATH_FINDORDER} from "../../config/routes-config";
+import {ButtonOrder} from "./Profile";
+import {useNavigate} from "react-router-dom";
 
 const FindOrders = () => {
+    const navigate = useNavigate();
   function order(
     username: string,
     amount: number,
@@ -35,7 +39,7 @@ const FindOrders = () => {
           key={order.username}
         />
       ))}
-      <Button style={{ marginTop: 20, width: "100%", background: "green" }}>
+      <Button onClick={()=> {navigate(PATH_FINDORDER)}} style={{ marginTop: 20, width: "100%", background: "green" }}>
         Open map
       </Button>
     </div>
