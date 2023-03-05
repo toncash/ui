@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MenuItem, Select, FormControl, InputLabel, SelectChangeEvent } from '@mui/material'
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import countriesData from '../../config/countries.json'
+// import countriesData from '../../config/countries.json'
 
 interface Currency {
     countryCode: string,
