@@ -1,62 +1,48 @@
 import { Autocomplete, Grid, Skeleton, TextField } from "@mui/material"
-import { useAxios } from "../hooks/useAxios";
-
+import { useAxios } from "../../hooks/useAxios";
+import data from "../../config/currencies.json"
+import { useState } from "react";
 
 
 const SelectCountry = (props: any) => {
-  const { value, setValue, label } = props;
-  const [data, loaded, error] = useAxios("https://restcountries.com/v3.1/all");
+  const { value,label } = props;
+  const [newValue, setNewValue] = useState('')
 
-
-
-  if(loaded) {
-    return (
-      <Grid item xs={12} md={3}>
-        <Skeleton variant="rounded" height={60}/>
-      </Grid>
-    )
-  }
-  if(error) {
-    return "Something went wrong!"
-  }
 
   console.log(data)
-  
-  const dataFilter = data.filter((item: any) => "currencies" in item);
+  const dataParsed = data.sort((a, b) => a.population - b.population).map((item: any) => {
+    try {
+      const code = Object.keys(item.currencies)[0]
+      const symbol = item.currencies[code].symbol
+      if (symbol == undefined) {
+        return
+      }
+      return `${symbol} ${code}`
+    } catch (e) {
+      return
+    }
+  })
 
- 
-  const dataCountries = dataFilter.map((item: any) => {
-    return  ` ${Object.keys(item.currencies)[0]}`
-    
-  });
 
+  const dataFilter = dataParsed.filter((value, index, array) => value !== undefined && array.indexOf(value) === index)
+  console.log(dataFilter)
 
-  // const dataCountries = dataFilter.map((item:any)=>{
-
-  // })
-  // const getCurrencies = (arr: any[])=>{
-
-  //   const currencies: any[] = [];
-  //   arr.forEach((el:any)=>{
-  //     for(let prop in el.currencies){
-  //       currencies.push(el.currencies[prop])
-  //     }
-  //   })
-  //   return currencies
-  // }
-  // console.log(getCurrencies(data))
 
   return (
+    <Grid item xs={12} md={3}>
       <Autocomplete
         value={value}
         disableClearable
         onChange={(event, newValue) => {
-          setValue(newValue);
+          setNewValue(newValue);
         }}
-        options={dataCountries}
+        options={dataFilter}
         renderInput={(params) => <TextField {...params} label={label} />}
       />
+    </Grid>
   )
 }
 
 export default SelectCountry
+
+
