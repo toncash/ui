@@ -6,7 +6,7 @@ import { MapComponent } from '../map/MapComponent';
 import {TonConnectButton} from "@tonconnect/ui-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PATH_CREATEORDER, PATH_FINDORDER } from "../config/routes-config";
+import {PATH_CREATEORDER, PATH_FINDORDER} from '../../config/routes-config';
 
 // type AuthType = {
 

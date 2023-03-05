@@ -15,7 +15,6 @@ export const Login = () => {
 
   return (
       <LoginStyle>
-          <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} />
           <CenterImg>
               <ImageAvatar src='https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png' size={150} style={{
                   marginTop: 50

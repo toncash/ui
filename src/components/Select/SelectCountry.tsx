@@ -1,5 +1,5 @@
 import { Autocomplete, Grid, Skeleton, TextField } from "@mui/material"
-import { useAxios } from "../hooks/useAxios";
+import { useAxios } from "../../hooks/useAxios";
 import {useState} from "react";
 
 
@@ -27,22 +27,7 @@ const SelectCountry = () => {
     return `${Object.keys(item.currencies)[0]}`
     
   });
-  console.log(dataCountries)
 
-  // const dataCountries = dataFilter.map((item:any)=>{
-
-  // })
-  // const getCurrencies = (arr: any[])=>{
-
-  //   const currencies: any[] = [];
-  //   arr.forEach((el:any)=>{
-  //     for(let prop in el.currencies){
-  //       currencies.push(el.currencies[prop])
-  //     }
-  //   })
-  //   return currencies
-  // }
-  // console.log(getCurrencies(data))
 
   return (
       <Autocomplete

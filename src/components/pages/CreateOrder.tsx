@@ -28,11 +28,27 @@ export const CreateOrder = () => {
     return (
         <FlexBoxCol>
             <TextTitle>New order</TextTitle>
-            
-                <FlexBoxRow1>
-                    <ButtonOrder onClick={() => { console.log('cancel') }} style={{ background: 'red' }}>Cancel</ButtonOrder>
-                    <ButtonOrder onClick={() => { console.log('next') }}> Next</ButtonOrder>
-                </FlexBoxRow1>
+            <FlexBoxRow1>
+                <ButtonOrder onClick={() => { console.log('sell') }}>I want sell</ButtonOrder>
+                <ButtonOrder onClick={() => { console.log('buy') }}>I want buy</ButtonOrder>
+            </FlexBoxRow1>
+
+            <TextCommon>Currency</TextCommon>
+            {/*<SelectCountry />*/}
+            <FlexBoxRow1>
+                <TextCommon>Price</TextCommon>
+                <TextCommon>Amount</TextCommon>
+            </FlexBoxRow1>
+            <FlexBoxRow1>
+                <Input value={'2,4'}></Input>
+                <Input value={'1000 TON'}></Input>
+            </FlexBoxRow1>
+            <FlexBoxRow1>
+                <ButtonOrder onClick={() => { console.log('cancel') }} style={{ background: 'red' }}>Cancel</ButtonOrder>
+                <ButtonOrder onClick={() => { console.log('next') }}> Next</ButtonOrder>
+            </FlexBoxRow1>
+
+            <OrderMapComponent location={{ lat: -3.745, lng: -38.523 }} />
         </FlexBoxCol>
     )
 }

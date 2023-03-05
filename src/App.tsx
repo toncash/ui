@@ -1,15 +1,15 @@
+import {PATH_PROFILE, routes} from "./config/routes-config";
 import { Pages, StyledApp } from "./components/pages/Pages"
 import "./App.css";
 import { Login } from "./components/pages/Login";
 import {BrowserRouter, Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import React, {ReactNode, useEffect, useState} from "react";
-import { routes } from "./config/routes-config";
-import { PATH_LOGIN, PATH_PROFILE } from "./components/config/routes-config";
+
 import {useTonConnect} from "./hooks/useTonConnect";
 import "@twa-dev/sdk";
-import {RouteType} from "./models/common/route-type";
-import FindOrders from "./components/pages/FindOrders";
-import OrderInfoSmall from "./components/pages/parts/OrderInfoSmall";
+import {TonConnectButton} from "@tonconnect/ui-react";
+
+
 
 
 const App = () => {
@@ -21,10 +21,11 @@ const App = () => {
             <Route key={r.path} path={r.path} element={r.element} ></Route>))
     }
     
-    if (isLoading) return null;
+    // if (isLoading) return null;
 
     return (
         <StyledApp>
+            <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} />
             {connected?
                 <BrowserRouter>
                     <Routes>
