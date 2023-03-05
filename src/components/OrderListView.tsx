@@ -1,11 +1,12 @@
 import { ImageAvatar } from "@twa-dev/mark42";
 import { Avatar } from "@twa-dev/mark42/dist/Components/Avatar";
 import React from "react";
-import { Card, FlexBoxRow } from "../../styled/styled";
-import { TextCommon } from "../FindOrder"
-import { UserName } from "../Profile";
+import { Card, FlexBoxRow } from "./styled/styled";
+import { TextCommon } from "./pages/FindOrder"
+import { UserName } from "./pages/Profile";
+import Order from "../models/order";
 
-const OrderListView = ({ order }: {order: any}) => {
+const OrderListView = ({ order }: {order: Order}) => {
   return (
     <Card
       style={{
@@ -36,7 +37,7 @@ const OrderListView = ({ order }: {order: any}) => {
             }
           }
         />
-        <UserName style={{ margin: 0, padding: 0 }}>@{order.username}</UserName>
+        <UserName style={{ margin: 0, padding: 0 }}>@{order.buyerId}</UserName>
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
         <TextCommon>

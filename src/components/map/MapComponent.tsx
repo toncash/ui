@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, InfoBox, MarkerF, InfoWindow } from '@react-google-maps/api';
+import Order from "../../models/order";
 
 const containerStyle = {
     width: '100%',
@@ -25,8 +26,9 @@ const onLoad = (infoBox: any) => {
     console.log('infoBox: ', infoBox)
 };
 
-export function MapComponent() {
+export function MapComponent(props: { orders : Order [] }) {
     const [selectedMarker, setSelectedMarker] = useState(null);
+    const {orders} = props
 
     function selectMarker(coordinates: any) {
         setSelectedMarker(coordinates);
@@ -38,22 +40,36 @@ export function MapComponent() {
         >
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={markers[0]}
+                center={{
+                    lat: 51.6110042,
+                    lng: -0.1021341
+                }}
                 zoom={10}
                 onClick={() => setSelectedMarker(null)}
             >
-                <MarkerF
-                    position={markers[0]}
-                    onClick={() => selectMarker(markers[0])} >
-                </MarkerF>
-                <MarkerF
-                    position={markers[1]}
-                    onClick={() => selectMarker(markers[1])} >
-                </MarkerF>
-                <MarkerF
-                    position={markers[2]}
-                    onClick={() => selectMarker(markers[2])} >
-                </MarkerF>
+                { orders.map(order=>(
+
+                    <MarkerF
+                        position={{
+                            lat: order.location.x,
+                            lng: order.location.y
+                        }}
+                        onClick={() => selectMarker(order.location)}
+                    >
+                    </MarkerF>
+                ))}
+                {/*<MarkerF*/}
+                {/*    position={markers[0]}*/}
+                {/*    onClick={() => selectMarker(markers[0])} >*/}
+                {/*</MarkerF>*/}
+                {/*<MarkerF*/}
+                {/*    position={markers[1]}*/}
+                {/*    onClick={() => selectMarker(markers[1])} >*/}
+                {/*</MarkerF>*/}
+                {/*<MarkerF*/}
+                {/*    position={markers[2]}*/}
+                {/*    onClick={() => selectMarker(markers[2])} >*/}
+                {/*</MarkerF>*/}
                 {selectedMarker && <InfoBox
                     onLoad={onLoad}
                     options={options}
