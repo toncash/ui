@@ -9,9 +9,6 @@ import {useTonConnect} from "./hooks/useTonConnect";
 import "@twa-dev/sdk";
 import {TonConnectButton} from "@tonconnect/ui-react";
 
-
-
-
 const App = () => {
     const { connected, isLoading} = useTonConnect();
 
@@ -20,7 +17,7 @@ const App = () => {
         return routes.map(r => (
             <Route key={r.path} path={r.path} element={r.element} ></Route>))
     }
-    
+
     // if (isLoading) return null;
 
     return (
