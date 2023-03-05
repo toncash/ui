@@ -48,7 +48,7 @@ export const CreateOrder = () => {
                 <ButtonOrder onClick={() => { console.log('next') }}> Next</ButtonOrder>
             </FlexBoxRow1>
 
-            <OrderMapComponent location={{ lat: -3.745, lng: -38.523 }} />
+            <OrderMapComponent location={{ lat: 51.6110042, lng: -0.1021341 }} />
         </FlexBoxCol>
     )
 }

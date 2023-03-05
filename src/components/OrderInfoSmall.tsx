@@ -1,14 +1,14 @@
 import React from "react";
-import { orders } from "../../test_data/data";
+import { orders } from "./test_data/data";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { ImageAvatar } from "@twa-dev/mark42";
-import { UserName } from "../Profile";
-import { TextCommon } from "../FindOrder";
-import { Button } from "../../styled/styled";
+import { UserName } from "./pages/Profile";
+import { TextCommon } from "./pages/FindOrder";
+import { Button } from "./styled/styled";
 
 const OrderInfoSmall = () => {
   const order = orders[3];
