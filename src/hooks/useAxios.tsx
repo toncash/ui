@@ -1,14 +1,7 @@
 import {useEffect,useState } from 'react'
 import axios from 'axios'
 
-
-
-// type useAxiosType={
-//     url:any
-// }
 export const useAxios = (url: string) => {
-
-    
     
     const [data, setData] = useState([])
     const [error, setError] = useState<any>(null)

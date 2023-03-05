@@ -5,6 +5,8 @@ import { LoginStyle } from './Login';
 import { MapComponent } from '../map/MapComponent';
 import {TonConnectButton} from "@tonconnect/ui-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import {PATH_CREATEORDER, PATH_FINDORDERS} from '../../config/routes-config';
 
 // type AuthType = {
 
@@ -64,6 +66,9 @@ font-weight: 700;
 
 
 export const Profile = () => {
+
+    const navigate = useNavigate();
+
     return (
         <LoginStyle>
 
@@ -88,11 +93,11 @@ export const Profile = () => {
                 </FlexBoxRow1>
                 <Button onClick={()=>{console.log('Current orders')}} style={{ minWidth: 300, height: 50, fontSize: 20 }}>Current orders</Button>
                 <FlexBoxRow1>
-                    <ButtonOrder onClick={()=>{console.log('MAke order')}}>Make order</ButtonOrder>
-                    <ButtonOrder onClick={()=>{console.log('Find order')}}>Find order</ButtonOrder>
+                    <ButtonOrder onClick={()=> {navigate(PATH_CREATEORDER)}}>Make order</ButtonOrder>
+                    <ButtonOrder onClick={()=> {navigate(PATH_FINDORDERS)}}>Find order</ButtonOrder>
                 </FlexBoxRow1>
 
-                <MapComponent/>
+                {/* <MapComponent/> */}
 
             </FlexBoxCol>
 
