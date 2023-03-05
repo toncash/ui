@@ -1,5 +1,5 @@
-import OrdersServiceRest from "../service/orders-service-rest";
-import Orders from "../service/orders";
+import OrdersServiceRest from "../service/orders-service-rest"
+import Orders from "../service/orders"
 
 const SERVER_URL = "https://toncash.herokuapp.com/api/v1"
 

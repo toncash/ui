@@ -8,8 +8,8 @@ function createData(
   total: number,
   totalClosed: number,
   location: {
-    lat: number;
-    lng: number;
+    lat: number
+    lng: number
   }
 ) {
   return {
@@ -22,7 +22,7 @@ function createData(
     total,
     totalClosed,
     location,
-  };
+  }
 }
 export const orders = [
   createData("Admin", 100, 2.45, "USD", "SELL", 500, 433, 400, {
@@ -41,4 +41,4 @@ export const orders = [
     lat: -3.751,
     lng: -38.543,
   }),
-];
+]
