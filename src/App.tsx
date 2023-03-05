@@ -19,7 +19,11 @@ const App = () => {
     }
 
     // if (isLoading) return null;
-
+    const win: any = window
+    const tg = win?.Telegram.WebApp
+    console.log(tg)
+    console.log(tg?.initDataUnsafe)
+    // console.log(tg.initDataUnsafe?.user?.id)
     return (
         <StyledApp>
             <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25  }} />
