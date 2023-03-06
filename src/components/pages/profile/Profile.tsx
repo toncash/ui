@@ -9,7 +9,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN } from "../../../config/routes-config"
 import { useTonConnect } from "../../../hooks/useTonConnect"
 import classes from "./Profile.module.css"
-import {useTonClient} from "../../hooks/useTonClient";
+import {useTonClient} from "../../../hooks/useTonClient";
 
 // type AuthType = {
 
