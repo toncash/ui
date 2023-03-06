@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { GoogleMap, LoadScript } from "@react-google-maps/api"
 import { GoogleMapRedMarker } from "../styled/styled"
-import { ButtonOrder, FlexBoxRow1 } from "../pages/Profile"
+import { ButtonOrder, FlexBoxRow1 } from "../pages/profile/Profile"
 
 const containerStyle = {
   width: "100%",

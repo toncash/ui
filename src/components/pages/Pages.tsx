@@ -8,7 +8,7 @@ import { useTonConnect } from "../../hooks/useTonConnect"
 import { CHAIN } from "@tonconnect/protocol"
 import "@twa-dev/sdk"
 import { Login } from "./login/Login"
-import { Profile } from "./Profile"
+import { Profile } from "./profile/Profile"
 import { Routes } from "react-router-dom"
 
 export const StyledApp = styled.div`

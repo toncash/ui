@@ -1,5 +1,5 @@
 import { RouteType } from "../models/common/route-type"
-import { Profile } from "../components/pages/Profile"
+import { Profile } from "../components/pages/profile/Profile"
 import { CreateOrder } from "../components/pages/CreateOrder"
 import { FindOrder } from "../components/pages/FindOrder"
 import FindOrders from "../components/pages/FindOrders"
