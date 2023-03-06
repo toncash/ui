@@ -8,6 +8,7 @@ import React, { useEffect } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN } from "../../config/routes-config"
 import { useTonConnect } from "../../hooks/useTonConnect"
+import {useTonClient} from "../../hooks/useTonClient";
 
 // type AuthType = {
 
@@ -61,14 +62,14 @@ export const Indicators = styled.div`
 export const Profile = () => {
   const navigate = useNavigate()
 
-  const { connected, isLoading } = useTonConnect()
+  const { connected } = useTonConnect()
+  const client = useTonClient()
 
   useEffect(() => {
-    console.log(connected, isLoading)
-    if (!isLoading && !connected) {
+    if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
-  }, [connected, isLoading])
+  }, [connected, client])
 
   return (
     <LoginStyle>
