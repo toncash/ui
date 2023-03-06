@@ -8,7 +8,7 @@ import React, { useEffect } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN } from "../../../config/routes-config"
 import { useTonConnect } from "../../../hooks/useTonConnect"
-import classes from "./Login.module.css"
+import classes from "./Profile.module.css"
 
 // type AuthType = {
 
@@ -76,7 +76,7 @@ export const Profile = () => {
 
   return (
     <LoginStyle>
-      <TonConnectButton />
+      <TonConnectButton className={classes.tonButton} />
       <div className={classes.profile}>
         <ImageAvatar
           src={user.avatar}

@@ -4,6 +4,16 @@
     align-items: center;
 }
 
+.tonButton button {
+    background-color: #FFFFFF;
+    color: #14141B !important;
+}
+
+.tonButton button div{
+    background-color: #FFFFFF;
+    color: #14141B !important;
+}
+
 .userName {
     font-style: normal;
     font-weight: 700;
