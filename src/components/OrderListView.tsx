@@ -1,12 +1,12 @@
-import { ImageAvatar } from "@twa-dev/mark42";
-import { Avatar } from "@twa-dev/mark42/dist/Components/Avatar";
-import React from "react";
-import { Card, FlexBoxRow } from "./styled/styled";
+import { ImageAvatar } from "@twa-dev/mark42"
+import { Avatar } from "@twa-dev/mark42/dist/Components/Avatar"
+import React from "react"
+import { Card, FlexBoxRow } from "./styled/styled"
 import { TextCommon } from "./pages/FindOrder"
-import { UserName } from "./pages/Profile";
-import Order from "../models/order";
+import { UserName } from "./pages/Profile"
+import Order from "../models/order"
 
-const OrderListView = ({ order }: {order: Order}) => {
+const OrderListView = ({ order }: { order: Order }) => {
   return (
     <Card
       style={{
@@ -41,21 +41,37 @@ const OrderListView = ({ order }: {order: Order}) => {
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
         <TextCommon>
-          Amount <br/> <span style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{order.amount} TON</span>
+          Amount <br />{" "}
+          <span
+            style={{
+              marginTop: 10,
+              fontStyle: "italic",
+              fontSize: 16,
+            }}
+          >
+            {order.amount} TON
+          </span>
         </TextCommon>
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
         <TextCommon>
-          Price <br /> <span style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>{order.price} {order.currency}</span>
+          Price <br />{" "}
+          <span
+            style={{
+              marginTop: 10,
+              fontStyle: "italic",
+              fontSize: 16,
+            }}
+          >
+            {order.price} {order.currency}
+          </span>
         </TextCommon>
       </div>
       <div style={{ textAlign: "center", width: "20%" }}>
-        <TextCommon style={{ marginTop: 10, fontStyle: 'italic', fontSize: 16}}>
-          {order.orderType}
-        </TextCommon>
+        <TextCommon style={{ marginTop: 10, fontStyle: "italic", fontSize: 16 }}>{order.orderType}</TextCommon>
       </div>
     </Card>
-  );
-};
+  )
+}
 
-export default OrderListView;
+export default OrderListView
