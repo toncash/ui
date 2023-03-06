@@ -1,13 +1,14 @@
 import { ImageAvatar } from "@twa-dev/mark42"
 import styled from "styled-components"
-import { Button, FlexBoxCol, FlexBoxRow } from "../styled/styled"
-import { LoginStyle } from "./login/Login"
-import { MapComponent } from "../map/MapComponent"
+import { Button, FlexBoxCol, FlexBoxRow } from "../../styled/styled"
+import { LoginStyle } from "../login/Login"
+import { MapComponent } from "../../map/MapComponent"
 import { TonConnectButton } from "@tonconnect/ui-react"
 import React, { useEffect } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
-import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN } from "../../config/routes-config"
-import { useTonConnect } from "../../hooks/useTonConnect"
+import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN } from "../../../config/routes-config"
+import { useTonConnect } from "../../../hooks/useTonConnect"
+import classes from "./Profile.module.css"
 import {useTonClient} from "../../hooks/useTonClient";
 
 // type AuthType = {
@@ -43,9 +44,6 @@ export const FlexBoxRow1 = styled.div`
   align-items: center;
 `
 
-export const CenterImg = styled.div`
-  margin: auto;
-`
 export const UserName = styled.div`
   margin: 0 auto;
   padding: 10px 20px;
@@ -71,58 +69,58 @@ export const Profile = () => {
     }
   }, [connected, client])
 
+  const user = {
+    id: 1,
+    name: "svetender",
+    avatar: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
+  }
+
   return (
     <LoginStyle>
-      <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25 }} />
-      <FlexBoxCol>
-        <CenterImg>
-          <ImageAvatar
-            src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"
-            size={200}
-            style={{
-              marginTop: 50,
-            }}
-          />
-        </CenterImg>
-        <UserName>@userName</UserName>
-        <FlexBoxRow1>
-          <Indicators>
-            Balance:
-            <span>10</span>
-          </Indicators>
-
-          <Indicators>
-            Comunity:
-            <span>1</span>
-          </Indicators>
-        </FlexBoxRow1>
-        <Button
-          onClick={() => {
-            console.log("Current orders")
+      <TonConnectButton className={classes.tonButton} />
+      <div className={classes.profile}>
+        <ImageAvatar
+          src={user.avatar}
+          size={114}
+          style={{
+            marginTop: 50,
           }}
-          style={{ minWidth: 300, height: 50, fontSize: 20 }}
-        >
-          Current orders
-        </Button>
-        <FlexBoxRow1>
-          <ButtonOrder
+        />
+        <p className={classes.userName}>@{user.name}</p>
+
+        <div className={classes.userInfo}>
+          <div className={classes.userInfo__item}>
+            <p className={classes.userInfo__itemTitle}>Balance:</p>
+            <p className={classes.userInfo__itemValue}>10</p>
+          </div>
+
+          <div className={classes.userInfo__item}>
+            <p className={classes.userInfo__itemTitle}>Comunity:</p>
+            <span className={classes.userInfo__itemValue}>1</span>
+          </div>
+        </div>
+
+        <div className={classes.buttonContainer}>
+          <button
+            className={classes.buttonOrder}
+            type="button"
             onClick={() => {
               navigate(PATH_CREATEORDER)
             }}
           >
             Make order
-          </ButtonOrder>
-          <ButtonOrder
+          </button>
+          <button
+            className={classes.buttonOrder}
+            type="button"
             onClick={() => {
               navigate(PATH_FINDORDERS)
             }}
           >
             Find order
-          </ButtonOrder>
-        </FlexBoxRow1>
-
-        {/* <MapComponent/> */}
-      </FlexBoxCol>
+          </button>
+        </div>
+      </div>
     </LoginStyle>
   )
 }

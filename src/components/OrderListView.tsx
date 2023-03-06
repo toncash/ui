@@ -3,7 +3,7 @@ import { Avatar } from "@twa-dev/mark42/dist/Components/Avatar"
 import React from "react"
 import { Card, FlexBoxRow } from "./styled/styled"
 import { TextCommon } from "./pages/FindOrder"
-import { UserName } from "./pages/Profile"
+import { UserName } from "./pages/profile/Profile"
 import Order from "../models/order"
 
 const OrderListView = ({ order }: { order: Order }) => {
