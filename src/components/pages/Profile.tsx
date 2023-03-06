@@ -1,12 +1,13 @@
 import { ImageAvatar } from "@twa-dev/mark42"
 import styled from "styled-components"
 import { Button, FlexBoxCol, FlexBoxRow } from "../styled/styled"
-import { LoginStyle } from "./Login"
+import { LoginStyle } from "./login/Login"
 import { MapComponent } from "../map/MapComponent"
 import { TonConnectButton } from "@tonconnect/ui-react"
-import React from "react"
-import { useNavigate } from "react-router-dom"
-import { PATH_CREATEORDER, PATH_FINDORDERS } from "../../config/routes-config"
+import React, { useEffect } from "react"
+import { Navigate, useNavigate } from "react-router-dom"
+import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN } from "../../config/routes-config"
+import { useTonConnect } from "../../hooks/useTonConnect"
 
 // type AuthType = {
 
@@ -60,12 +61,22 @@ export const Indicators = styled.div`
 export const Profile = () => {
   const navigate = useNavigate()
 
+  const { connected, isLoading } = useTonConnect()
+
+  useEffect(() => {
+    console.log(connected, isLoading)
+    if (!isLoading && !connected) {
+      navigate(PATH_LOGIN)
+    }
+  }, [connected, isLoading])
+
   return (
     <LoginStyle>
+      <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25 }} />
       <FlexBoxCol>
         <CenterImg>
           <ImageAvatar
-            src="https://api.telegram.org/file/bot6274692659:AAE8iBiGQdXJczgmig85FBbTzxwwZ1k3rhY/photos/file_0.jpg"
+            src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"
             size={200}
             style={{
               marginTop: 50,
