@@ -66,3 +66,11 @@ export const GoogleMapRedMarker = styled.div`
 
   cursor: pointer;
 `
+
+export const TextCommon = styled.div`
+  margin: auto;
+  padding: 10px 20px;
+  color: black;
+  font-weight: 700;
+  font-size: 20px;
+`
