@@ -21,11 +21,6 @@ export const Login = () => {
 
   const { connected, isLoading } = useTonConnect()
 
-  if (connected) {
-    console.log("+")
-    return <Navigate to={PATH_PROFILE} />
-  }
-
   const [user, setUser] = useState<User>()
 
   const token = import.meta.env.VITE_BOT_ACCESS_TOKEN
@@ -59,7 +54,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (tg.initDataUnsafe?.user?.id) {
-      // handleGetUser()
+      handleGetUser()
     } else {
       setUser({
         id: 1,
@@ -68,6 +63,11 @@ export const Login = () => {
       })
     }
   }, [tg.initDataUnsafe?.user?.id])
+
+  if (connected) {
+    console.log("+")
+    return <Navigate to={PATH_PROFILE} />
+  }
 
   return (
     <LoginStyle>
