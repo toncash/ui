@@ -7,8 +7,7 @@ import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
 import { ImageAvatar } from "@twa-dev/mark42"
 import { UserName } from "./pages/profile/Profile"
-import { TextCommon } from "./pages/FindOrder"
-import { Button } from "./styled/styled"
+import { Button, TextCommon } from "./styled/styled"
 
 const OrderInfoSmall = () => {
   const order = orders[3]

@@ -1,8 +1,7 @@
 import { ImageAvatar } from "@twa-dev/mark42"
 import { Avatar } from "@twa-dev/mark42/dist/Components/Avatar"
 import React from "react"
-import { Card, FlexBoxRow } from "./styled/styled"
-import { TextCommon } from "./pages/FindOrder"
+import { Card, TextCommon } from "./styled/styled"
 import { UserName } from "./pages/profile/Profile"
 import Order from "../models/order"
 

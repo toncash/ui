@@ -14,6 +14,8 @@ import { Routes } from "react-router-dom"
 export const StyledApp = styled.div`
   background-color: #14141b;
   color: #fff;
+  display: flex;
+  flex-direction: column;
 
   // @media (prefers-color-scheme: dark) {
   //   background-color: #222;
