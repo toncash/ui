@@ -7,13 +7,13 @@ import { Button, FlexBoxCol, FlexBoxRow } from "../styled/styled"
 import { useTonConnect } from "../../hooks/useTonConnect"
 import { CHAIN } from "@tonconnect/protocol"
 import "@twa-dev/sdk"
-import { Login } from "./Login"
-import { Profile } from "./Profile"
+import { Login } from "./login/Login"
+import { Profile } from "./profile/Profile"
 import { Routes } from "react-router-dom"
 
 export const StyledApp = styled.div`
-  background-color: #d7f1f7;
-  color: black;
+  background-color: #14141b;
+  color: #fff;
 
   // @media (prefers-color-scheme: dark) {
   //   background-color: #222;

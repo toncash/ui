@@ -1,6 +1,5 @@
 import DataProvider from "./data-provider"
 import Order from "../models/order"
-import { generateId } from "../utils/generator"
 
 export default class Orders {
   constructor(private ordersService: DataProvider<Order>) {}

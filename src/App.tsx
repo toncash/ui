@@ -1,40 +1,58 @@
-import { PATH_PROFILE, routes } from "./config/routes-config"
+import {
+  PATH_LOGIN,
+  PATH_PROFILE,
+  PATH_CREATEORDER,
+  PATH_FINDORDER,
+  PATH_FINDORDERS,
+  routes,
+} from "./config/routes-config"
 import { Pages, StyledApp } from "./components/pages/Pages"
 import "./App.css"
-import { Login } from "./components/pages/Login"
+import { Login } from "./components/pages/login/Login"
+import { Profile } from "./components/pages/profile/Profile"
+import { CreateOrder } from "./components/pages/CreateOrder"
+import { FindOrder } from "./components/pages/FindOrder"
+import FindOrders from "./components/pages/FindOrders"
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom"
 import React, { ReactNode, useEffect, useState } from "react"
+import { redirect } from "react-router-dom"
 
 import { useTonConnect } from "./hooks/useTonConnect"
 import "@twa-dev/sdk"
 import { TonConnectButton } from "@tonconnect/ui-react"
 
 const App = () => {
-  const { connected, isLoading } = useTonConnect()
+  function RequireAuth({ children }: { children: JSX.Element }) {
+    const { connected, isLoading } = useTonConnect()
 
-  function getRoutes(): ReactNode[] {
-    return routes.map(r => <Route key={r.path} path={r.path} element={r.element}></Route>)
+    if (isLoading) return null
+
+    if (!connected) {
+      return <Navigate to={PATH_LOGIN} replace />
+    }
+
+    return children
   }
 
-  // if (isLoading) return null;
-  const win: any = window
-  const tg = win?.Telegram.WebApp
-  console.log(tg)
-  console.log(tg?.initDataUnsafe)
-  // console.log(tg.initDataUnsafe?.user?.id)
+  function getRoutes(): ReactNode[] {
+    return routes.map(r => {
+      return <Route key={r.path} path={r.path} element={r.element}></Route>
+    })
+  }
+
   return (
     <StyledApp>
-      <TonConnectButton style={{ minWidth: 250, height: 50, padding: 25 }} />
-      {connected ? (
-        <BrowserRouter>
-          <Routes>
-            {getRoutes()}
-            <Route path="/ui/*" element={<Navigate to={PATH_PROFILE} />} />
-          </Routes>
-        </BrowserRouter>
-      ) : (
-        <Login />
-      )}
+      <BrowserRouter>
+        <Routes>
+          {/* <Route key={PATH_PROFILE} path={PATH_PROFILE} element={<Profile />}/>
+            <Route key={PATH_CREATEORDER} path={PATH_CREATEORDER} element={<CreateOrder />}/>
+            <Route key={PATH_FINDORDER} path={PATH_FINDORDER} element={<FindOrder />}/>
+            <Route key={PATH_FINDORDERS} path={PATH_FINDORDERS} element={<FindOrders />}/> */}
+          {getRoutes()}
+          <Route key={PATH_LOGIN} path={PATH_LOGIN} element={<Login />} />
+          <Route path="/*" element={<Navigate to={PATH_LOGIN} replace />} />
+        </Routes>
+      </BrowserRouter>
     </StyledApp>
   )
 }
