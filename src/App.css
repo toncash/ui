@@ -39,8 +39,8 @@
 
 .selected-order-box {
   background: #fff;
+  color: black;
   padding: 15px;
   border-radius: 8px;
-  transform: translate(-50%, -50%);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
