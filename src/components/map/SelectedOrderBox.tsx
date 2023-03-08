@@ -39,7 +39,7 @@ export function SelectedOrderBox({ order }: CustomMarkerProps) {
             className={classes.userAvatar}
           />
           <div className={classes.userCardRight}>
-            <div className={classes.userSlug}>{order.amount}</div>
+            <div className={classes.userSlug}>@katya_ulyanova</div>
             <div className={classes.userInfo}>
               2 km away, сompletion: <span className={classes.userSuccessPercent}>97%</span>
             </div>
