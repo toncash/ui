@@ -1,7 +1,7 @@
 import { RouteType } from "../models/common/route-type"
 import { Profile } from "../components/pages/profile/Profile"
 import { CreateOrder } from "../components/pages/CreateOrder"
-import FindOrders from "../components/pages/FindOrders"
+import FindOrders from "../components/pages/find-orders/FindOrders"
 
 export const PATH_LOGIN = "/ui/login"
 export const PATH_PROFILE = "/ui/profile"
