@@ -1,5 +1,6 @@
-import { useCallback, useMemo } from "react"
+import { useCallback } from "react"
 import { OverlayView } from "@react-google-maps/api"
+import classes from "./Map.module.css"
 
 interface CustomMarkerProps {
   orderId: string
@@ -33,7 +34,7 @@ export default function CustomMarker({ orderId, text, lat, lng, onClick }: Custo
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       getPixelPositionOffset={getPixelPositionOffset}
     >
-      <div className="price-tag" onClick={handleClick}>
+      <div className={classes.priceTag} onClick={handleClick}>
         {text}
       </div>
     </OverlayView>

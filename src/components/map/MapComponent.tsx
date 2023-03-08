@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import { useState } from "react"
 import { GoogleMap, LoadScript } from "@react-google-maps/api"
 import Order from "../../models/order"
 import CustomMarker from "./CustomMarker"
@@ -9,32 +9,9 @@ const containerStyle = {
   flex: 1,
 }
 
-const markers = [
-  {
-    lat: -3.745,
-    lng: -38.523,
-  },
-  {
-    lat: -3.76,
-    lng: -38.514,
-  },
-  {
-    lat: -3.73,
-    lng: -38.533,
-  },
-]
-
 export function MapComponent(props: { orders: Order[] }) {
   const [selectedOrder, selectOrder] = useState<string>()
   let { orders } = props
-
-  orders = useMemo(() => {
-    return orders?.map(order => {
-      order.location.x - (Math.random() / 200) * order.location.x * (Math.random() > 0.5 ? -1 : 1)
-      order.location.y - (Math.random() / 200) * order.location.x * (Math.random() > 0.5 ? -1 : 1)
-      return order
-    })
-  }, [orders])
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyCGvLoWBYgZhpX4GHbQf9q1tsrp6tPhbr4">
@@ -48,6 +25,7 @@ export function MapComponent(props: { orders: Order[] }) {
         onClick={() => selectOrder(undefined)}
         options={{
           disableDefaultUI: true,
+          clickableIcons: false,
         }}
       >
         {orders.map((order, i) => (

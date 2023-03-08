@@ -1,0 +1,83 @@
+.userCard {
+  display: flex;
+  margin-bottom: 16px;
+}
+.userCardRight {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.userAvatar {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  overflow: hidden;
+  display: block;
+  margin-right: 10px;
+}
+.userSlug {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+}
+.userInfo {
+  color: #9b9b9b;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+}
+.userSuccessPercent {
+  color: #d3ff6a;
+}
+
+.orderInfo {
+  display: flex;
+  margin: 0 0 20px;
+}
+
+.orderDT {
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 16px;
+  color: #9b9b9b;
+  margin-bottom: 3px;
+}
+.orderDD {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+}
+.orderInfoDivider {
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 2px 10px;
+}
+
+.priceTag {
+  background-color: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: #000;
+  padding: 3px 7px;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  font-family: "Circe", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+}
+.priceTag:hover {
+  background: #eee;
+}
+
+.selectedOrderBox {
+  background: #1b1b1b;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+}

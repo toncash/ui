@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { OverlayView } from "@react-google-maps/api"
 import Order from "../../models/order"
+import classes from "./Map.module.css"
 
 interface CustomMarkerProps {
   order?: Order
@@ -24,7 +25,7 @@ export function SelectedOrderBox({ order }: CustomMarkerProps) {
       getPixelPositionOffset={getPixelPositionOffset}
     >
       <motion.div
-        className="selected-order-box"
+        className={classes.selectedOrderBox}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{
@@ -32,7 +33,32 @@ export function SelectedOrderBox({ order }: CustomMarkerProps) {
           duration: 0.25,
         }}
       >
-        {order.id}
+        <div className={classes.userCard}>
+          <img
+            src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"
+            className={classes.userAvatar}
+          />
+          <div className={classes.userCardRight}>
+            <div className={classes.userSlug}>{order.amount}</div>
+            <div className={classes.userInfo}>
+              2 km away, сompletion: <span className={classes.userSuccessPercent}>97%</span>
+            </div>
+          </div>
+        </div>
+        <div className={classes.orderInfo}>
+          <div className={classes.orderDL}>
+            <div className={classes.orderDT}>Amount:</div>
+            <div className={classes.orderDD}>{order.amount} TON</div>
+          </div>
+          <div className={classes.orderInfoDivider}></div>
+          <div className={classes.orderDL}>
+            <div className={classes.orderDT}>Price:</div>
+            <div className={classes.orderDD}>
+              {order.price} {order.currency}
+            </div>
+          </div>
+        </div>
+        <button>Buy TON</button>
       </motion.div>
     </OverlayView>
   )
