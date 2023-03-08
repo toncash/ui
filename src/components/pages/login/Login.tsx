@@ -70,7 +70,7 @@ export const Login = () => {
   }
 
   return (
-    <LoginStyle>
+    <div className={classes.pageLogin}>
       <ImageAvatar
         src={user?.avatar ? user.avatar : "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"}
         size={114}
@@ -81,19 +81,10 @@ export const Login = () => {
         }}
       />
 
-      {/* <p className={classes.userName}>@{user?.name ? user.name : "username"}</p>
+      <p className={classes.userName}>@{user?.name ? user.name : "username"}</p>
       <h1 className={classes.titlePage}>Welcome</h1>
       <p className={classes.subtitlePage}>Сonnect your wallet for further registration</p>
       <TonConnectButton className={classes.connectButton} />
-
-      <div className={classes.ordersHeaders}>
-        <h1 className={classes.ordersTitle}>Find order</h1>
-        <button onClick={handleClickSwitchMapBitton}>{viewMode === "map" ? "Open list" : "Open map"}</button>
-      </div>
-      <div>
-        <button>Only sell</button>
-        <button>Only buy</button>
-      </div> */}
-    </LoginStyle>
+    </div>
   )
 }

@@ -16,13 +16,7 @@ export const StyledApp = styled.div`
   color: #fff;
   display: flex;
   flex-direction: column;
-
-  // @media (prefers-color-scheme: dark) {
-  //   background-color: #222;
-  //   color: white;
-  // }
   min-height: 100vh;
-  padding: 20px 20px;
 `
 
 const AppContainer = styled.div`

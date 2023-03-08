@@ -117,51 +117,50 @@ export const Profile = () => {
   }, [tg.initDataUnsafe?.user?.id])
 
   return (
-    <LoginStyle>
+    <div className={classes.profile}>
       <TonConnectButton className={classes.tonButton} />
-      <div className={classes.profile}>
-        <ImageAvatar
-          src={user?.avatar}
-          size={114}
-          style={{
-            marginTop: 50,
-          }}
-        />
-        <p className={classes.userName}>@{user?.name}</p>
 
-        <div className={classes.userInfo}>
-          <div className={classes.userInfo__item}>
-            <p className={classes.userInfo__itemTitle}>Balance:</p>
-            <p className={classes.userInfo__itemValue}>10</p>
-          </div>
+      <ImageAvatar
+        src={user?.avatar}
+        size={114}
+        style={{
+          marginTop: 50,
+        }}
+      />
+      <p className={classes.userName}>@{user?.name}</p>
 
-          <div className={classes.userInfo__item}>
-            <p className={classes.userInfo__itemTitle}>Comunity:</p>
-            <span className={classes.userInfo__itemValue}>1</span>
-          </div>
+      <div className={classes.userInfo}>
+        <div className={classes.userInfo__item}>
+          <p className={classes.userInfo__itemTitle}>Balance:</p>
+          <p className={classes.userInfo__itemValue}>10</p>
         </div>
 
-        <div className={classes.buttonContainer}>
-          <button
-            className={classes.buttonOrder}
-            type="button"
-            onClick={() => {
-              navigate(PATH_CREATEORDER)
-            }}
-          >
-            Make order
-          </button>
-          <button
-            className={classes.buttonOrder}
-            type="button"
-            onClick={() => {
-              navigate(PATH_FINDORDERS)
-            }}
-          >
-            Find order
-          </button>
+        <div className={classes.userInfo__item}>
+          <p className={classes.userInfo__itemTitle}>Comunity:</p>
+          <span className={classes.userInfo__itemValue}>1</span>
         </div>
       </div>
-    </LoginStyle>
+
+      <div className={classes.buttonContainer}>
+        <button
+          className={classes.buttonOrder}
+          type="button"
+          onClick={() => {
+            navigate(PATH_CREATEORDER)
+          }}
+        >
+          Make order
+        </button>
+        <button
+          className={classes.buttonOrder}
+          type="button"
+          onClick={() => {
+            navigate(PATH_FINDORDERS)
+          }}
+        >
+          Find order
+        </button>
+      </div>
+    </div>
   )
 }

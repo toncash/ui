@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 15px;
+}
+
+.tonButton {
+    margin-left: auto;
 }
 
 .tonButton button {
@@ -45,7 +50,8 @@
 }
 
 .buttonOrder {
-    width: 353px;
+    max-width: 353px;
+    width: 90vw;
     height: 54px;
     background: #FFFFFF;
     border-radius: 100px;

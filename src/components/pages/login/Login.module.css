@@ -1,3 +1,9 @@
+.pageLogin {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
 .titlePage {
   font-style: normal;
   font-weight: 700;
@@ -19,7 +25,8 @@
 }
 
 .connectButton button {
-    width: 294px;
+    max-width: 294px;
+    width: 80vw;
     height: 54px;
     background: #FFFFFF;
     border-radius: 100px;
