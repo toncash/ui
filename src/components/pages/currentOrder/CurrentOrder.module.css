@@ -1,0 +1,106 @@
+.orderPage {
+    display: flex;
+    flex-direction: column;
+    padding: 45px 20px 20px 20px;
+}
+
+.orderHeaders {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 0 30px 0;
+}
+
+.orderTitle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+    margin: 0 0 0 12px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.chatLink {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px #26272B solid;
+    text-decoration: none;
+    color: #fff;
+    margin-left: auto;
+    height: max-content;
+}
+
+.orderItem {
+    display: flex;
+    width: 100%;
+    min-height: 34px;
+    text-decoration: none;
+    color: #fff;
+    align-items: center;
+}
+
+.userContainer {
+    flex: 1;
+    max-width: 70%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.userName {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    align-items: center;
+}
+
+.info {
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.statusComleted {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: #D3FF6A;
+}
+
+.infoContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.infoItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.infoItemTitle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    opacity: 0.5;
+    padding-right: 20px;
+}
+
+.infoItemValue {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}

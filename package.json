@@ -1,0 +1,58 @@
+{
+  "name": "ton-starter-twa-vite",
+  "homepage": "https://toncash.github.io/ui/",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "configbot": "node configure.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\""
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.11",
+    "@nanostores/react": "^0.4.1",
+    "@orbs-network/ton-access": "^2.2.2",
+    "@react-google-maps/api": "^2.18.1",
+    "@tanstack/react-query": "^4.24.4",
+    "@tonconnect/ui-react": "^0.0.14",
+    "@twa-dev/mark42": "^0.0.37",
+    "@twa-dev/sdk": "^6.4.2",
+    "buffer": "^6.0.3",
+    "framer-motion": "^10.1.0",
+    "is-mobile": "^3.1.1",
+    "nanostores": "^0.7.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "styled-components": "^5.3.6",
+    "ton": "13.3.0",
+    "ton-core": "^0.46.0",
+    "ton-crypto": "^3.2.0",
+    "use-local-storage": "^2.3.6",
+    "uuid": "^9.0.0",
+    "vite-plugin-node-polyfills": "^0.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^3.0.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "gh-pages": "^5.0.0",
+    "prettier": "2.8.4",
+    "typescript": "^4.9.5",
+    "vite": "^4.0.4"
+  },
+  "overrides": {
+    "react-error-overlay": "6.0.9"
+  }
+}

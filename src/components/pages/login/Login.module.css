@@ -1,0 +1,59 @@
+.pageLogin {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.titlePage {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 47px;
+  margin: 39px auto 0 auto;
+  width: max-content;
+}
+
+.subtitlePage {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 10px auto 26px auto;
+    max-width: 70vw;
+    width: max-content;
+    text-align: center;
+}
+
+.connectButton button {
+    max-width: 294px;
+    width: 80vw;
+    height: 54px;
+    background: #FFFFFF;
+    border-radius: 100px;
+    margin: 0 auto;
+}
+
+.connectButton div {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 29px;
+    margin: 0 auto;
+    color: #000;
+}
+
+.connectButton svg {
+    display: none;
+}
+
+.userName {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 20px auto 30px auto;
+    max-width: 70vw;
+    width: max-content;
+    text-align: center;
+}
