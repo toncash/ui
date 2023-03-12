@@ -11,6 +11,9 @@ import {useStore} from "@nanostores/react";
 import {setUser, userData} from "../../../store/UserData";
 import getAvatar from "../../../utils/getAvatar";
 import { Link } from "react-router-dom"
+import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall";
+import {ordersUserService} from "../../../config/service-config";
+import {OrderUser} from "../../../models/order-user";
 
 
 export const ButtonOrder = styled.button`
@@ -56,19 +59,27 @@ export const Profile = () => {
 
   const { connected, wallet } = useTonConnect()
   const client = useTonClient()
-  useEffect(()=>{
-
-  }, [])
+  const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
+  const user = useStore(userData)
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
+    ordersUserService.getOrderUsersByUser(user.id)
+        .then(res=>setCurrentOrders(res))
 
   }, [connected, client])
 
-  const user = useStore(userData)
-  console.log(user)
-  const token = import.meta.env.VITE_BOT_ACCESS_TOKEN
+
+  // console.log(user)
+
+  const getOrders = () => {
+    return currentOrders.map((item, index) => {
+      return <OrderListViewSmall orderUser={item} key={index}></OrderListViewSmall>
+    })
+  }
+
+
 
   const handleGetUser = async () => {
     const userId = tg.initDataUnsafe?.user?.id
@@ -181,6 +192,7 @@ export const Profile = () => {
             Only buy
           </button>
         </div>
+        <div className={classes.viewListOrdersContainer}>{getOrders()}</div>
       </div>
     </div>
   )

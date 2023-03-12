@@ -6,12 +6,12 @@ export enum DealStatus {
 }
 
 export type Deal = {
+    id?: string | number
+    addressContract?: string
     orderId: string | number
     buyerId: string | number
     sellerId: string | number
     amount: number
-    price: number
-    currency: string
     dealStatus: DealStatus
 }
 
@@ -21,8 +21,6 @@ export function getEmptyDeal(orderId: string): Deal{
         buyerId: 0,
         sellerId: 0,
         amount: 0,
-        price: 0,
-        currency: "",
         dealStatus: DealStatus.CURRENT
     }
 }

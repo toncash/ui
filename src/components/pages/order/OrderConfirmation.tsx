@@ -3,10 +3,11 @@ import User from "../../../models/user";
 import React, {useState} from "react";
 import classes from "../find-orders/FindOrders.module.css";
 import {PATH_PROFILE} from "../../../config/routes-config";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Button} from "../../styled/styled";
 import {OrderUser} from "../../../models/order-user";
 import {Deal} from "../../../models/deal";
+import {ordersService} from "../../../config/service-config";
 
 type CheckoutProps = {
     order: Order,
@@ -16,7 +17,18 @@ type CheckoutProps = {
 const OrderConfimation = ()=> {
 
     const location = useLocation();
-    const deal : Deal = location.state;
+    const deal : Deal = location.state.deal;
+    const order : Order = location.state.order;
+    const navigate = useNavigate()
+
+    function addDealToOrder(order: Order, deal: Deal) {
+        // TODO
+        // ordersService.addOrder()
+    }
+
+    function showPopup(){
+        // TODO
+    }
 
 
     return (
@@ -31,12 +43,16 @@ const OrderConfimation = ()=> {
             <div>
                 <div>
                     <div>Amount {deal.amount} TON</div>
-                    <div>Amount {deal.amount*deal.price} {deal.currency}</div>
+                    <div>Amount {deal.amount*order.price} {order.currency}</div>
                 </div>
             </div>
             <div>
                 <Button>Cancel</Button>
-                <Button>Confirm</Button>
+                <Button onClick={async ()=>{
+                    await addDealToOrder(order, deal)
+                    showPopup()
+                    navigate(PATH_PROFILE)
+                }}>Confirm</Button>
             </div>
         </div>
     )

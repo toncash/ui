@@ -1,12 +1,12 @@
 import { motion } from "framer-motion"
 import { OverlayView } from "@react-google-maps/api"
-import Order from "../../models/order"
 import classes from "./Map.module.css"
 import {Link} from "react-router-dom";
 import {PATH_CHECKOUT} from "../../config/routes-config";
 import {OrderUser} from "../../models/order-user";
 import {useEffect, useState} from "react";
 import getAvatar from "../../utils/getAvatar";
+import {Button} from "../styled/styled";
 
 interface CustomMarkerProps {
   orderUser?: OrderUser
@@ -24,6 +24,8 @@ export function SelectedOrderBox({ orderUser }: CustomMarkerProps) {
     getAvatar(Number(orderUser.person.id))
         .then(res=>setAvatarUrl(res))
   }, [])
+  console.log("orderUser")
+  console.log(orderUser)
   return (
     <OverlayView
       position={{
@@ -67,7 +69,7 @@ export function SelectedOrderBox({ orderUser }: CustomMarkerProps) {
             </div>
           </div>
         </div>
-        <Link to={PATH_CHECKOUT} state={orderUser}>Buy TON</Link>
+        <Link to={PATH_CHECKOUT} state={{order: orderUser.order, person: orderUser.person}}>Buy TON</Link>
       </motion.div>
     </OverlayView>
   )
