@@ -38,8 +38,8 @@ export function MapComponent(props: { ordersUsers: OrderUser[] }) {
         {ordersUsers.map((orderUser, i) => (
           <CustomMarker
             key={i}
-            lat={ordersUsers[0].order.location.x}
-            lng={ordersUsers[0].order.location.y}
+            lat={orderUser.order.location.x}
+            lng={orderUser.order.location.y}
             text={`${orderUser.order.amount} TON`}
             onClick={selectOrder}
             orderId={orderUser.order.id as string}

@@ -89,53 +89,52 @@ const CheckoutDeal = ()=> {
     }
 
     return (
-        <div>Hello</div>
-        // <div>
-        //     <Link className={classes.backButton} to={PATH_PROFILE}>
-        //         go back
-        //     </Link>
-        //     <div>
-        //         <h1 className={classes.ordersTitle}>Checkout</h1>
-        //     </div>
-        //
-        //     <div>
-        //         <UserInfoShort user={orderUser.person} order={orderUser.order}/>
-        //     </div>
-        //     <div>
-        //         <div>
-        //             <div>Amount</div>
-        //             <div>{orderUser.order.amount}</div>
-        //         </div>
-        //         <div>
-        //             <TextField
-        //                 id="pay"
-        //                 label={"I want to pay " +
-        //                     (String(order.orderType) === OrderType[OrderType.SELL] ? order.currency : "TON" )
-        //                 }
-        //                 variant="outlined"
-        //                 type="number"
-        //                 value={amountToPay}
-        //                 error={!!errorAmount}
-        //                 helperText={errorAmount}
-        //                 onChange={handleChangeAmountToPay} />
-        //             <TextField
-        //                 id="receive"
-        //                 label={"I want to receive " +
-        //                     (String(order.orderType) === OrderType[OrderType.SELL] ? "TON" : order.currency)
-        //                 }
-        //                 variant="outlined"
-        //                 type="number"
-        //                 value={amountToReceive}
-        //                 error={!!errorAmount}
-        //                 helperText={errorAmount}
-        //                 onChange={handleChangeAmountToReceive} />
-        //         </div>
-        //     </div>
-        //     <div>
-        //         <Link to={PATH_FINDORDERS}>Cancel</Link>
-        //         <Link to={PATH_ORDER_CONFIRMATION} state={{deal, order}}>Buy TON</Link>
-        //     </div>
-        // </div>
+        <div>
+            <Link className={classes.backButton} to={PATH_PROFILE}>
+                go back
+            </Link>
+            <div>
+                <h1 className={classes.ordersTitle}>Checkout</h1>
+            </div>
+
+            <div>
+                <UserInfoShort user={orderUser.person} order={orderUser.order}/>
+            </div>
+            <div>
+                <div>
+                    <div>Amount</div>
+                    <div>{orderUser.order.amount}</div>
+                </div>
+                <div>
+                    <TextField
+                        id="pay"
+                        label={"I want to pay " +
+                            (String(order.orderType) === OrderType[OrderType.SELL] ? order.currency : "TON" )
+                        }
+                        variant="outlined"
+                        type="number"
+                        value={amountToPay}
+                        error={!!errorAmount}
+                        helperText={errorAmount}
+                        onChange={handleChangeAmountToPay} />
+                    <TextField
+                        id="receive"
+                        label={"I want to receive " +
+                            (String(order.orderType) === OrderType[OrderType.SELL] ? "TON" : order.currency)
+                        }
+                        variant="outlined"
+                        type="number"
+                        value={amountToReceive}
+                        error={!!errorAmount}
+                        helperText={errorAmount}
+                        onChange={handleChangeAmountToReceive} />
+                </div>
+            </div>
+            <div>
+                <Link to={PATH_FINDORDERS}>Cancel</Link>
+                <Link to={PATH_ORDER_CONFIRMATION} state={{deal, order}}>Buy TON</Link>
+            </div>
+        </div>
     )
 
 }
