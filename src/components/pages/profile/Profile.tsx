@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall";
 import {ordersUserService} from "../../../config/service-config";
 import {OrderUser} from "../../../models/order-user";
+import {Address, fromNano} from "ton";
 
 
 export const ButtonOrder = styled.button`
@@ -58,15 +59,21 @@ export const Profile = () => {
   const navigate = useNavigate()
 
   const { connected, wallet } = useTonConnect()
+  // wallet.
   const client = useTonClient()
+  const [balance, setBalance] = useState(0)
+
   const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
   const user = useStore(userData)
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
+    client.client?.getBalance(Address.parse(wallet as string))
+        .then(res=>setBalance(Number(fromNano(res))))
     ordersUserService.getOrderUsersByUser(user.id)
         .then(res=>setCurrentOrders(res))
+        .catch(e=>console.log(e))
 
   }, [connected, client])
 
@@ -138,7 +145,7 @@ export const Profile = () => {
       <div className={classes.userInfo}>
         <div className={classes.userInfo__item}>
           <p className={classes.userInfo__itemTitle}>Balance:</p>
-          <p className={classes.userInfo__itemValue}>10</p>
+          <p className={classes.userInfo__itemValue}>{balance}</p>
         </div>
 
         <div className={classes.userInfo__item}>
