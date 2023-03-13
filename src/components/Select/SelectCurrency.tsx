@@ -1,34 +1,49 @@
 import { Autocomplete, Grid, Skeleton, TextField } from "@mui/material"
-import { useAxios } from "../../hooks/useAxios"
 import data from "../../config/currencies-parsed.json"
-import {useEffect, useState} from "react"
-import * as fs from "fs";
-import Order from "../../models/order";
-import {OrderUser} from "../../models/order-user";
+import { useEffect, useState } from "react"
+import { OrderUser } from "../../models/order-user"
+import styled from "styled-components"
 
 type SelectCurrencyProps = {
-    orderUser: OrderUser,
-    setOrderUser: (o: OrderUser)=>void
+  orderUser: OrderUser
+  setOrderUser: (o: OrderUser) => void
 }
 
+const CssTextField = styled(TextField)({
+  "& .css-1tzgnuz-MuiInputBase-root-MuiFilledInput-root ": {
+    background: "rgba(255, 255, 255, 0.05)",
+    color: "#FFFFFF",
+    fontSize: "16px",
+    lineHeight: "24px",
+    paddingTop: "8px",
+
+    input: {
+      padding: "0 0 8px 12px",
+    },
+  },
+  " .css-1tzgnuz-MuiInputBase-root-MuiFilledInput-root:after": {
+    borderBottom: "2px solid #fff",
+  },
+})
+
 const SelectCurrency = (props: SelectCurrencyProps) => {
-    const {orderUser, setOrderUser} = props
+  const { orderUser, setOrderUser } = props
   const [newValue, setNewValue] = useState(orderUser.order.currency)
 
   return (
-    <Grid item xs={12} md={3}>
+    <div>
       <Autocomplete
         value={newValue}
         disableClearable
         onChange={(event, newValue) => {
-            setNewValue(newValue)
-            orderUser.order.currency = newValue
-            setOrderUser({...orderUser})
+          setNewValue(newValue)
+          orderUser.order.currency = newValue
+          setOrderUser({ ...orderUser })
         }}
         options={data}
-        renderInput={params => <TextField {...params} label={"Currency"} />}
+        renderInput={params => <CssTextField {...params} variant="filled" />}
       />
-    </Grid>
+    </div>
   )
 }
 
