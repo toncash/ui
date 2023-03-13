@@ -59,7 +59,6 @@ export const Profile = () => {
   const navigate = useNavigate()
 
   const { connected, wallet } = useTonConnect()
-  // wallet.
   const client = useTonClient()
   const [balance, setBalance] = useState(0)
 

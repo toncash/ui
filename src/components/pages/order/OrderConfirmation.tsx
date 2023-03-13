@@ -7,7 +7,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Button} from "../../styled/styled";
 import {OrderUser} from "../../../models/order-user";
 import {Deal} from "../../../models/deal";
-import {ordersService} from "../../../config/service-config";
+import {dealsService, ordersService} from "../../../config/service-config";
 
 type CheckoutProps = {
     order: Order,
@@ -21,9 +21,10 @@ const OrderConfimation = ()=> {
     const order : Order = location.state.order;
     const navigate = useNavigate()
 
-    function addDealToOrder(order: Order, deal: Deal) {
+    async function dealRequest(order: Order, deal: Deal) {
         // TODO
         // ordersService.addOrder()
+        await dealsService.addDeal(deal)
     }
 
     function showPopup(){
@@ -49,7 +50,7 @@ const OrderConfimation = ()=> {
             <div>
                 <Button>Cancel</Button>
                 <Button onClick={async ()=>{
-                    await addDealToOrder(order, deal)
+                    await dealRequest(order, deal)
                     showPopup()
                     navigate(PATH_PROFILE)
                 }}>Confirm</Button>

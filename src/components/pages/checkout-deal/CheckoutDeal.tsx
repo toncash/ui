@@ -9,6 +9,8 @@ import {TextField} from "@mui/material";
 import {useStore} from "@nanostores/react";
 import {userData} from "../../../store/UserData";
 import {Deal, DealStatus, getEmptyDeal} from "../../../models/deal";
+import {useTonConnect} from "../../../hooks/useTonConnect";
+import {useTonClient} from "../../../hooks/useTonClient";
 
 type CheckoutProps = {
     order: Order,
@@ -22,27 +24,24 @@ const CheckoutDeal = ()=> {
     const [errorAmount, setErrorAmount] = useState("")
     const location = useLocation();
     const user = useStore(userData)
-
+    const { connected, wallet } = useTonConnect()
+    const client = useTonClient()
     const orderUser = location.state;
 
     const order: Order = orderUser?.order
-    const [deal, setDeal] = useState<Deal>(getEmptyDeal("1234" as string))
+    const [deal, setDeal] = useState<Deal>(getEmptyDeal(order.id as string))
 
     useEffect(()=>{
-        console.log(location)
-    }, [location, user])
+        deal.addressContract = wallet as string
+        console.log("deal.addressContract - ", deal.addressContract)
+    }, [wallet])
 
     useEffect(()=>{
-        console.log(order)
-        console.log(`OrderType[order.orderType] === OrderType[OrderType.SELL]`)
-        // console.log(`${order.orderType} === ${OrderType[OrderType.SELL]}`)
-        // deal.dealStatus = DealStatus.CURRENT
-        // deal.sellerId = order.orderType===OrderType.SELL ? order.ownerId : user.id
-        // deal.buyerId = order.orderType===OrderType.BUY ? order.ownerId : user.id
-        // setDeal({...deal})
+        deal.dealStatus = DealStatus.CURRENT
+        deal.sellerId = order.orderType===OrderType.SELL ? order.ownerId : user.id
+        deal.buyerId = order.orderType===OrderType.BUY ? order.ownerId : user.id
+        setDeal({...deal})
     }, [])
-
-
 
     function validateFn(amount: number){
         console.log('amount>order.amount')
