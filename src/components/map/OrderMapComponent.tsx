@@ -2,10 +2,11 @@ import { useRef } from "react"
 import { GoogleMap, LoadScript } from "@react-google-maps/api"
 import { GoogleMapRedMarker } from "../styled/styled"
 import { ButtonOrder, FlexBoxRow1 } from "../pages/profile/Profile"
-import Order from "../../models/order";
-import {OrderUser} from "../../models/order-user";
-import {useStore} from "@nanostores/react";
-import {locationData} from "../../store/Location";
+import Order from "../../models/order"
+import { OrderUser } from "../../models/order-user"
+import { useStore } from "@nanostores/react"
+import { locationData } from "../../store/Location"
+import classes from "./style.module.css"
 
 const containerStyle = {
   width: "100%",
@@ -18,9 +19,9 @@ type Location = {
 }
 
 type LocationProps = {
-  setStep: (step: number)=>void,
-  orderUser: OrderUser,
-  setOrderUser: (o: OrderUser)=>void
+  setStep: (step: number) => void
+  orderUser: OrderUser
+  setOrderUser: (o: OrderUser) => void
 }
 
 export function OrderMapComponent(props: LocationProps) {
@@ -35,29 +36,41 @@ export function OrderMapComponent(props: LocationProps) {
     orderUser.order.location.x = mapCenter.lat()
     orderUser.order.location.y = mapCenter.lng()
 
-    setOrderUser({...orderUser})
+    setOrderUser({ ...orderUser })
   }
 
   return (
-    <div>
+    <div style={{ margin: "50px 0" }}>
       <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_API}>
-        <GoogleMap ref={refMap} mapContainerStyle={containerStyle} zoom={10} center={{lat: location.x, lng: location.y}}>
+        <GoogleMap
+          ref={refMap}
+          mapContainerStyle={containerStyle}
+          zoom={10}
+          center={{ lat: location.x, lng: location.y }}
+        >
           <GoogleMapRedMarker />
         </GoogleMap>
       </LoadScript>
-      <FlexBoxRow1>
-        <ButtonOrder
+
+      <div className={classes.buttonContainer}>
+        <button
+          className={classes.buttonValueCancel}
           onClick={() => {
             setStep(1)
           }}
         >
           Cancel
-        </ButtonOrder>
-        <ButtonOrder onClick={()=>{
-          handleConfirm()
-          setStep(1)
-        }}>Confirm</ButtonOrder>
-      </FlexBoxRow1>
+        </button>
+        <button
+          className={classes.buttonValueCame}
+          onClick={() => {
+            handleConfirm()
+            setStep(1)
+          }}
+        >
+          Confirm
+        </button>
+      </div>
     </div>
   )
 }

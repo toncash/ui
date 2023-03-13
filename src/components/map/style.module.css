@@ -1,0 +1,32 @@
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 54px;
+    gap: 11px;
+    margin: 30px 20px 0 20px;
+}
+
+.buttonValueCancel {
+    border: none;
+    flex: 1;
+    height: 54px;
+    background: #1B1B1B;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    color: #fff;
+}
+
+.buttonValueCame {
+    border: none;
+    flex: 1;
+    height: 54px;
+    background: #D3FF6A;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    color: #000;
+}
