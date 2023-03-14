@@ -12,9 +12,14 @@ import {setUser, userData} from "../../../store/UserData";
 import getAvatar from "../../../utils/getAvatar";
 import { Link } from "react-router-dom"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall";
-import {ordersUserService} from "../../../config/service-config";
+import {dealsService, ordersUserService} from "../../../config/service-config";
 import {OrderUser} from "../../../models/order-user";
 import {Address, fromNano} from "ton";
+import {Deal} from "../../../models/deal";
+import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall";
+import {Button} from "@mui/material";
+import {useHistoryKeeper} from "../../../hooks/useHistoryKeeper";
+import {useCounterContract} from "../../../hooks/useCounterContract";
 
 
 export const ButtonOrder = styled.button`
@@ -58,29 +63,46 @@ export const Profile = () => {
 
   const navigate = useNavigate()
 
-  const { connected, wallet } = useTonConnect()
+  const { connected, wallet, sender } = useTonConnect()
   const client = useTonClient()
   const [balance, setBalance] = useState(0)
   const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
+  const [currentDeals, setCurrentDeals] = useState<Deal []>([])
   const user = useStore(userData)
+  const historyKeeper = useHistoryKeeper()
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
+    console.log("sender1")
+    console.log(sender)
     client.client?.getBalance(Address.parse(wallet as string))
         .then(res=>setBalance(Number(fromNano(res))))
     ordersUserService.getOrderUsersByUser(user.id)
         .then(res=>setCurrentOrders(res))
         .catch(e=>console.log(e))
 
+    // dealsService.getDealsByUser(user.id)
+    //     .then(res=>setCurrentDeals(res))
+    //     .catch(err=>console.log(err))
+
   }, [connected, client])
 
 
   // console.log(user)
-
+  // TODO convert deal to order
   const getOrders = () => {
     return currentOrders.map((item, index) => {
       return <OrderListViewSmall orderUser={item} key={index}></OrderListViewSmall>
+    })
+  }
+
+  const getDeals = () => {
+    return currentDeals.map((item, index) => {
+      return <DealListViewSmall dealUser={{
+        person: user,
+        deal: item
+      }} key={index}></DealListViewSmall>
     })
   }
 
@@ -198,7 +220,17 @@ export const Profile = () => {
           </button>
         </div>
         <div className={classes.viewListOrdersContainer}>{getOrders()}</div>
+        {/*<div className={classes.viewListOrdersContainer}>{getDeals()}</div>*/}
       </div>
+      <Button onClick={()=>{
+        dealsService.acceptDeal(
+            "6410566b384724250566c838",
+            "640f29a0d4dfb1303244f9bc",
+            "260316435",
+            sender.address as Address,
+            Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
+            historyKeeper)
+      }}>create contract</Button>
     </div>
   )
 }

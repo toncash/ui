@@ -8,6 +8,8 @@ import {Button} from "../../styled/styled";
 import {OrderUser} from "../../../models/order-user";
 import {Deal} from "../../../models/deal";
 import {dealsService, ordersService} from "../../../config/service-config";
+import {useStore} from "@nanostores/react";
+import {userData} from "../../../store/UserData";
 
 type CheckoutProps = {
     order: Order,
@@ -20,11 +22,13 @@ const OrderConfimation = ()=> {
     const deal : Deal = location.state.deal;
     const order : Order = location.state.order;
     const navigate = useNavigate()
+    const user = useStore(userData)
 
-    async function dealRequest(order: Order, deal: Deal) {
+    async function dealRequest(ownerId: string, deal: Deal) {
         // TODO
         // ordersService.addOrder()
-        await dealsService.offerDeal(deal)
+        const res = await dealsService.offerDeal(ownerId, deal)
+        console.log(res)
     }
 
     function showPopup(){
@@ -50,7 +54,7 @@ const OrderConfimation = ()=> {
             <div>
                 <Button>Cancel</Button>
                 <Button onClick={async ()=>{
-                    await dealRequest(order, deal)
+                    await dealRequest(user.id.toString(), deal)
                     showPopup()
                     navigate(PATH_PROFILE)
                 }}>Confirm</Button>

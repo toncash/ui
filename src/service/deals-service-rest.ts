@@ -11,12 +11,12 @@ export default class DealsServiceRest{
         })
     }
 
-    async get(dealId: string): Promise<Deal> {
-        return fetchGet(`${this.url}/${dealId}`) // TODO
+    async get(orderId: string, dealId: string): Promise<Deal> {
+        return fetchGet(`${this.url}/orders/${orderId}/deals/${dealId}`) // TODO
     }
 
     async getByUser(userId: string): Promise<Deal []>{
-        return fetchGet(`${this.url}/${userId}`) // TODO
+        return fetchGet(`${this.url}/persons/${userId}/deals`) // TODO
     }
 
     async remove(dealId: string){

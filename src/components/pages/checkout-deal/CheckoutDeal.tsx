@@ -32,8 +32,7 @@ const CheckoutDeal = ()=> {
     const [deal, setDeal] = useState<Deal>(getEmptyDeal(order.id as string))
 
     useEffect(()=>{
-        deal.addressContract = wallet as string
-        console.log("deal.addressContract - ", deal.addressContract)
+        deal.addressBuyer = wallet as string
     }, [wallet])
 
     useEffect(()=>{

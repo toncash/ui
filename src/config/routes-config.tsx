@@ -19,6 +19,7 @@ export const PATH_CHECKOUT = "/ui/checkout"
 export const PATH_ORDER_CONFIRMATION = "/ui/confirmation"
 
 export const BASE_PATH_CURRENTORDER = "/ui/order/"
+export const BASE_PATH_CURRENTDEAL = "/ui/deal/"
 
 export const routes: RouteType[] = [
   { path: PATH_PROFILE, element: <Profile />, label: "Profile" },
