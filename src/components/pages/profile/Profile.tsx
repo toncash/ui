@@ -61,7 +61,6 @@ export const Profile = () => {
   const { connected, wallet } = useTonConnect()
   const client = useTonClient()
   const [balance, setBalance] = useState(0)
-
   const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
   const user = useStore(userData)
   useEffect(() => {

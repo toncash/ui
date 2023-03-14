@@ -22,10 +22,10 @@ export function useDealContract(history_keeper: Address, buyer_address: Address)
 
         return client.open(contract) as OpenedContract<Deal>
     }, [client])
-
     return {
-        sendCancel: (value: bigint)=>{
+        sendCancel: ()=>{
             return dealContract?.sendCancel(sender)
-        }
+        },
+        address: dealContract?.address
     }
 }

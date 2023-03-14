@@ -1,5 +1,7 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from 'ton-core';
 import {compile} from "@ton-community/blueprint";
+import fs from "fs";
+import {Deal} from "./deal-contract";
 
 export type HistoryKeeperConfig = {
     owner_address: Address
@@ -44,11 +46,20 @@ export class HistoryKeeper implements Contract {
     }
 
     async sendNewDeal(provider: ContractProvider, via: Sender, value: bigint, buyer_address: Address) {
+        const deal_code: Cell = Cell.fromBoc(fs.readFileSync("./compiled/deal.cell"))[0]
+        const deal_contract = await Deal.createFromConfig({
+            owner_address: via.address as Address,
+            history_keeper: this.address,
+            buyer_address
+        }, deal_code)
+
         await provider.internal(via, {
             value,
             sendMode: SendMode.PAY_GAS_SEPARATLY,
             body: getMsgBody(buyer_address),
         });
+
+        return deal_contract
     }
 
     async get_keeper_data(provider: ContractProvider) {

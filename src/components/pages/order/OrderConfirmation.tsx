@@ -24,7 +24,7 @@ const OrderConfimation = ()=> {
     async function dealRequest(order: Order, deal: Deal) {
         // TODO
         // ordersService.addOrder()
-        await dealsService.addDeal(deal)
+        await dealsService.offerDeal(deal)
     }
 
     function showPopup(){

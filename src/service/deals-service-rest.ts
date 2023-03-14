@@ -3,10 +3,12 @@ import {Deal} from "../models/deal";
 export default class DealsServiceRest{
     constructor(private url: string) {}
 
-    async add(deal: Deal) {
-        // TODO
-        console.log(deal)
-        console.log("deal added")
+    async add(owderId: string, deal: Deal) {
+        return requestRest(`${this.url}/orders/deals?clientId=${owderId}`, {
+            method: "POST",
+            headers: getHeaders(),
+            body: JSON.stringify(deal)
+        })
     }
 
     async get(dealId: string): Promise<Deal> {
