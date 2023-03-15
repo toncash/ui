@@ -38,7 +38,7 @@ export default class Deals {
                 console.log("start")
                 console.log("historyKeeper")
                 console.log(historyKeeper)
-                const dealContract = await this.createDealContract(ownerAddress, buyerAddress, toNano(deal.amount), historyKeeper)
+                const dealContract = await this.createDealContract(ownerAddress, buyerAddress, toNano(5), historyKeeper)
                 console.log("dealContract")
                 console.log(dealContract)
                 console.log(dealContract.address.toString())
@@ -55,7 +55,7 @@ export default class Deals {
         buyerAddress: Address,
         amount: bigint,
         historyKeeper: any){
-        return historyKeeper.sendDeploy(buyerAddress, amount)
+        return historyKeeper.sendDeploy(amount, buyerAddress)
     }
 
     private async isContractDeployed(address: Address) : Promise<boolean | undefined> {

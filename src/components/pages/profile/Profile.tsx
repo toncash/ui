@@ -14,12 +14,13 @@ import { Link } from "react-router-dom"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall";
 import {dealsService, ordersUserService} from "../../../config/service-config";
 import {OrderUser} from "../../../models/order-user";
-import {Address, fromNano} from "ton";
+import {Address, fromNano, toNano} from "ton";
 import {Deal} from "../../../models/deal";
 import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall";
 import {Button} from "@mui/material";
 import {useHistoryKeeper} from "../../../hooks/useHistoryKeeper";
 import {useCounterContract} from "../../../hooks/useCounterContract";
+import {useDealContract} from "../../../hooks/useDealContract";
 
 
 export const ButtonOrder = styled.button`
@@ -70,12 +71,12 @@ export const Profile = () => {
   const [currentDeals, setCurrentDeals] = useState<Deal []>([])
   const user = useStore(userData)
   const historyKeeper = useHistoryKeeper()
+  const dealContract = useDealContract(historyKeeper.address, Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
-    console.log("sender1")
-    console.log(sender)
+
     client.client?.getBalance(Address.parse(wallet as string))
         .then(res=>setBalance(Number(fromNano(res))))
     ordersUserService.getOrderUsersByUser(user.id)
@@ -223,13 +224,17 @@ export const Profile = () => {
         {/*<div className={classes.viewListOrdersContainer}>{getDeals()}</div>*/}
       </div>
       <Button onClick={()=>{
-        dealsService.acceptDeal(
-            "6410566b384724250566c838",
-            "640f29a0d4dfb1303244f9bc",
-            "260316435",
-            sender.address as Address,
-            Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
-            historyKeeper)
+        // dealsService.acceptDeal(
+        //     "6410566b384724250566c838",
+        //     "640f29a0d4dfb1303244f9bc",
+        //     "260316435",
+        //     sender.address as Address,
+        //     Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
+        //     historyKeeper)
+        // historyKeeper.sendNewDeal(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
+        // historyKeeper.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+        console.log("dealContract")
+        dealContract.sendCancel()
       }}>create contract</Button>
     </div>
   )

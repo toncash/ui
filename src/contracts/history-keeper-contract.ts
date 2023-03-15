@@ -1,14 +1,15 @@
-import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from 'ton-core';
-import {Deal} from "./deal-contract";
+import { Address, toNano, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from 'ton-core';
 import {dealCode} from "./encode-contracts-code";
+import {Deal} from "./deal-contract";
 
-const deal_code: Cell = Cell.fromBase64(dealCode)
+const deal_code = Cell.fromBase64(dealCode)
 
 export type HistoryKeeperConfig = {
     owner_address: Address
 };
 
 export async function historyKeeperConfigToCell(config: HistoryKeeperConfig): Promise<Cell> {
+
 
     return beginCell()
         .storeAddress(config.owner_address)
@@ -39,34 +40,29 @@ export class HistoryKeeper implements Contract {
     }
 
     async sendDeploy(provider: ContractProvider, via: Sender, value: bigint, buyer_address: Address) {
-
-        const deal_contract = await Deal.createFromConfig({
-            owner_address: via.address as Address,
-            history_keeper: this.address,
-            buyer_address
-        }, deal_code)
-
         await provider.internal(via, {
             value,
-            sendMode: SendMode.PAY_GAS_SEPARATLY,
+            bounce: false,
             body: getMsgBody(buyer_address),
         });
-
-        return deal_contract
     }
 
     async sendNewDeal(provider: ContractProvider, via: Sender, value: bigint, buyer_address: Address) {
-        const deal_contract = await Deal.createFromConfig({
-            owner_address: via.address as Address,
-            history_keeper: this.address,
-            buyer_address
-        }, deal_code)
-
+        console.log("start")
         await provider.internal(via, {
             value,
             sendMode: SendMode.PAY_GAS_SEPARATLY,
             body: getMsgBody(buyer_address),
         });
+        console.log("end")
+    }
+
+    async getDealAddress(provider: ContractProvider, via: Sender, buyer_address: Address) {
+        const deal_contract = await Deal.createFromConfig({
+            owner_address: via.address as Address,
+            history_keeper: this.address,
+            buyer_address
+        }, deal_code)
 
         return deal_contract
     }
