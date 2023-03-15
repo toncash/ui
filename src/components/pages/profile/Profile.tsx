@@ -6,12 +6,12 @@ import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN, PATH_HISTORY } from "../
 import { useTonConnect } from "../../../hooks/useTonConnect"
 import classes from "./Profile.module.css"
 import { useTonClient } from "../../../hooks/useTonClient"
-import  {getEmptyUser} from "../../../models/user"
-import {useStore} from "@nanostores/react";
-import {setUser, userData} from "../../../store/UserData";
-import getAvatar from "../../../utils/getAvatar";
+import { getEmptyUser } from "../../../models/user"
+import { useStore } from "@nanostores/react"
+import { setUser, userData } from "../../../store/UserData"
+import getAvatar from "../../../utils/getAvatar"
 import { Link } from "react-router-dom"
-
+import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
 
 export const ButtonOrder = styled.button`
   background-color: ${props => (props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)")};
@@ -56,14 +56,11 @@ export const Profile = () => {
 
   const { connected, wallet } = useTonConnect()
   const client = useTonClient()
-  useEffect(()=>{
-
-  }, [])
+  useEffect(() => {}, [])
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
-
   }, [connected, client])
 
   const user = useStore(userData)
@@ -98,6 +95,65 @@ export const Profile = () => {
   }, [tg.initDataUnsafe?.user?.id])
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")
+
+  // TO DO  вывести сделки
+
+  //  - подставить правильный запрос апи
+
+  // async function getData() {
+  //     const data = await ordersService.getDealsByUser(Number(user.id))
+  //     setAllOrders(data)
+  //   }
+
+  //   const [arrayDeals, setArrayDeals] = useState<Order[]>([])
+
+  //   useEffect(() => {
+  //     getData()
+  //   }, [])
+
+  // - fake data удалить
+
+  const arrayDeals = [
+    {
+      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
+      id: 32,
+      buyerId: "katya_ulyanova ",
+      amount: "10 000",
+      status: "Сompleted",
+      data: "23.01.2023",
+      location: "al. Tadeusza Kościuszki 49/51, 90-514 Łódź, Poland",
+      x: 55.7478993,
+      y: 37.673359,
+    },
+    {
+      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
+      id: 32,
+      buyerId: "katya_ulyanova ",
+      amount: "10 000",
+      status: "Сompleted",
+      data: "23.01.2023",
+      location: "al. Tadeusza Kościuszki 49/51, 90-514 Łódź, Poland",
+      x: 55.7478993,
+      y: 37.673359,
+    },
+    {
+      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
+      id: 32,
+      buyerId: "katya_ulyanova ",
+      amount: "10 000",
+      status: "Сompleted",
+      data: "23.01.2023",
+      location: "al. Tadeusza Kościuszki 49/51, 90-514 Łódź, Poland",
+      x: 55.7478993,
+      y: 37.673359,
+    },
+  ]
+
+  const getArrayDeals = () => {
+    return arrayDeals.map((item, index) => {
+      return <OrderListViewSmall order={item} key={index} deal={true}></OrderListViewSmall>
+    })
+  }
 
   // for filter button
 
@@ -181,6 +237,7 @@ export const Profile = () => {
             Only buy
           </button>
         </div>
+        <div className={classes.viewListOrdersContainer}>{getArrayDeals()}</div>
       </div>
     </div>
   )
