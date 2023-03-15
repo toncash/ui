@@ -41,8 +41,7 @@ const App = () => {
       setErrorLocationData("catch")
     }
   }, [location])
-  console.log("location")
-  console.log(location)
+
   return (
     <StyledApp>
       Location: {JSON.stringify(location)}

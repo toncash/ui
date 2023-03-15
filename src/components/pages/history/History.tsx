@@ -2,63 +2,24 @@ import React, { useEffect, useState } from "react"
 import classes from "./History.module.css"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
 import ButtonBack from "../../buttonBack/ButtonBack"
+import {ordersUserService} from "../../../config/service-config";
+import {useStore} from "@nanostores/react";
+import {userData} from "../../../store/UserData";
+import {OrderUser} from "../../../models/order-user";
 
 const History = () => {
-  //  подставить правильный запрос апи
 
-  // async function getData() {
-  //     const data = await ordersService.getOrdersByUser(Number(user.id))
-  //     setAllOrders(data)
-  //   }
+  const user = useStore(userData)
+  const [ordersUserArray, setOrdersUser] = useState<OrderUser[]>([])
+  async function getData() {
+      const data = await ordersUserService.getOrderUsersByUser(Number(user.id))
+      console.log(data)
+      setOrdersUser(data)
+    }
 
-  //   const [arrayOrder, setArrayOrder] = useState<Order[]>([])
-
-  //   useEffect(() => {
-  //     getData()
-  //   }, [])
-
-  const arrayOrder = [
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-    },
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-    },
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-    },
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-    },
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-    },
-  ]
+    useEffect(() => {
+      getData()
+    }, [])
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")
 
@@ -75,8 +36,8 @@ const History = () => {
   const styleDisabledOnlyButton = { color: "#9B9B9B", backgroundColor: "rgba(255, 255, 255, 0.05)" }
 
   const getArray = () => {
-    return arrayOrder.map((item, index) => {
-      return <OrderListViewSmall order={item} key={index}></OrderListViewSmall>
+    return ordersUserArray.map((item, index) => {
+      return <OrderListViewSmall orderUser={item} key={index}></OrderListViewSmall>
     })
   }
 

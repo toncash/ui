@@ -15,26 +15,31 @@ export function MapComponent(props: { ordersUsers: OrderUser[] }) {
   const [selectedOrder, selectOrder] = useState<string>()
   let { ordersUsers } = props
     const location = useStore(locationData)
+    console.log("MapComponent")
+    console.log(ordersUsers)
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_API}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={{
-          lat: location.x,
-          lng: location.y,
+          lat: ordersUsers[0].order.location.x,
+          lng: ordersUsers[0].order.location.y,
         }}
         zoom={10}
-        onClick={() => selectOrder(undefined)}
+        onClick={() => {
+            selectOrder(undefined)
+            console.log(selectedOrder)
+        }}
         options={{
           disableDefaultUI: true,
-          clickableIcons: false,
+          clickableIcons: false
         }}
       >
         {ordersUsers.map((orderUser, i) => (
           <CustomMarker
             key={i}
-            lat={location.x}
-            lng={location.y}
+            lat={orderUser.order.location.x}
+            lng={orderUser.order.location.y}
             text={`${orderUser.order.amount} TON`}
             onClick={selectOrder}
             orderId={orderUser.order.id as string}

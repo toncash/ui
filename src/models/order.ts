@@ -1,3 +1,5 @@
+import {Deal} from "./deal";
+
 export enum OrderType {
   BUY,
   SELL,
@@ -20,6 +22,8 @@ export type Order = {
   orderType: OrderType
   orderStatus: OrderStatus
   limit: Limit
+  deals?: Deal [],
+  localDateTime?: string
 }
 
 export type Location = {

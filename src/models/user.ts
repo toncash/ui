@@ -7,7 +7,7 @@ export type User = {
 
 export function getEmptyUser(): User {
     return {
-        id: 0,
+        id: 260316435,
         username: "svetender",
         avatar: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
     }
