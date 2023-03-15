@@ -1,11 +1,4 @@
-import { useState } from "react"
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api"
-import CustomMarker from "./CustomMarker"
-import { SelectedOrderBox } from "./SelectedOrderBox"
-import { OrderUser } from "../../models/order-user"
-import { useStore } from "@nanostores/react"
-import { locationData } from "../../store/Location"
-import Order from "../../models/order"
 
 const containerStyle = {
   height: "234px",
