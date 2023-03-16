@@ -1,10 +1,10 @@
 import { ImageAvatar } from "@twa-dev/mark42"
 import { Link } from "react-router-dom"
 import { BASE_PATH_CURRENTORDER, BASE_PATH_DEAL } from "../../config/routes-config"
-import classes from "./OrderListViewSmall.module.css"
+import classes from "./DealListViewSmall.module.css"
 
-export const OrderListViewSmall = ({ order }: { order: any }) => {
-  const link = BASE_PATH_CURRENTORDER + order.id
+export const DealListViewSmall = ({ order }: { order: any }) => {
+  const link = BASE_PATH_DEAL + order.id
 
   return (
     <Link className={classes.orderItem} to={link}>
@@ -19,11 +19,12 @@ export const OrderListViewSmall = ({ order }: { order: any }) => {
         <p className={classes.infoValueTon}>{order.amount} TON</p>
 
         {/* нужно будет дописать логику выбора */}
-        <p className={classes.statusComleted}>{order.status}</p>
-        {/* <p className={classes.statusСancelled}>{order.status}</p> */}
+
+        {/* <p className={classes.statusComleted}>{order.status}</p>
+        <p className={classes.statusСancelled}>{order.status}</p> */}
       </div>
     </Link>
   )
 }
 
-export default OrderListViewSmall
+export default DealListViewSmall

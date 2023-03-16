@@ -12,6 +12,7 @@ import { setUser, userData } from "../../../store/UserData"
 import getAvatar from "../../../utils/getAvatar"
 import { Link } from "react-router-dom"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
+import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall"
 
 export const ButtonOrder = styled.button`
   background-color: ${props => (props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)")};
@@ -151,7 +152,7 @@ export const Profile = () => {
 
   const getArrayDeals = () => {
     return arrayDeals.map((item, index) => {
-      return <OrderListViewSmall order={item} key={index} deal={true}></OrderListViewSmall>
+      return <DealListViewSmall order={item} key={index}></DealListViewSmall>
     })
   }
 
