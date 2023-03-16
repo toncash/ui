@@ -1,8 +1,8 @@
 import {Deal, DealStatus} from "../models/deal";
 import {Address, toNano} from "ton";
-import {HistoryKeeper} from "../contracts/history-keeper-contract";
-import {OpenedContract, Sender} from "ton-core";
 import {useTonClient} from "../hooks/useTonClient";
+import {OpenedContract} from "ton-core";
+import {default as DealContract} from "../contracts/Deal"
 
 export default class Deals {
     constructor(private dealService: any) {}
@@ -21,13 +21,22 @@ export default class Deals {
     //     }
     // }
 
+    async completeDeal(
+        dealContract: any) {
+        dealContract.sendComplete()
+    }
+
+    async cancelDeal(dealContract: any) {
+        dealContract.sendCancel()
+    }
+
     async acceptDeal(
         id: string,
         orderId: string,
         ownerId: string,
         ownerAddress: Address,
         buyerAddress: Address,
-        historyKeeper: any
+        accountContract: any
     ): Promise<Deal> {
 
         const {deal} = await this.getDeal(orderId, id)
@@ -36,9 +45,9 @@ export default class Deals {
             if(deal.sellerId==ownerId){
                 deal.dealStatus = DealStatus.PENDING
                 console.log("start")
-                console.log("historyKeeper")
-                console.log(historyKeeper)
-                const dealContract = await this.createDealContract(ownerAddress, buyerAddress, toNano(5), historyKeeper)
+                console.log("accountContract")
+                console.log(accountContract)
+                const dealContract = await this.createDealContract(ownerAddress, buyerAddress, toNano(5), accountContract)
                 console.log("dealContract")
                 console.log(dealContract)
                 console.log(dealContract.address.toString())
@@ -54,8 +63,8 @@ export default class Deals {
         ownerAddress: Address,
         buyerAddress: Address,
         amount: bigint,
-        historyKeeper: any){
-        return historyKeeper.sendDeploy(amount, buyerAddress)
+        accountContract: any){
+        return accountContract.sendDeploy(amount, buyerAddress)
     }
 
     private async isContractDeployed(address: Address) : Promise<boolean | undefined> {

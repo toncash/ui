@@ -6,7 +6,7 @@ import OrdersUserServiceRest from "../service/orders-user-service-rest";
 import OrderUsers from "../service/orders-user";
 import DealsServiceRest from "../service/deals-service-rest";
 import Deals from "../service/deals";
-import {useHistoryKeeper} from "../hooks/useHistoryKeeper";
+import {useAccount} from "../hooks/useAccount";
 import {useTonConnect} from "../hooks/useTonConnect";
 
 const SERVER_URL = "https://toncash.herokuapp.com/api/v1"

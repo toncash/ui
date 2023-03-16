@@ -18,9 +18,10 @@ import {Address, fromNano, toNano} from "ton";
 import {Deal} from "../../../models/deal";
 import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall";
 import {Button} from "@mui/material";
-import {useHistoryKeeper} from "../../../hooks/useHistoryKeeper";
+import {useAccount} from "../../../hooks/useAccount";
 import {useCounterContract} from "../../../hooks/useCounterContract";
 import {useDealContract} from "../../../hooks/useDealContract";
+import {useMaster} from "../../../hooks/useMaster";
 
 
 export const ButtonOrder = styled.button`
@@ -70,24 +71,28 @@ export const Profile = () => {
   const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
   const [currentDeals, setCurrentDeals] = useState<Deal []>([])
   const user = useStore(userData)
-  const historyKeeper = useHistoryKeeper()
-  const dealContract = useDealContract(historyKeeper.address, Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+  let accountContract
+  let dealContract = useDealContract(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+  let masterContract
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
 
+
+    // masterContract = useMaster()
     client.client?.getBalance(Address.parse(wallet as string))
         .then(res=>setBalance(Number(fromNano(res))))
     ordersUserService.getOrderUsersByUser(user.id)
         .then(res=>setCurrentOrders(res))
         .catch(e=>console.log(e))
-
+    // console.log("deal address")
+    // console.log(dealContract.address ? dealContract.address.toString() : "")
     // dealsService.getDealsByUser(user.id)
     //     .then(res=>setCurrentDeals(res))
     //     .catch(err=>console.log(err))
 
-  }, [connected, client])
+  }, [connected, client, accountContract])
 
 
   // console.log(user)
@@ -230,11 +235,12 @@ export const Profile = () => {
         //     "260316435",
         //     sender.address as Address,
         //     Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
-        //     historyKeeper)
-        // historyKeeper.sendNewDeal(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
-        // historyKeeper.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
-        console.log("dealContract")
-        dealContract.sendCancel()
+        //     accountContract)
+        // masterContract.sendNewAccount(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
+        // // accountContract.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+        // // console.log("dealContract")
+      dealsService.cancelDeal(dealContract)
+
       }}>create contract</Button>
     </div>
   )
