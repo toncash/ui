@@ -1,4 +1,4 @@
-.dealItem {
+.orderItem {
     display: flex;
     width: 100%;
     min-height: 34px;
@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.dealData {
+.orderData {
     font-style: normal;
     font-weight: 600;
     font-size: 12px;

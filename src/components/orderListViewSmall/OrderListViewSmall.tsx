@@ -1,6 +1,6 @@
 import { ImageAvatar } from "@twa-dev/mark42"
 import { Link } from "react-router-dom"
-import { BASE_PATH_CURRENTORDER } from "../../config/routes-config"
+import { BASE_PATH_CURRENTORDER, BASE_PATH_DEAL } from "../../config/routes-config"
 import { OrderUser } from "../../models/order-user"
 import classes from "./OrderListViewSmall.module.css"
 import {useEffect, useState} from "react";
