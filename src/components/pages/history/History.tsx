@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react"
 import classes from "./History.module.css"
-import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
 import ButtonBack from "../../buttonBack/ButtonBack"
-import { dealsService, ordersUserService } from "../../../config/service-config"
+import { dealsService } from "../../../config/service-config"
 import { useStore } from "@nanostores/react"
 import { userData } from "../../../store/UserData"
-import { OrderUser } from "../../../models/order-user"
 import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall"
 import { DealUser } from "../../../models/deal-user"
 

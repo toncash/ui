@@ -29,6 +29,6 @@ export function useAccount() {
     sendNewDeal: (buyer_address: Address, value: bigint) => {
       return account?.sendNewDeal(sender, value, buyer_address)
     },
-    isDeployed: account?.address ? client?.isContractDeployed( account?.address ) : false,
+    isDeployed: account?.address ? client?.isContractDeployed(account?.address) : false,
   }
 }

@@ -1,8 +1,6 @@
 import { useRef } from "react"
 import { GoogleMap, LoadScript } from "@react-google-maps/api"
 import { GoogleMapRedMarker } from "../styled/styled"
-import { ButtonOrder, FlexBoxRow1 } from "../pages/profile/Profile"
-import Order from "../../models/order"
 import { OrderUser } from "../../models/order-user"
 import { useStore } from "@nanostores/react"
 import { locationData } from "../../store/Location"
@@ -11,11 +9,6 @@ import classes from "./style.module.css"
 const containerStyle = {
   width: "100%",
   height: "300px",
-}
-
-type Location = {
-  lat: number
-  lng: number
 }
 
 type LocationProps = {

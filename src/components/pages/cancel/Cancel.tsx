@@ -1,8 +1,5 @@
 import classes from "./Cancel.module.css"
 import ButtonBack from "../../buttonBack/ButtonBack"
-import PopupCongratulations from "../../popup/PopupCongratulations"
-import PopupUnfortunately from "../../popup/PopupUnfortunately"
-
 const Cancel = () => {
   return (
     <section className={classes.cancelPage}>
@@ -30,11 +27,6 @@ const Cancel = () => {
         <button className={classes.buttonValueCancel}>Cancel</button>
         <button className={classes.buttonValueCame}>I came</button>
       </div>
-
-      {/* проверка попапов
-
-      <PopupCongratulations />
-      <PopupUnfortunately /> */}
     </section>
   )
 }

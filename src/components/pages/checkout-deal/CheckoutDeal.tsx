@@ -1,5 +1,4 @@
 import { Order, OrderType } from "../../../models/order"
-import User from "../../../models/user"
 import React, { useEffect, useState } from "react"
 import classes from "./CheckoutDeal.module.css"
 import { PATH_FINDORDERS, PATH_ORDER_CONFIRMATION, PATH_PROFILE } from "../../../config/routes-config"
@@ -10,14 +9,8 @@ import { useStore } from "@nanostores/react"
 import { userData } from "../../../store/UserData"
 import { Deal, DealStatus, getEmptyDeal } from "../../../models/deal"
 import { useTonConnect } from "../../../hooks/useTonConnect"
-import { useTonClient } from "../../../hooks/useTonClient"
 import ButtonBack from "../../buttonBack/ButtonBack"
 import styled from "styled-components"
-
-type CheckoutProps = {
-  order: Order
-  person: User
-}
 
 const CssTextField = styled(TextField)({
   "& .css-2y464i-MuiInputBase-root-MuiFilledInput-root": {
@@ -66,8 +59,7 @@ const CheckoutDeal = () => {
   const [errorAmount, setErrorAmount] = useState("")
   const location = useLocation()
   const user = useStore(userData)
-  const { connected, wallet } = useTonConnect()
-  const client = useTonClient()
+  const { wallet } = useTonConnect()
   const orderUser = location.state
 
   const order: Order = orderUser?.order

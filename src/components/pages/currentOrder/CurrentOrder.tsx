@@ -42,7 +42,7 @@ const CurrentOrder: FC = () => {
     setOrder(order)
     setPerson(person)
     if (user.chatId === person.chatId) {
-      setAvatarUrl("/my_order.png")
+      setAvatarUrl("../my_order.png")
     } else {
       getAvatar(Number(person.chatId)).then(res => setAvatarUrl(res))
     }

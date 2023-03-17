@@ -2,23 +2,18 @@ import styled from "styled-components"
 import React, { useEffect, useState } from "react"
 import { OrderMapComponent } from "../../map/OrderMapComponent"
 import SelectCurrency from "../../Select/SelectCurrency"
-import { FlexBoxCol } from "../../styled/styled"
-import Order, { getEmptyOrder, OrderType } from "../../../models/order"
-import { ButtonOrder, FlexBoxRow1 } from "../profile/Profile"
+import { getEmptyOrder, OrderType } from "../../../models/order"
 import { useNavigate } from "react-router-dom"
 import { PATH_PROFILE } from "../../../config/routes-config"
-import { Button, InputAdornment, TextField } from "@mui/material"
+import { InputAdornment, TextField } from "@mui/material"
 import { MapComponent } from "../../map/MapComponent"
 import { ordersService } from "../../../config/service-config"
 import { useStore } from "@nanostores/react"
 import { userData } from "../../../store/UserData"
-import User from "../../../models/user"
 import { OrderUser } from "../../../models/order-user"
 import { locationData } from "../../../store/Location"
 import classes from "./CreateOrder.module.css"
 import ButtonBack from "../../buttonBack/ButtonBack"
-
-// import SelectCurrency from '../../../src'
 
 export const TextTitle = styled.div`
   margin: auto;
@@ -242,22 +237,6 @@ const StepTwo = (props: Step) => {
       return ""
     }
     return "Not valid"
-  }
-
-  function handleChangeLimitMin(event: any) {
-    const limitMin = Number(event.target.value)
-    const message = validateFn(limitMin)
-    setErrorLimitMinMessage(message)
-    orderUser.order.limit.min = limitMin
-    setOrderUser({ ...orderUser })
-  }
-
-  function handleChangeLimitMax(event: any) {
-    const limitMax = Number(event.target.value)
-    const message = validateFn(limitMax)
-    setErrorLimitMaxMessage(message)
-    orderUser.order.limit.max = limitMax
-    setOrderUser({ ...orderUser })
   }
 
   return (

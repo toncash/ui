@@ -1,11 +1,6 @@
-import classes from "./Deal.module.css"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { ReactNode, useEffect, useState } from "react"
-import { ImageAvatar } from "@twa-dev/mark42"
-import ButtonBack from "../../buttonBack/ButtonBack"
-import { MapView } from "../../map/MapView"
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 import { dealsService, ordersUserService } from "../../../config/service-config"
-import getAvatar from "../../../utils/getAvatar"
 import User, { getEmptyUser } from "../../../models/user"
 import { getEmptyDeal, Deal, DealStatus } from "../../../models/deal"
 import Order, { getEmptyOrder, OrderType } from "../../../models/order"
@@ -14,8 +9,8 @@ import DealPending from "./DealPending"
 import DealDenied from "./DealDenied"
 import DealCancel from "./DealCancel"
 import DealFinish from "./DealFinish"
-import {useStore} from "@nanostores/react";
-import {userData} from "../../../store/UserData";
+import { useStore } from "@nanostores/react"
+import { userData } from "../../../store/UserData"
 
 const DealPage = () => {
   const [dealOwner, setDealOwner] = useState<User>(getEmptyUser())

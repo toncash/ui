@@ -1,6 +1,6 @@
 import { ImageAvatar } from "@twa-dev/mark42"
 import { Link } from "react-router-dom"
-import { BASE_PATH_CURRENTORDER, BASE_PATH_DEAL } from "../../config/routes-config"
+import { BASE_PATH_DEAL } from "../../config/routes-config"
 import classes from "./DealListViewSmall.module.css"
 import { DealUser } from "../../models/deal-user"
 import { useEffect, useState } from "react"
@@ -29,11 +29,6 @@ export const DealListViewSmall = (props: PropsType) => {
       </div>
       <div className={classes.info}>
         <p className={classes.infoValueTon}>{deal.amount} TON</p>
-
-        {/* нужно будет дописать логику выбора */}
-
-        {/* <p className={classes.statusComleted}>{order.status}</p>
-        <p className={classes.statusСancelled}>{order.status}</p> */}
       </div>
     </Link>
   )

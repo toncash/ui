@@ -51,7 +51,7 @@ export function useDealContract(buyer_address: Address) {
     },
     address: dealContract?.address,
 
-      isDeployed: dealContract?.address ? client?.isContractDeployed(dealContract?.address) : false,
-      balance: async ()=>dealContract?.address? await client?.getBalance(dealContract?.address) : 0
+    isDeployed: dealContract?.address ? client?.isContractDeployed(dealContract?.address) : false,
+    balance: async () => (dealContract?.address ? await client?.getBalance(dealContract?.address) : 0),
   }
 }

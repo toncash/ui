@@ -7,7 +7,7 @@ export type User = {
 
 export function getEmptyUser(): User {
   return {
-    chatId: 0,
+    chatId: 260316435,
     username: "svetender",
     avatarURL: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
   }

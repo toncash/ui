@@ -61,7 +61,7 @@ export const Profile = () => {
 
   const { connected, wallet, sender } = useTonConnect()
   const client = useTonClient()
-  const [balance, setBalance] = useState(0)
+  const [balance, setBalance] = useState("")
   const [currentOrders, setCurrentOrders] = useState<Order[]>([])
   const [currentDeals, setCurrentDeals] = useState<DealUser[]>([])
   const user = useStore(userData)
@@ -83,10 +83,8 @@ export const Profile = () => {
       navigate(PATH_LOGIN)
     }
 
-
-    client.client?.getBalance(Address.parse(wallet as string)).then(res => setBalance(Number(fromNano(res))))
+    client.client?.getBalance(Address.parse(wallet as string)).then(res => setBalance(Number(fromNano(res)).toFixed(2)))
   }, [client])
-
 
   const getOrders = () => {
     return currentOrders.map((item, index) => {

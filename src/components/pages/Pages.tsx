@@ -1,7 +1,4 @@
 import { TonConnectButton } from "@tonconnect/ui-react"
-import { Counter } from "../Counter"
-import { Jetton } from "../Jetton"
-import { TransferTon } from "../TransferTon"
 import styled from "styled-components"
 import { Button, FlexBoxCol, FlexBoxRow } from "../styled/styled"
 import { useTonConnect } from "../../hooks/useTonConnect"
@@ -31,23 +28,6 @@ export const Pages = () => {
     <Routes>
       <StyledApp>
         <Profile />
-        {/* <AppContainer>
-      <FlexBoxCol>
-        <FlexBoxRow>
-          <Login />
-          <Button>
-            {network
-              ? network === CHAIN.MAINNET
-                ? "mainnet"
-                : "testnet"
-              : "N/A"}
-          </Button>
-        </FlexBoxRow>
-        <Counter />
-        <TransferTon />
-        <Jetton />
-      </FlexBoxCol>
-    </AppContainer> */}
       </StyledApp>
     </Routes>
   )
