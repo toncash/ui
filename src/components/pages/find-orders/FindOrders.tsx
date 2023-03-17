@@ -56,8 +56,8 @@ const FindOrders = () => {
 
   return (
     <div className={classes.orders}>
-      <ButtonBack />
       <div className={classes.ordersHeaders}>
+        <ButtonBack />
         <h1 className={classes.ordersTitle}>Find order</h1>
         <button className={classes.changeMapButton} onClick={handleClickSwitchMapButton}>
           {viewMode === "map" ? "Open a list" : "Open map"}
