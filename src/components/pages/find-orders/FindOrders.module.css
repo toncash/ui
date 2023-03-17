@@ -11,14 +11,15 @@
     line-height: 35px;
     text-align: center;
     color: #FFFFFF;
+    margin: 0 0 0 10px;
 }
 
 .ordersHeaders {
     display: flex;
     width: 100%;
-    justify-content: space-between;
     flex-direction: row;
     padding: 0 15px;
+    margin: 55px 0 0 0;
 }
 
 .changeMapButton {
@@ -37,6 +38,7 @@
     color: #FFFFFF;
     text-align: center;
     cursor: pointer;
+    margin-left: auto;
 }
 
 .onlyButtonContainer {
