@@ -18,7 +18,7 @@ export function MapComponent(props: { ordersUsers: OrderUser[] }) {
   const location = useStore(locationData)
   console.log("MapComponent")
   console.log(ordersUsers)
-    const centerLocation = !!ordersUsers[0] ? ordersUsers[0].order.location : location
+  const centerLocation = !!ordersUsers[0] ? ordersUsers[0].order.location : location
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}

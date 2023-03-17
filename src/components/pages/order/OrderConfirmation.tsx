@@ -1,6 +1,6 @@
 import { Order, OrderType } from "../../../models/order"
 import User from "../../../models/user"
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import classes from "./OrderConfirmation.module.css"
 import { PATH_PROFILE } from "../../../config/routes-config"
 import { Link, useLocation, useNavigate } from "react-router-dom"
@@ -11,8 +11,8 @@ import ButtonBack from "../../buttonBack/ButtonBack"
 import { dealsService, ordersService } from "../../../config/service-config"
 import { useStore } from "@nanostores/react"
 import { userData } from "../../../store/UserData"
-import PopupCongratulations from "../../popup/PopupCongratulations";
-import PopupUnfortunately from "../../popup/PopupUnfortunately";
+import PopupCongratulations from "../../popup/PopupCongratulations"
+import PopupUnfortunately from "../../popup/PopupUnfortunately"
 
 type CheckoutProps = {
   order: Order
@@ -31,8 +31,8 @@ const OrderConfimation = () => {
   const [success, setSuccess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
 
-  useEffect(()=>{
-    if(String(order.orderType) === OrderType[OrderType.SELL]){
+  useEffect(() => {
+    if (String(order.orderType) === OrderType[OrderType.SELL]) {
       setAmountToReceive(deal.amount)
       setAmountToPay(deal.amount * order.price)
     }
@@ -41,13 +41,13 @@ const OrderConfimation = () => {
   // TODO дописать логику кнопки конфирм
 
   const handleConfirm = async () => {
-  try{
-    await dealsService.offerDeal(user.chatId.toString(), deal)
-    setSuccess(true)
-  } catch (e){
-    console.log(e)
-    await setError(true)
-  }
+    try {
+      await dealsService.offerDeal(user.chatId.toString(), deal)
+      setSuccess(true)
+    } catch (e) {
+      console.log(e)
+      await setError(true)
+    }
 
     // navigate(PATH_PROFILE)
   }
@@ -67,14 +67,14 @@ const OrderConfimation = () => {
             <p>I want to pay:</p>
             <p>
               {amountToPay}
-              {(String(order.orderType) === OrderType[OrderType.SELL] ? order.currency : "TON")}
+              {String(order.orderType) === OrderType[OrderType.SELL] ? order.currency : "TON"}
             </p>
           </div>
           <div className={classes.infoItem}>
             <p>I want to receive:</p>
             <p>
               {amountToReceive}
-              {(String(order.orderType) === OrderType[OrderType.SELL] ? " TON" : order.currency)}
+              {String(order.orderType) === OrderType[OrderType.SELL] ? " TON" : order.currency}
             </p>
           </div>
         </div>
@@ -89,15 +89,21 @@ const OrderConfimation = () => {
         </button>
       </div>
 
-      <PopupCongratulations flag={success} hidePopup={()=>{
-        setSuccess(false)
-        navigate(PATH_PROFILE)
-      }}/>
+      <PopupCongratulations
+        flag={success}
+        hidePopup={() => {
+          setSuccess(false)
+          navigate(PATH_PROFILE)
+        }}
+      />
 
-      <PopupUnfortunately flag={error} hidePopup={()=>{
-        setError(false)
-        navigate(PATH_PROFILE)
-      }}/>
+      <PopupUnfortunately
+        flag={error}
+        hidePopup={() => {
+          setError(false)
+          navigate(PATH_PROFILE)
+        }}
+      />
     </div>
   )
 }

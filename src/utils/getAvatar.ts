@@ -1,4 +1,4 @@
-const getAvatar = async (userId: number) => {
+const getAvatar = async (userId: number | string) => {
   const token = import.meta.env.VITE_BOT_ACCESS_TOKEN
   const response = await fetch(`https://api.telegram.org/bot${token}/getUserProfilePhotos?user_id=${userId}&limit=1`)
   const data = await response.json()

@@ -1,102 +1,64 @@
 import classes from "./Deal.module.css"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { ImageAvatar } from "@twa-dev/mark42"
 import ButtonBack from "../../buttonBack/ButtonBack"
 import { MapView } from "../../map/MapView"
 import { dealsService, ordersUserService } from "../../../config/service-config"
 import getAvatar from "../../../utils/getAvatar"
 import User, { getEmptyUser } from "../../../models/user"
-import { getEmptyDeal, Deal } from "../../../models/deal"
-import Order, { OrderType } from "../../../models/order"
+import { getEmptyDeal, Deal, DealStatus } from "../../../models/deal"
+import Order, { getEmptyOrder, OrderType } from "../../../models/order"
+import DealCurrent from "./DealCurrent"
+import DealPending from "./DealPending"
+import DealDenied from "./DealDenied"
+import DealCancel from "./DealCancel"
+import DealFinish from "./DealFinish"
 
 const DealPage = () => {
-  const [avatarUrl, setAvatarUrl] = useState("")
-  const [person, setPerson] = useState<User>(getEmptyUser())
-  const [deal, setDeal] = useState<Deal>()
+  const [dealOwner, setDealOwner] = useState<User>(getEmptyUser())
+  const [deal, setDeal] = useState<Deal>(getEmptyDeal(""))
   const { id } = useParams()
-  console.log(id)
-  const [amountPay, setAmountPay] = useState("")
-  const [amountReceive, setAmountReceive] = useState("")
-  const [order, setOrder] = useState<Order>()
+  const [order, setOrder] = useState<Order>(getEmptyOrder({ x: 0, y: 0 }))
+  const [orderOwner, setOrderOwner] = useState<User>(getEmptyUser())
 
   async function getData() {
     // @ts-ignore
     const data = await dealsService.getDealUser(id)
     const { person, deal } = data
-    console.log("deal")
-    console.log(deal)
-    console.log("person")
-    console.log(person)
-    getAvatar(Number(person.chatId)).then(res => setAvatarUrl(res))
     setDeal(deal)
-    setPerson(person)
+    setDealOwner(person)
     const orderUser = await ordersUserService.getOrderUser(deal.orderId)
-    const { order } = orderUser
-    setOrder(order)
-    if (String(order.orderType) === OrderType[OrderType.SELL]) {
-      setAmountReceive(`${order.amount * order.price} ${order.currency}`)
-      setAmountPay(`${order.amount} TON`)
-    }
 
-    if (String(order.orderType) === OrderType[OrderType.BUY]) {
-      setAmountReceive(`${order.amount} TON`)
-      setAmountPay(`${order.amount * order.price} ${order.currency}`)
-    }
+    setOrder(orderUser.order)
+    setOrderOwner(orderUser.person)
   }
 
   useEffect(() => {
     getData()
   }, [])
 
-  return (
-    <section className={classes.orderPage}>
-      <div className={classes.orderHeaders}>
-        <ButtonBack />
-        <h1 className={classes.orderTitle}>Deal</h1>
-      </div>
-      <div className={classes.orderItem}>
-        <div className={classes.userContainer}>
-          <ImageAvatar src={avatarUrl} size={57} />
-          <div>
-            <p className={classes.userName}>@{person.username}</p>
-            {/* <p className={classes.statusComleted}>{order?.status}</p> */}
-          </div>
-        </div>
-        <Link className={classes.chatLink} to={`https://t.me/${person.username}`}>
-          See Chat
-        </Link>
-      </div>
+  if (String(deal.dealStatus) === "CURRENT") {
+    return <DealCurrent deal={deal} order={order} id={id} dealOwner={dealOwner} orderOwner={orderOwner} />
+  }
 
-      <div className={classes.infoContainer}>
-        <div className={classes.infoItem}>
-          <p className={classes.infoItemTitle}>Price:</p>
-          <p className={classes.infoItemValue}>{deal?.amount}</p>
-        </div>
+  if (String(deal.dealStatus) === "PENDING") {
+    return <DealPending deal={deal} order={order} id={id} dealOwner={dealOwner} orderOwner={orderOwner} />
+  }
 
-        <div className={classes.infoItem}>
-          <p className={classes.infoItemTitle}>I want to pay:</p>
-          <p className={classes.infoItemValue}>{amountPay}</p>
-        </div>
+  if (String(deal.dealStatus) === "DENIED") {
+    return <DealDenied deal={deal} order={order} id={id} dealOwner={dealOwner} orderOwner={orderOwner} />
+  }
 
-        <div className={classes.infoItem}>
-          <p className={classes.infoItemTitle}>I will receive:</p>
-          <p className={classes.infoItemValue}>{amountReceive}</p>
-        </div>
+  if (String(deal.dealStatus) === "CANCEL") {
+    return <DealCancel deal={deal} order={order} id={id} dealOwner={dealOwner} orderOwner={orderOwner} />
+  }
 
-      </div>
-      <MapView x={order?.location.x} y={order?.location.y} />
-      <div className={classes.buttonContainer}>
-        <button
-          className={classes.buttonValueCancel}
-          onClick={() => (!!deal?.id ? dealsService.denyDeal(deal.id) : "")}
-        >
-          Deny
-        </button>
-        <button className={classes.buttonValueCame}>Accept</button>
-      </div>
-    </section>
-  )
+  if (String(deal.dealStatus) === "FINISH") {
+    return <DealFinish deal={deal} order={order} id={id} dealOwner={dealOwner} orderOwner={orderOwner} />
+  }
+
+  return <div></div>
 }
 
 export default DealPage

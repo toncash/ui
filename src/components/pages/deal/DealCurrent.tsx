@@ -9,50 +9,43 @@ import getAvatar from "../../../utils/getAvatar"
 import User, { getEmptyUser } from "../../../models/user"
 import { getEmptyDeal, Deal } from "../../../models/deal"
 import Order, { OrderType } from "../../../models/order"
+import {DealProps} from "./deal-props";
 
-const DealCurrent = () => {
+const DealCurrent = (props: DealProps) => {
+    const {deal, id, order, dealOwner, orderOwner} = props
     const [isDealOwner, setIsDealOwner] = useState(false)
     const [avatarUrl, setAvatarUrl] = useState("")
-    const [person, setPerson] = useState<User>(getEmptyUser())
-    const [deal, setDeal] = useState<Deal>()
-    const { id } = useParams()
     console.log(id)
     const [amountPay, setAmountPay] = useState("")
     const [amountReceive, setAmountReceive] = useState("")
-    const [order, setOrder] = useState<Order>()
 
     async function getData() {
-        // @ts-ignore
-        const data = await dealsService.getDealUser(id)
-        const { person, deal } = data
-        const orderUser = await ordersUserService.getOrderUser(deal.orderId)
-        const { order } = orderUser
 
-        if(order.ownerId == person.chatId){
+        if(orderOwner.chatId == dealOwner.chatId){
             setIsDealOwner(true)
+            setAvatarUrl(await getAvatar(orderOwner.chatId))
         } else{
             setIsDealOwner(false)
+            setAvatarUrl(await getAvatar(dealOwner.chatId))
         }
 
-        getAvatar(Number(person.chatId)).then(res => setAvatarUrl(res))
-        setDeal(deal)
-        setPerson(person)
-
-        setOrder(order)
         if (String(order.orderType) === OrderType[OrderType.SELL]) {
-            setAmountReceive(`${order.amount * order.price} ${order.currency}`)
-            setAmountPay(`${order.amount} TON`)
+            setAmountReceive(`${deal.amount * order.price} ${order.currency}`)
+            setAmountPay(`${deal.amount} TON`)
         }
 
         if (String(order.orderType) === OrderType[OrderType.BUY]) {
-            setAmountReceive(`${order.amount} TON`)
-            setAmountPay(`${order.amount * order.price} ${order.currency}`)
+            setAmountReceive(`${deal.amount} TON`)
+            setAmountPay(`${deal.amount * order.price} ${order.currency}`)
         }
+
+
     }
 
     useEffect(() => {
         getData()
-    }, [])
+        console.log(props)
+    }, [deal, order])
 
     return (
         <section className={classes.orderPage}>
@@ -64,42 +57,45 @@ const DealCurrent = () => {
     <div className={classes.userContainer}>
     <ImageAvatar src={avatarUrl} size={57} />
     <div>
-    <p className={classes.userName}>@{person.username}</p>
+    <p className={classes.userName}>@{!isDealOwner?dealOwner.username:orderOwner.username}</p>
     {/* <p className={classes.statusComleted}>{order?.status}</p> */}
     </div>
     </div>
-    <Link className={classes.chatLink} to={`https://t.me/${person.username}`}>
-    See Chat
-    </Link>
+                {isDealOwner?<Link className={classes.chatLink} to={`https://t.me/${dealOwner.username}`}>See Chat
+                </Link>:''}
     </div>
 
     <div className={classes.infoContainer}>
     <div className={classes.infoItem}>
     <p className={classes.infoItemTitle}>Price:</p>
-    <p className={classes.infoItemValue}>{deal?.amount}</p>
+    <p className={classes.infoItemValue}>{order.price} {order.currency}</p>
     </div>
 
     <div className={classes.infoItem}>
-    <p className={classes.infoItemTitle}>I want to pay:</p>
-    <p className={classes.infoItemValue}>{amountPay}</p>
+    <p className={classes.infoItemTitle}>I will to pay:</p>
+    <p className={classes.infoItemValue}>{isDealOwner?amountPay:amountReceive}</p>
         </div>
 
         <div className={classes.infoItem}>
     <p className={classes.infoItemTitle}>I will receive:</p>
-    <p className={classes.infoItemValue}>{amountReceive}</p>
+    <p className={classes.infoItemValue}>{isDealOwner?amountReceive:amountPay}</p>
         </div>
 
         </div>
         <MapView x={order?.location.x} y={order?.location.y} />
-    <div className={classes.buttonContainer}>
-    <button
-        className={classes.buttonValueCancel}
-    onClick={() => (!!deal?.id ? dealsService.denyDeal(deal.id) : "")}
->
-    Deny
-    </button>
-    <button className={classes.buttonValueCame}>Accept</button>
-        </div>
+            {!isDealOwner ?<div className={classes.buttonContainer}>
+         <button
+                className={classes.buttonValueCancel}
+                onClick={() => (!!deal?.id ? dealsService.denyDeal(deal.id) : "")}
+            >
+                Deny
+            </button>
+            <button className={classes.buttonValueCame}>Accept</button>
+
+            </div> :
+                <div className={classes.buttonContainer}>
+                    <button className={classes.buttonValueCancel} onClick={()=>dealsService.cancelDeal(deal.id as string)}>Cancel</button>
+                </div>}
         </section>
 )
 }
