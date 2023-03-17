@@ -12,7 +12,7 @@ const History = () => {
   const user = useStore(userData)
   const [ordersUserArray, setOrdersUser] = useState<OrderUser[]>([])
   async function getData() {
-      const data = await ordersUserService.getOrderUsersByUser(Number(user.id))
+      const data = await ordersUserService.getOrderUsersByUser(Number(user.chatId))
       console.log(data)
       setOrdersUser(data)
     }
@@ -37,7 +37,7 @@ const History = () => {
 
   const getArray = () => {
     return ordersUserArray.map((item, index) => {
-      return <OrderListViewSmall orderUser={item} key={index}></OrderListViewSmall>
+      return <OrderListViewSmall order={item} key={index}></OrderListViewSmall>
     })
   }
 

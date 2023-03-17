@@ -54,7 +54,7 @@ const OrderConfimation = ()=> {
             <div>
                 <Button>Cancel</Button>
                 <Button onClick={async ()=>{
-                    await dealRequest(user.id.toString(), deal)
+                    await dealRequest(user.chatId.toString(), deal)
                     showPopup()
                     navigate(PATH_PROFILE)
                 }}>Confirm</Button>

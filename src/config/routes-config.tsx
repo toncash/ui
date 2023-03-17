@@ -7,7 +7,7 @@ import CurrentOrder from "../components/pages/currentOrder/CurrentOrder"
 import Cancel from "../components/pages/cancel/Cancel"
 import CheckoutDeal from "../components/pages/checkout-deal/CheckoutDeal"
 import OrderConfirmation from "../components/pages/order/OrderConfirmation"
-import Deal from "../components/pages/deal/Deal"
+import DealPage from "../components/pages/deal/DealPage"
 
 export const PATH_LOGIN = "/ui/login"
 export const PATH_PROFILE = "/ui/profile"
@@ -29,7 +29,7 @@ export const routes: RouteType[] = [
   { path: PATH_FINDORDERS, element: <FindOrders />, label: "FindOrders" },
   { path: PATH_HISTORY, element: <History />, label: "History" },
   { path: PATH_CURRENTORDER, element: <CurrentOrder />, label: "CurrentOrder" },
-  { path: PATH_DEAL, element: <Deal />, label: "Deal" },
+  { path: PATH_DEAL, element: <DealPage />, label: "Deal" },
   { path: PATH_CANCEL, element: <Cancel />, label: "Cancel" },
   { path: PATH_CHECKOUT, element: <CheckoutDeal />, label: "Checkout" },
   { path: PATH_ORDER_CONFIRMATION, element: <OrderConfirmation />, label: "Confirmation" },

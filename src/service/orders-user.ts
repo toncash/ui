@@ -1,10 +1,11 @@
 import DataProvider from "./data-provider"
 import {OrderUser} from "../models/order-user";
+import Order from "../models/order";
 
 export default class OrderUsers {
     constructor(private ordersUserService: any) {}
 
-    getOrderUsersByUser(userId: number | string): Promise<OrderUser[]> {
+    getOrderUsersByUser(userId: number | string): Promise<Order[]> {
         return this.ordersUserService.getByUser(userId)
     }
 
@@ -13,7 +14,7 @@ export default class OrderUsers {
         return this.ordersUserService.getByGeo(x, y)
     }
 
-    getOrderUser(orderId: string): Promise<OrderUser>{
+    getOrderUser(orderId: string | number): Promise<OrderUser>{
         return this.ordersUserService.getByOrderId(orderId)
     }
 }

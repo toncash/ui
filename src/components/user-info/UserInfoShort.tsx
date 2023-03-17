@@ -13,7 +13,7 @@ const UserInfoShort = (props: {user: User, order: Order}) => {
     const [avatarUrl, setAvatarUrl] = useState("")
     const location = useStore(locationData)
     useEffect(()=>{
-        getAvatar(Number(user.id))
+        getAvatar(Number(user.chatId))
             .then(res=>setAvatarUrl(res))
     }, [])
     return (

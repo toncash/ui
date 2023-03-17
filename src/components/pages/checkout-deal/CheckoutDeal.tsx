@@ -37,8 +37,8 @@ const CheckoutDeal = ()=> {
 
     useEffect(()=>{
         deal.dealStatus = DealStatus.CURRENT
-        deal.sellerId = order.orderType===OrderType.SELL ? order.ownerId : user.id
-        deal.buyerId = order.orderType===OrderType.BUY ? order.ownerId : user.id
+        deal.sellerId = order.orderType===OrderType.SELL ? order.ownerId : user.chatId
+        deal.buyerId = order.orderType===OrderType.BUY ? order.ownerId : user.chatId
         setDeal({...deal})
     }, [])
 

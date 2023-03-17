@@ -22,6 +22,8 @@ import {useAccount} from "../../../hooks/useAccount";
 import {useCounterContract} from "../../../hooks/useCounterContract";
 import {useDealContract} from "../../../hooks/useDealContract";
 import {useMaster} from "../../../hooks/useMaster";
+import {DealUser} from "../../../models/deal-user";
+import Order from "../../../models/order";
 
 
 export const ButtonOrder = styled.button`
@@ -68,8 +70,8 @@ export const Profile = () => {
   const { connected, wallet, sender } = useTonConnect()
   const client = useTonClient()
   const [balance, setBalance] = useState(0)
-  const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
-  const [currentDeals, setCurrentDeals] = useState<Deal []>([])
+  const [currentOrders, setCurrentOrders] = useState<Order []>([])
+  const [currentDeals, setCurrentDeals] = useState<DealUser []>([])
   const user = useStore(userData)
   let accountContract
   let dealContract = useDealContract(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
@@ -81,34 +83,31 @@ export const Profile = () => {
 
 
     // masterContract = useMaster()
+
     client.client?.getBalance(Address.parse(wallet as string))
         .then(res=>setBalance(Number(fromNano(res))))
-    ordersUserService.getOrderUsersByUser(user.id)
+    ordersUserService.getOrderUsersByUser(user.chatId)// TODO собрать сделки которые мне прислали
         .then(res=>setCurrentOrders(res))
         .catch(e=>console.log(e))
-    // console.log("deal address")
-    // console.log(dealContract.address ? dealContract.address.toString() : "")
-    // dealsService.getDealsByUser(user.id)
-    //     .then(res=>setCurrentDeals(res))
-    //     .catch(err=>console.log(err))
+    //
+    dealsService.getDealsByUser(user.chatId)
+        .then(res=>setCurrentDeals(res))
+        .catch(err=>console.log(err))
 
-  }, [connected, client, accountContract])
+  }, [])
 
 
   // console.log(user)
   // TODO convert deal to order
   const getOrders = () => {
     return currentOrders.map((item, index) => {
-      return <OrderListViewSmall orderUser={item} key={index}></OrderListViewSmall>
+      return <OrderListViewSmall order={item} key={index}></OrderListViewSmall>
     })
   }
 
   const getDeals = () => {
     return currentDeals.map((item, index) => {
-      return <DealListViewSmall dealUser={{
-        person: user,
-        deal: item
-      }} key={index}></DealListViewSmall>
+      return <DealListViewSmall dealUser={item} key={index}></DealListViewSmall>
     })
   }
 
@@ -121,9 +120,9 @@ export const Profile = () => {
     try {
       const avatarUrl = await getAvatar(userId)
       setUser({
-        id: userId,
+        chatId: userId,
         username: username,
-        avatar: avatarUrl,
+        avatarURL: avatarUrl,
         wallet,
       })
     } catch (error) {
@@ -133,7 +132,7 @@ export const Profile = () => {
 
   useEffect(() => {
     if (tg.initDataUnsafe?.user?.id) {
-      if (!user.id) {
+      if (!user.chatId) {
         handleGetUser()
       }
     } else {
@@ -143,7 +142,7 @@ export const Profile = () => {
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")
 
-  // TO DO  вывести сделки
+  // TODO  вывести сделки
 
   //  - подставить правильный запрос апи
 
@@ -196,12 +195,6 @@ export const Profile = () => {
     },
   ]
 
-  const getArrayDeals = () => {
-    return arrayDeals.map((item, index) => {
-      return <DealListViewSmall order={item} key={index}></DealListViewSmall>
-    })
-  }
-
   // for filter button
 
   const handleClickSwitchOnlyBitton = () => {
@@ -219,7 +212,7 @@ export const Profile = () => {
   return (
     <div className={classes.profile}>
       <ImageAvatar
-        src={user?.avatar}
+        src={user?.avatarURL}
         size={114}
         style={{
           marginTop: 50,
@@ -284,7 +277,7 @@ export const Profile = () => {
             Only buy
           </button>
         </div>
-        <div className={classes.viewListOrdersContainer}>{getArrayDeals()}</div>
+        <div className={classes.viewListOrdersContainer}>{getDeals()}</div>
         <div className={classes.viewListOrdersContainer}>{getOrders()}</div>
       </div>
       <Button onClick={()=>{
@@ -298,7 +291,7 @@ export const Profile = () => {
         // masterContract.sendNewAccount(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
         // // accountContract.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
         // // console.log("dealContract")
-      dealsService.cancelDeal(dealContract)
+
 
       }}>create contract</Button>
     </div>

@@ -12,6 +12,7 @@ import {MapComponent} from "../../map/MapComponent";
 import {useStore} from "@nanostores/react";
 import {locationData} from "../../../store/Location";
 import {userData} from "../../../store/UserData";
+import {Button} from "@mui/material";
 
 const CurrentOrder: FC = () => {
   const [order, setOrder] = useState<Order>({
@@ -30,6 +31,8 @@ const CurrentOrder: FC = () => {
   })
   const [person, setPerson] = useState<User>(getEmptyUser())
   const [avatarUrl, setAvatarUrl] = useState("")
+  const [amountPay, setAmountPay] = useState("")
+  const [amountReceive, setAmountReceive] = useState("")
   const {id} = useParams()
   const user = useStore(userData)
 
@@ -39,10 +42,10 @@ const CurrentOrder: FC = () => {
       const {order, person} = await ordersUserService.getOrderUser(id as string)
       setOrder(order)
       setPerson(person)
-      if(user.id===person.id){
+      if(user.chatId===person.chatId){
         setAvatarUrl("/my_order.png")
       } else {
-        getAvatar(Number(person.id))
+        getAvatar(Number(person.chatId))
             .then(res=>setAvatarUrl(res))
       }
 
@@ -64,11 +67,11 @@ const CurrentOrder: FC = () => {
         <div className={classes.userContainer}>
           <ImageAvatar src={avatarUrl} size={57} />
           <div>
-            <p className={classes.userName}>{ user.id != person.id ? `@${person.username}` : "My order"}</p>
+            <p className={classes.userName}>{ user.chatId != person.chatId ? `@${person.username}` : "My order"}</p>
             <p className={classes.statusComleted}>{order?.orderStatus}</p>
           </div>
         </div>
-        {user.id!==person.id?<Link className={classes.chatLink} to={`https://t.me/${person.username}`}>
+        {user.chatId!==person.chatId?<Link className={classes.chatLink} to={`https://t.me/${person.username}`}>
           See Chat
         </Link> : <div></div>}
       </div>
@@ -80,19 +83,19 @@ const CurrentOrder: FC = () => {
         </div>
 
         <div className={classes.infoItem}>
-          <p className={classes.infoItemTitle}>Amount:</p>
-          <p className={classes.infoItemValue}>{order?.amount} TON</p>
+          <p className={classes.infoItemTitle}>Type:</p>
+          <p className={classes.infoItemValue}>{order.orderType}</p>
         </div>
 
         <div className={classes.infoItem}>
-          <p className={classes.infoItemTitle}>I want to pay:</p>
-          <p className={classes.infoItemValue}>{order?.amount}</p>
+          <p className={classes.infoItemTitle}>Price:</p>
+          <p className={classes.infoItemValue}>{order.price} {order.currency}</p>
         </div>
 
-        <div className={classes.infoItem}>
-          <p className={classes.infoItemTitle}>I will receive:</p>
-          <p className={classes.infoItemValue}>{order?.amount}</p>
-        </div>
+        {/*<div className={classes.infoItem}>*/}
+        {/*  <p className={classes.infoItemTitle}>I will receive:</p>*/}
+        {/*  <p className={classes.infoItemValue}>{amountReceive}</p>*/}
+        {/*</div>*/}
 
 
       </div>
@@ -103,7 +106,6 @@ const CurrentOrder: FC = () => {
             <MapComponent ordersUsers={[{order, person}]}/>
           </div>
         </div>
-        <button>Cancel</button>
       </div>
 
   )
