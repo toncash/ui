@@ -26,7 +26,6 @@ export const TextTitle = styled.div`
   color: #fff;
   font-weight: 700;
   font-size: 24px;
-  color: var(--tg-theme-button-color);
 `
 
 export const TextCommon = styled.div`
@@ -274,7 +273,6 @@ const StepTwo = (props: Step) => {
         Choose your location:
       </button>
       <div className={classes.createOrderItem}>
-
         <div className={classes.buttonContainer}>
           <button
             className={classes.buttonValueCancel}
