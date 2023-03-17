@@ -1,10 +1,10 @@
-import { Autocomplete, Grid, Skeleton, TextField } from "@mui/material"
+import { Autocomplete, TextField } from "@mui/material"
 import data from "../../config/currencies-parsed.json"
 import { useEffect, useState } from "react"
 import { OrderUser } from "../../models/order-user"
 import styled from "styled-components"
 
-type SelectCurrencyProps = {
+ type SelectCurrencyProps = {
   orderUser: OrderUser
   setOrderUser: (o: OrderUser) => void
 }
@@ -41,7 +41,7 @@ const SelectCurrency = (props: SelectCurrencyProps) => {
           setOrderUser({ ...orderUser })
         }}
         options={data}
-        renderInput={params => <CssTextField  style={{color: 'white'}} {...params} variant="filled" />}
+        renderInput={params => <CssTextField  style={{color: 'red !important' }} {...params} variant="filled" />}
       />
     </div>
   )
