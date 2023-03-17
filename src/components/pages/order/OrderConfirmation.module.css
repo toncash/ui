@@ -1,0 +1,82 @@
+.orderConfimationPage {
+    padding: 44px 20px;
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.orderHeaders {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 0 30px 0;
+}
+
+.orderTitle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+    margin: 0 0 0 12px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.infoItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infoItem p {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.infoItem p:last-of-type {
+    opacity: 1;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 54px;
+    gap: 11px;
+    margin: 30px 20px 0 20px;
+}
+
+.buttonValueCancel {
+    border: none;
+    flex: 1;
+    height: 54px;
+    background: #1B1B1B;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    color: #fff;
+}
+
+.buttonValueCame {
+    border: none;
+    flex: 1;
+    height: 54px;
+    background: #D3FF6A;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 21px;
+    color: #000;
+}
