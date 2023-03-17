@@ -1,6 +1,6 @@
 import { Order, OrderType } from "../../../models/order"
 import User from "../../../models/user"
-import React, { useState } from "react"
+import React, {useEffect, useState} from "react"
 import classes from "./OrderConfirmation.module.css"
 import { PATH_PROFILE } from "../../../config/routes-config"
 import { Link, useLocation, useNavigate } from "react-router-dom"
@@ -11,6 +11,8 @@ import ButtonBack from "../../buttonBack/ButtonBack"
 import { dealsService, ordersService } from "../../../config/service-config"
 import { useStore } from "@nanostores/react"
 import { userData } from "../../../store/UserData"
+import PopupCongratulations from "../../popup/PopupCongratulations";
+import PopupUnfortunately from "../../popup/PopupUnfortunately";
 
 type CheckoutProps = {
   order: Order
@@ -19,29 +21,35 @@ type CheckoutProps = {
 
 const OrderConfimation = () => {
   const location = useLocation()
-  const deal: Deal = location.state
-
+  const deal: Deal = location.state.deal
+  console.log(location)
   const order: Order = location.state.order
   const navigate = useNavigate()
   const user = useStore(userData)
+  const [amountToPay, setAmountToPay] = useState<number>()
+  const [amountToReceive, setAmountToReceive] = useState<number>()
+  const [success, setSuccess] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
 
-  async function dealRequest(ownerId: string, deal: Deal) {
-    // TODO
-    // ordersService.addOrder()
-    const res = await dealsService.offerDeal(ownerId, deal)
-    console.log(res)
-  }
-
-  function showPopup() {
-    // TODO
-  }
+  useEffect(()=>{
+    if(String(order.orderType) === OrderType[OrderType.SELL]){
+      setAmountToReceive(deal.amount)
+      setAmountToPay(deal.amount * order.price)
+    }
+  }, [])
 
   // TODO дописать логику кнопки конфирм
 
   const handleConfirm = async () => {
-    await dealRequest(user.chatId.toString(), deal)
-    showPopup()
-    navigate(PATH_PROFILE)
+  try{
+    await dealsService.offerDeal(user.chatId.toString(), deal)
+    setSuccess(true)
+  } catch (e){
+    console.log(e)
+    await setError(true)
+  }
+
+    // navigate(PATH_PROFILE)
   }
 
   return (
@@ -56,13 +64,17 @@ const OrderConfimation = () => {
 
         <div className={classes.infoContainer}>
           <div className={classes.infoItem}>
-            <p>Amount:</p>
-            <p>{deal.amount} TON</p>
+            <p>I want to pay:</p>
+            <p>
+              {amountToPay}
+              {(String(order.orderType) === OrderType[OrderType.SELL] ? order.currency : "TON")}
+            </p>
           </div>
           <div className={classes.infoItem}>
-            <p>Amount::</p>
+            <p>I want to receive:</p>
             <p>
-              {deal.amount * order.price} {order.currency}
+              {amountToReceive}
+              {(String(order.orderType) === OrderType[OrderType.SELL] ? " TON" : order.currency)}
             </p>
           </div>
         </div>
@@ -76,6 +88,16 @@ const OrderConfimation = () => {
           Сonfirm
         </button>
       </div>
+
+      <PopupCongratulations flag={success} hidePopup={()=>{
+        setSuccess(false)
+        navigate(PATH_PROFILE)
+      }}/>
+
+      <PopupUnfortunately flag={error} hidePopup={()=>{
+        setError(false)
+        navigate(PATH_PROFILE)
+      }}/>
     </div>
   )
 }
