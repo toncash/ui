@@ -41,7 +41,7 @@ const SelectCurrency = (props: SelectCurrencyProps) => {
           setOrderUser({ ...orderUser })
         }}
         options={data}
-        renderInput={params => <CssTextField {...params} variant="filled" />}
+        renderInput={params => <CssTextField  style={{color: 'white'}} {...params} variant="filled" />}
       />
     </div>
   )

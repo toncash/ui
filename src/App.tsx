@@ -14,6 +14,8 @@ import Cancel from "./components/pages/currentOrder/CurrentOrder"
 import { Location } from "./models/order"
 import { locationData, setErrorLocationData, setLocationData } from "./store/Location"
 import { useStore } from "@nanostores/react"
+import { TransferTon } from "./components/TransferTon"
+import SelectCurrency from "./components/Select/SelectCurrency"
 
 const App = () => {
   const { connected } = useTonConnect()
