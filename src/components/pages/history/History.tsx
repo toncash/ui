@@ -2,25 +2,24 @@ import React, { useEffect, useState } from "react"
 import classes from "./History.module.css"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
 import ButtonBack from "../../buttonBack/ButtonBack"
-import {dealsService, ordersUserService} from "../../../config/service-config";
-import {useStore} from "@nanostores/react";
-import {userData} from "../../../store/UserData";
-import {OrderUser} from "../../../models/order-user";
-import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall";
-import {DealUser} from "../../../models/deal-user";
+import { dealsService, ordersUserService } from "../../../config/service-config"
+import { useStore } from "@nanostores/react"
+import { userData } from "../../../store/UserData"
+import { OrderUser } from "../../../models/order-user"
+import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall"
+import { DealUser } from "../../../models/deal-user"
 
 const History = () => {
-
   const user = useStore(userData)
   const [dealsUserArray, setDealsUser] = useState<DealUser[]>([])
   async function getData() {
-      const data = await dealsService.getDealsByUser(user.chatId)
-      setDealsUser(data)
-    }
+    const data = await dealsService.getDealsByUser(user.chatId)
+    setDealsUser(data)
+  }
 
-    useEffect(() => {
-      getData()
-    }, [])
+  useEffect(() => {
+    getData()
+  }, [])
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")
 
@@ -38,7 +37,7 @@ const History = () => {
 
   const getArray = () => {
     return dealsUserArray.map((item, index) => {
-      return <DealListViewSmall dealUser={item} key={index}/>
+      return <DealListViewSmall dealUser={item} key={index} />
     })
   }
 

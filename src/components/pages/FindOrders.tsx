@@ -8,12 +8,12 @@ import IconButton from "@mui/material/IconButton"
 import { ButtonOrder } from "./profile/Profile"
 import { useNavigate } from "react-router-dom"
 import Orders from "../../service/orders"
-import {ordersService, ordersUserService} from "../../config/service-config"
-import Order, {Location} from "../../models/order"
+import { ordersService, ordersUserService } from "../../config/service-config"
+import Order, { Location } from "../../models/order"
 import { MapComponent } from "../map/MapComponent"
-import {OrderUser} from "../../models/order-user";
-import {useStore} from "@nanostores/react";
-import {locationData} from "../../store/Location";
+import { OrderUser } from "../../models/order-user"
+import { useStore } from "@nanostores/react"
+import { locationData } from "../../store/Location"
 
 const FindOrders = () => {
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ const FindOrders = () => {
   let [allOrders, setAllOrders] = useState<OrderUser[]>([])
   const [viewMode, setViewMode] = useState<"list" | "map">("map")
 
-    const location = useStore(locationData)
+  const location = useStore(locationData)
 
   async function getData() {
     console.log(location)

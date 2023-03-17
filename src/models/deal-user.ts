@@ -1,7 +1,7 @@
-import User from "./user";
-import {Deal} from "./deal";
+import User from "./user"
+import { Deal } from "./deal"
 
 export type DealUser = {
-    person: User,
-    deal: Deal
+  person: User
+  deal: Deal
 }

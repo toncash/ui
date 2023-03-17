@@ -1,5 +1,3 @@
-const OrderInfo = ()=>{
-
-}
+const OrderInfo = () => {}
 
 export default OrderInfo

@@ -1,60 +1,60 @@
 .orderItem {
-    display: flex;
-    width: 100%;
-    min-height: 34px;
-    text-decoration: none;
-    color: #fff;
+  display: flex;
+  width: 100%;
+  min-height: 34px;
+  text-decoration: none;
+  color: #fff;
 }
 
 .userContainer {
-    flex: 1;
-    max-width: 70%;
-    display: flex;
-    gap: 10px;
+  flex: 1;
+  max-width: 70%;
+  display: flex;
+  gap: 10px;
 }
 
 .userName {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
-    align-items: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  align-items: center;
 }
 
 .orderData {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 14px;
-    color: #9B9B9B;
-    margin: 0 0 5px 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: #9b9b9b;
+  margin: 0 0 5px 0;
 }
 
 .info {
-    max-width: 30%;
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
+  max-width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
 }
 
 .infoValueTon {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .statusComleted {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: right;  
-    color: #D3FF6A;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: right;
+  color: #d3ff6a;
 }
 
 .statusСancelled {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: right;  
-    color: #FF7253;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: right;
+  color: #ff7253;
 }

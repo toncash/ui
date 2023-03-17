@@ -73,7 +73,11 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
             </div>
           </div>
         </div>
-        <Link to={PATH_CHECKOUT} state={{ order: orderUser.order, person: orderUser.person }}>
+        <Link
+          className={classes.buyTonButton}
+          to={PATH_CHECKOUT}
+          state={{ order: orderUser.order, person: orderUser.person }}
+        >
           Buy TON
         </Link>
       </motion.div>

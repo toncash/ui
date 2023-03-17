@@ -11,20 +11,19 @@ import { useStore } from "@nanostores/react"
 import { setUser, userData } from "../../../store/UserData"
 import getAvatar from "../../../utils/getAvatar"
 import { Link } from "react-router-dom"
-import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall";
-import {dealsService, ordersUserService} from "../../../config/service-config";
-import {OrderUser} from "../../../models/order-user";
-import {Address, fromNano, toNano} from "ton";
-import {Deal} from "../../../models/deal";
-import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall";
-import {Button} from "@mui/material";
-import {useAccount} from "../../../hooks/useAccount";
-import {useCounterContract} from "../../../hooks/useCounterContract";
-import {useDealContract} from "../../../hooks/useDealContract";
-import {useMaster} from "../../../hooks/useMaster";
-import {DealUser} from "../../../models/deal-user";
-import Order from "../../../models/order";
-
+import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
+import { dealsService, ordersUserService } from "../../../config/service-config"
+import { OrderUser } from "../../../models/order-user"
+import { Address, fromNano, toNano } from "ton"
+import { Deal } from "../../../models/deal"
+import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall"
+import { Button } from "@mui/material"
+import { useAccount } from "../../../hooks/useAccount"
+import { useCounterContract } from "../../../hooks/useCounterContract"
+import { useDealContract } from "../../../hooks/useDealContract"
+import { useMaster } from "../../../hooks/useMaster"
+import { DealUser } from "../../../models/deal-user"
+import Order from "../../../models/order"
 
 export const ButtonOrder = styled.button`
   background-color: ${props => (props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)")};
@@ -70,20 +69,24 @@ export const Profile = () => {
   const { connected, wallet, sender } = useTonConnect()
   const client = useTonClient()
   const [balance, setBalance] = useState(0)
-  const [currentOrders, setCurrentOrders] = useState<Order []>([])
-  const [currentDeals, setCurrentDeals] = useState<DealUser []>([])
+  const [currentOrders, setCurrentOrders] = useState<Order[]>([])
+  const [currentDeals, setCurrentDeals] = useState<DealUser[]>([])
   const user = useStore(userData)
   let accountContract
-  let dealContract = useDealContract(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+  let dealContract = useDealContract(
+    Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1")
+  )
   let masterContract
-  useEffect(()=>{
-    ordersUserService.getOrderUsersByUser(user.chatId)// TODO собрать сделки которые мне прислали
-        .then(res=>setCurrentOrders(res))
-        .catch(e=>console.log(e))
+  useEffect(() => {
+    ordersUserService
+      .getOrderUsersByUser(user.chatId) // TODO собрать сделки которые мне прислали
+      .then(res => setCurrentOrders(res))
+      .catch(e => console.log(e))
     //
-    dealsService.getDealsByUser(user.chatId)
-        .then(res=>setCurrentDeals(res))
-        .catch(err=>console.log(err))
+    dealsService
+      .getDealsByUser(user.chatId)
+      .then(res => setCurrentDeals(res))
+      .catch(err => console.log(err))
   }, [])
 
   useEffect(() => {
@@ -92,11 +95,8 @@ export const Profile = () => {
     }
     // masterContract = useMaster()
 
-    client.client?.getBalance(Address.parse(wallet as string))
-        .then(res=>setBalance(Number(fromNano(res))))
-
+    client.client?.getBalance(Address.parse(wallet as string)).then(res => setBalance(Number(fromNano(res))))
   }, [client])
-
 
   // console.log(user)
   // TODO convert deal to order
@@ -111,8 +111,6 @@ export const Profile = () => {
       return <DealListViewSmall dealUser={item} key={index}></DealListViewSmall>
     })
   }
-
-
 
   const handleGetUser = async () => {
     const userId = tg.initDataUnsafe?.user?.id
@@ -281,20 +279,22 @@ export const Profile = () => {
         <div className={classes.viewListOrdersContainer}>{getDeals()}</div>
         <div className={classes.viewListOrdersContainer}>{getOrders()}</div>
       </div>
-      <Button onClick={()=>{
-        // dealsService.acceptDeal(
-        //     "6410566b384724250566c838",
-        //     "640f29a0d4dfb1303244f9bc",
-        //     "260316435",
-        //     sender.address as Address,
-        //     Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
-        //     accountContract)
-        // masterContract.sendNewAccount(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
-        // // accountContract.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
-        // // console.log("dealContract")
-
-
-      }}>create contract</Button>
+      <Button
+        onClick={() => {
+          // dealsService.acceptDeal(
+          //     "6410566b384724250566c838",
+          //     "640f29a0d4dfb1303244f9bc",
+          //     "260316435",
+          //     sender.address as Address,
+          //     Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
+          //     accountContract)
+          // masterContract.sendNewAccount(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
+          // // accountContract.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+          // // console.log("dealContract")
+        }}
+      >
+        create contract
+      </Button>
     </div>
   )
 }

@@ -41,16 +41,14 @@ export function OrderMapComponent(props: LocationProps) {
 
   return (
     <div style={{ margin: "50px 0" }}>
-      <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_API}>
-        <GoogleMap
-          ref={refMap}
-          mapContainerStyle={containerStyle}
-          zoom={10}
-          center={{ lat: location.x, lng: location.y }}
-        >
-          <GoogleMapRedMarker />
-        </GoogleMap>
-      </LoadScript>
+      <GoogleMap
+        ref={refMap}
+        mapContainerStyle={containerStyle}
+        zoom={10}
+        center={{ lat: location.x, lng: location.y }}
+      >
+        <GoogleMapRedMarker />
+      </GoogleMap>
 
       <div className={classes.buttonContainer}>
         <button

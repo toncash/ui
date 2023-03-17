@@ -1,7 +1,7 @@
 .pageLogin {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 15px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 .titlePage {
@@ -14,46 +14,46 @@
 }
 
 .subtitlePage {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    margin: 10px auto 26px auto;
-    max-width: 70vw;
-    width: max-content;
-    text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 10px auto 26px auto;
+  max-width: 70vw;
+  width: max-content;
+  text-align: center;
 }
 
 .connectButton button {
-    max-width: 294px;
-    width: 80vw;
-    height: 54px;
-    background: #FFFFFF;
-    border-radius: 100px;
-    margin: 0 auto;
+  max-width: 294px;
+  width: 80vw;
+  height: 54px;
+  background: #ffffff;
+  border-radius: 100px;
+  margin: 0 auto;
 }
 
 .connectButton div {
-    font-family: sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 29px;
-    margin: 0 auto;
-    color: #000;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 29px;
+  margin: 0 auto;
+  color: #000;
 }
 
 .connectButton svg {
-    display: none;
+  display: none;
 }
 
 .userName {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    margin: 20px auto 30px auto;
-    max-width: 70vw;
-    width: max-content;
-    text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 20px auto 30px auto;
+  max-width: 70vw;
+  width: max-content;
+  text-align: center;
 }

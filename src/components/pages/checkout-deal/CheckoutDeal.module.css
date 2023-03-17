@@ -1,93 +1,93 @@
 .orderCHeckoutPage {
-    padding: 44px 20px;
-    min-height: 95vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  padding: 44px 20px;
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .orderHeaders {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    margin: 0 0 30px 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  margin: 0 0 30px 0;
 }
 
 .orderTitle {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 35px;
-    margin: 0 0 0 12px;
-    text-align: center;
-    color: #FFFFFF;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  margin: 0 0 0 12px;
+  text-align: center;
+  color: #ffffff;
 }
 
 .orderAmount {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 40px 0 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 40px 0 20px 0;
 }
 
 .orderAmount p {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    color: #FFFFFF;
-    opacity: 0.5;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  opacity: 0.5;
 }
 
 .orderAmount p:last-of-type {
-    opacity: 1;
+  opacity: 1;
 }
 
 .orderCHeckoutItem {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 30px 0;
 }
 
 .orderCHeckoutItemLabel {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    color: #FFFFFF;
-    opacity: 0.5;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  opacity: 0.5;
 }
 
 .buttonCancel {
-    height: 46px;
-    background: #1B1B1B;
-    border-radius: 100px;
-    text-decoration: none;
-    color: #fff;
-    padding: 12px;
-    font-weight: 700;
-    font-size: 17px;
-    flex: 1;
-    display: flex;
-    justify-content: center;
+  height: 46px;
+  background: #1b1b1b;
+  border-radius: 100px;
+  text-decoration: none;
+  color: #fff;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 17px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .buttonBuyTon {
-    background: #D3FF6A;
-    border-radius: 100px;
-    text-decoration: none;
-    color: #000;
-    padding: 12px;
-    font-weight: 700;
-    font-size: 17px;
-    flex: 1;
-    display: flex;
-    justify-content: center;
+  background: #d3ff6a;
+  border-radius: 100px;
+  text-decoration: none;
+  color: #000;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 17px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 11px;
+  display: flex;
+  justify-content: space-between;
+  gap: 11px;
 }

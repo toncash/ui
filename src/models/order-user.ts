@@ -1,7 +1,7 @@
-import User from "./user";
-import Order from "./order";
+import User from "./user"
+import Order from "./order"
 
 export type OrderUser = {
-    person: User,
-    order: Order
+  person: User
+  order: Order
 }
