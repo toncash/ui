@@ -4,12 +4,14 @@ import classes from "./Map.module.css"
 import { Link } from "react-router-dom"
 import { PATH_CHECKOUT } from "../../config/routes-config"
 import { OrderUser } from "../../models/order-user"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import getAvatar from "../../utils/getAvatar"
-import { Button } from "../styled/styled"
+import { useComputeDistance } from "./useComputeDistance"
+import { convertMetersToKilometers } from "../../utils/formatMeters"
 
 interface CustomMarkerProps {
   orderUser?: OrderUser
+  userLocation: google.maps.LatLngLiteral
 }
 
 const getPixelPositionOffset = (width: number, height: number) => ({
@@ -17,20 +19,25 @@ const getPixelPositionOffset = (width: number, height: number) => ({
   y: -(height / 2),
 })
 
-export function SelectedOrderBox({ orderUser }: CustomMarkerProps) {
+export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps) {
   if (!orderUser) return null
   const [avatarUrl, setAvatarUrl] = useState("")
   useEffect(() => {
-    getAvatar(Number(orderUser.person.chatId)).then(res => setAvatarUrl(res))
+    getAvatar(Number(orderUser.person.id)).then(res => setAvatarUrl(res))
   }, [])
   console.log("orderUser")
   console.log(orderUser)
+
+  const orderLocation = {
+    lat: orderUser.order.location.x,
+    lng: orderUser.order.location.y,
+  }
+
+  const distance = useComputeDistance(orderLocation, userLocation)
+
   return (
     <OverlayView
-      position={{
-        lat: orderUser.order.location.x,
-        lng: orderUser.order.location.y,
-      }}
+      position={orderLocation}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       getPixelPositionOffset={getPixelPositionOffset}
     >
@@ -48,7 +55,8 @@ export function SelectedOrderBox({ orderUser }: CustomMarkerProps) {
           <div className={classes.userCardRight}>
             <div className={classes.userSlug}>@{orderUser.person.username}</div>
             <div className={classes.userInfo}>
-              2 km away, сompletion: <span className={classes.userSuccessPercent}>97%</span>
+              {distance ? `${convertMetersToKilometers(distance)} away` : "Distance unknown"}, сompletion:{" "}
+              <span className={classes.userSuccessPercent}>97%</span>
             </div>
           </div>
         </div>
@@ -65,11 +73,7 @@ export function SelectedOrderBox({ orderUser }: CustomMarkerProps) {
             </div>
           </div>
         </div>
-        <Link
-          to={PATH_CHECKOUT}
-          state={{ order: orderUser.order, person: orderUser.person }}
-          className={classes.buyTonButton}
-        >
+        <Link to={PATH_CHECKOUT} state={{ order: orderUser.order, person: orderUser.person }}>
           Buy TON
         </Link>
       </motion.div>
