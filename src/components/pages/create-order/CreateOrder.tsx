@@ -237,7 +237,7 @@ const StepTwo = (props: Step) => {
   const { orderUser, setOrderUser, setStep } = props
   const [errorLimitMinMessage, setErrorLimitMinMessage] = useState("")
   const [errorLimitMaxMessage, setErrorLimitMaxMessage] = useState("")
-
+  const navigate = useNavigate()
   function validateFn(value: number) {
     if (value > 0) {
       return ""
@@ -274,35 +274,6 @@ const StepTwo = (props: Step) => {
         Choose your location:
       </button>
       <div className={classes.createOrderItem}>
-        {/* <div className={classes.itemTwoContainer}>
-          <div>
-            <label>Limits min:</label>
-            <TextField
-              id="limit-min"
-              // label="Min"
-              variant="filled"
-              type="number"
-              value={orderUser.order.limit.min ? orderUser.order.limit.min : ""}
-              error={!!errorLimitMinMessage}
-              helperText={errorLimitMinMessage}
-              onChange={handleChangeLimitMin}
-            />
-          </div>
-          <div>
-            <label>Limits max:</label>
-            <TextField
-              id="limit-max"
-              // label="Max"
-              variant="filled"
-              type="number"
-              value={orderUser.order.limit.max ? orderUser.order.limit.max : ""}
-              error={!!errorLimitMaxMessage}
-              helperText={errorLimitMaxMessage}
-              onChange={handleChangeLimitMax}
-            />
-          </div>
-          {/*<Input value={order.limit.min} onChange={handleChangeLimitMin}></Input>
-        </div> */}
 
         <div className={classes.buttonContainer}>
           <button
@@ -324,6 +295,7 @@ const StepTwo = (props: Step) => {
                 setErrorLimitMinMessage("")
 
                 const res = await ordersService.addOrder(orderUser.order)
+                navigate(PATH_PROFILE)
                 console.log(res)
               } else if (orderUser.order.limit.max <= orderUser.order.limit.min) {
                 setErrorLimitMaxMessage("Max must be more than min")

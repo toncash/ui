@@ -76,16 +76,7 @@ export const Profile = () => {
   let accountContract
   let dealContract = useDealContract(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
   let masterContract
-  useEffect(() => {
-    if (!!client.client && !connected) {
-      navigate(PATH_LOGIN)
-    }
-
-
-    // masterContract = useMaster()
-
-    client.client?.getBalance(Address.parse(wallet as string))
-        .then(res=>setBalance(Number(fromNano(res))))
+  useEffect(()=>{
     ordersUserService.getOrderUsersByUser(user.chatId)// TODO собрать сделки которые мне прислали
         .then(res=>setCurrentOrders(res))
         .catch(e=>console.log(e))
@@ -93,8 +84,18 @@ export const Profile = () => {
     dealsService.getDealsByUser(user.chatId)
         .then(res=>setCurrentDeals(res))
         .catch(err=>console.log(err))
-
   }, [])
+
+  useEffect(() => {
+    if (!!client.client && !connected) {
+      navigate(PATH_LOGIN)
+    }
+    // masterContract = useMaster()
+
+    client.client?.getBalance(Address.parse(wallet as string))
+        .then(res=>setBalance(Number(fromNano(res))))
+
+  }, [client])
 
 
   // console.log(user)
