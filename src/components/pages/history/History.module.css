@@ -1,99 +1,99 @@
 .history {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 45px 15px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 45px 15px 15px 20px;
 }
 
 .backButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    width: 70px;
-    height: 20px;
-    background: rgba(217, 217, 217, 0.1);
-    border-radius: 18px;
-    border: none;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 18px;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  width: 70px;
+  height: 20px;
+  background: rgba(217, 217, 217, 0.1);
+  border-radius: 18px;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  text-decoration: none;
 }
 
 .historyTitle {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 35px;
-    margin: 0 0 0 12px;
-    text-align: center;
-    color: #FFFFFF;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  margin: 0 0 0 12px;
+  text-align: center;
+  color: #ffffff;
 }
 
 .historyHeaders {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
 }
 
 .onlyButtonContainer {
-    width: 100%;
-    margin: 20px 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    padding: 0 15px;
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 0 15px;
 }
 
 .onlyButton {
-    min-width: 55%;
-    height: 39px;
-    left: 20px;
-    top: 109px;
-    border-radius: 20px;
-    border: none;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    color: #FFFFFF;
+  min-width: 55%;
+  height: 39px;
+  left: 20px;
+  top: 109px;
+  border-radius: 20px;
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
 }
 
 .onlyButton:last-of-type {
-    position: relative;
-    left: -10%;
-    top: 0
+  position: relative;
+  left: -10%;
+  top: 0;
 }
 
 .viewListOrdersContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 10px;
 }
 
 .searchInput {
-    width: 95%;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 4px 15px rgba(27, 31, 36, 0.1);
-    border-radius: 100px;
-    border: none;
-    margin: 0 auto;
-    padding: 0 15px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 25px;
+  width: 95%;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 4px 15px rgba(27, 31, 36, 0.1);
+  border-radius: 100px;
+  border: none;
+  margin: 0 auto;
+  padding: 0 15px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
 }
 
 .searchInput::placeholder {
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 25px;
-    color: #9B9B9B;
-    margin: 0 0 20px;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 25px;
+  color: #9b9b9b;
+  margin: 0 0 20px;
 }

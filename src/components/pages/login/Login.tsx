@@ -5,11 +5,11 @@ import classes from "./Login.module.css"
 import { useTonConnect } from "../../../hooks/useTonConnect"
 import { Navigate } from "react-router-dom"
 import { PATH_PROFILE } from "../../../config/routes-config"
-import User, {getEmptyUser} from "../../../models/user"
-import {setUser, userData} from "../../../store/UserData";
-import {useStore} from "@nanostores/react";
-import {usersService} from "../../../config/service-config";
-import getAvatar from "../../../utils/getAvatar";
+import User, { getEmptyUser } from "../../../models/user"
+import { setUser, userData } from "../../../store/UserData"
+import { useStore } from "@nanostores/react"
+import { usersService } from "../../../config/service-config"
+import getAvatar from "../../../utils/getAvatar"
 
 export const LoginStyle = styled.div`
   max-width: 1400px;
@@ -32,17 +32,19 @@ export const Login = () => {
     try {
       const avatarUrl = await getAvatar(userId)
       setUser({
-        id: userId,
+        chatId: userId,
         username,
-        avatar: avatarUrl,
-        wallet
+        avatarURL: avatarUrl,
+        wallet,
       })
 
       const checkUser = await usersService.getUser(userId)
-      if(!checkUser.id){
-        await usersService.addUser({
-          id: userId,
-          username
+
+      if (!checkUser.chatId) {
+        const res = await usersService.addUser({
+          chatId: userId,
+          username,
+          avatarURL: avatarUrl,
         })
       }
     } catch (error) {
@@ -52,14 +54,11 @@ export const Login = () => {
 
   useEffect(() => {
     if (tg.initDataUnsafe?.user?.id) {
-      if(!user.id){
-        handleGetUser()
-      }
-
+      handleGetUser()
     } else {
       setUser(getEmptyUser())
     }
-  }, [tg.initDataUnsafe?.user?.id])
+  }, [])
 
   if (connected) {
     console.log("+")
@@ -69,7 +68,11 @@ export const Login = () => {
   return (
     <div className={classes.pageLogin}>
       <ImageAvatar
-        src={user?.avatar ? user.avatar : "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"}
+        src={
+          user?.avatarURL
+            ? user.avatarURL
+            : "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png"
+        }
         size={114}
         style={{
           marginTop: 50,
@@ -81,7 +84,6 @@ export const Login = () => {
       <p className={classes.userName}>@{user?.username ? user.username : "username"}</p>
       <h1 className={classes.titlePage}>Welcome</h1>
       <p className={classes.subtitlePage}>Сonnect your wallet for further registration</p>
-
     </div>
   )
 }

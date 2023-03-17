@@ -27,7 +27,6 @@ const banner = `
 console.log(banner)
 
 let githubUsername, githubRepo, botUsername
-
 ;(async () => {
   try {
     const file = fs.readFileSync(".git/config").toString()

@@ -1,95 +1,95 @@
 .cancelPage {
-    display: flex;
-    flex-direction: column;
-    padding: 45px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 45px 20px 20px 20px;
 }
 
 .cancelHeaders {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    margin: 0 0 30px 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  margin: 0 0 30px 0;
 }
 
 .cancelTitle {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 35px;
-    margin: 0 0 0 12px;
-    text-align: center;
-    color: #FFFFFF;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  margin: 0 0 0 12px;
+  text-align: center;
+  color: #ffffff;
 }
 
 .cancelSubtitle {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .cancelForm {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .labelCheckbox {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 .checkbox {
-    margin: 0 10px 0 0;
+  margin: 0 10px 0 0;
 }
 
 .textarea {
-    width: 100%;
-    min-height: 128px;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 4px 15px rgba(27, 31, 36, 0.1);
-    border-radius: 10px;
-    border: none;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    color: #fff;
+  width: 100%;
+  min-height: 128px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 4px 15px rgba(27, 31, 36, 0.1);
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
 }
 
 .buttonContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    height: 54px;
-    gap: 11px;
-    margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 54px;
+  gap: 11px;
+  margin: 0 0 30px 0;
 }
 
 .buttonValueCancel {
-    border: none;
-    flex: 1;
-    height: 54px;
-    background: #1B1B1B;
-    border-radius: 100px;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 21px;
-    color: #fff;
+  border: none;
+  flex: 1;
+  height: 54px;
+  background: #1b1b1b;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 21px;
+  color: #fff;
 }
 
 .buttonValueCame {
-    border: none;
-    flex: 1;
-    height: 54px;
-    background: #D3FF6A;
-    border-radius: 100px;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 21px;
-    color: #000;
+  border: none;
+  flex: 1;
+  height: 54px;
+  background: #d3ff6a;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 21px;
+  color: #000;
 }

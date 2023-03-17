@@ -3,30 +3,48 @@ import { Link } from "react-router-dom"
 import { BASE_PATH_CURRENTORDER } from "../../config/routes-config"
 import { OrderUser } from "../../models/order-user"
 import classes from "./OrderListViewSmall.module.css"
-import {useEffect, useState} from "react";
-import getAvatar from "../../utils/getAvatar";
-import {useStore} from "@nanostores/react";
-import {userData} from "../../store/UserData";
+import React, { useState } from "react"
+import { Deal } from "../../models/deal"
+import DealListViewSmall from "../dealListViewSmall/DealListViewSmall"
+import { usersService } from "../../config/service-config"
+import Order, { OrderType } from "../../models/order"
 
-export const OrderListViewSmall = ({ orderUser }: { orderUser: OrderUser }) => {
-    const {order, person} = orderUser
-    const link = BASE_PATH_CURRENTORDER + order.id
-    const user = useStore(userData)
-    const [avatarUrl, setAvatarUrl] = useState("")
-    useEffect(()=>{
-        if(user.id===person.id){
-            setAvatarUrl("/my_order.png")
-        } else {
-            getAvatar(Number(person.id))
-                .then(res=>setAvatarUrl(res))
-        }
-    }, [])
+function getDealOwner(order: Order, deal: Deal) {
+  let userId
+  if (order.orderType == OrderType.SELL) {
+    userId = deal.sellerId
+  } else {
+    userId = deal.buyerId
+  }
+
+  return usersService.getUser(String(userId))
+}
+
+export const OrderListViewSmall = ({ order }: { order: Order }) => {
+  const link = BASE_PATH_CURRENTORDER + order.id
+  const [avatarUrl, setAvatarUrl] = useState("/my_order.png")
+  const [currentDeals, setCurrentDeals] = useState<Deal[] | undefined>(order.deals)
+  const getDeals = async () => {
+    if (currentDeals) {
+      return currentDeals.map(async (deal, index) => {
+        const person = await getDealOwner(order, deal)
+        return (
+          <DealListViewSmall
+            dealUser={{
+              deal,
+              person,
+            }}
+          />
+        )
+      })
+    }
+  }
   return (
     <Link className={classes.orderItem} to={link}>
       <div className={classes.userContainer}>
         <ImageAvatar src={avatarUrl} size={36} />
         <div>
-          <p className={classes.userName}>{ user.id != person.id ? `@${person.username}` : "my order"}</p>
+          <p className={classes.userName}>{"my order"}</p>
           <p className={classes.orderData}>{order.localDateTime?.substring(0, 10)}</p>
         </div>
       </div>
@@ -35,7 +53,6 @@ export const OrderListViewSmall = ({ orderUser }: { orderUser: OrderUser }) => {
 
         {/* нужно будет дописать логику выбора */}
         <p className={classes.statusComleted}>{order.orderStatus}</p>
-        {/* <p className={classes.statusСancelled}>{order.status}</p> */}
       </div>
     </Link>
   )

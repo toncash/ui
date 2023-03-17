@@ -1,7 +1,7 @@
 import { CHAIN } from "@tonconnect/protocol"
 import { Sender, SenderArguments } from "ton-core"
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react"
-import {Address} from "ton";
+import { Address } from "ton"
 
 export function useTonConnect(): {
   sender: Sender
@@ -27,7 +27,7 @@ export function useTonConnect(): {
           validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes for user to approve
         })
       },
-      address: wallet?.account.address?Address.parse(wallet?.account.address):undefined
+      address: wallet?.account.address ? Address.parse(wallet?.account.address) : undefined,
     },
     connected: !!wallet?.account.address,
     wallet: wallet?.account.address ?? null,

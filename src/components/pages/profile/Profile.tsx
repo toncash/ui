@@ -6,22 +6,17 @@ import { PATH_CREATEORDER, PATH_FINDORDERS, PATH_LOGIN, PATH_HISTORY } from "../
 import { useTonConnect } from "../../../hooks/useTonConnect"
 import classes from "./Profile.module.css"
 import { useTonClient } from "../../../hooks/useTonClient"
-import  {getEmptyUser} from "../../../models/user"
-import {useStore} from "@nanostores/react";
-import {setUser, userData} from "../../../store/UserData";
-import getAvatar from "../../../utils/getAvatar";
+import { getEmptyUser } from "../../../models/user"
+import { useStore } from "@nanostores/react"
+import { setUser, userData } from "../../../store/UserData"
+import getAvatar from "../../../utils/getAvatar"
 import { Link } from "react-router-dom"
-import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall";
-import {dealsService, ordersUserService} from "../../../config/service-config";
-import {OrderUser} from "../../../models/order-user";
-import {Address, fromNano, toNano} from "ton";
-import {Deal} from "../../../models/deal";
-import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall";
-import {Button} from "@mui/material";
-import {useHistoryKeeper} from "../../../hooks/useHistoryKeeper";
-import {useCounterContract} from "../../../hooks/useCounterContract";
-import {useDealContract} from "../../../hooks/useDealContract";
-
+import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
+import { dealsService, ordersUserService } from "../../../config/service-config"
+import { Address, fromNano } from "ton"
+import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall"
+import { DealUser } from "../../../models/deal-user"
+import Order from "../../../models/order"
 
 export const ButtonOrder = styled.button`
   background-color: ${props => (props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)")};
@@ -67,47 +62,43 @@ export const Profile = () => {
   const { connected, wallet, sender } = useTonConnect()
   const client = useTonClient()
   const [balance, setBalance] = useState(0)
-  const [currentOrders, setCurrentOrders] = useState<OrderUser []>([])
-  const [currentDeals, setCurrentDeals] = useState<Deal []>([])
+  const [currentOrders, setCurrentOrders] = useState<Order[]>([])
+  const [currentDeals, setCurrentDeals] = useState<DealUser[]>([])
   const user = useStore(userData)
-  const historyKeeper = useHistoryKeeper()
-  const dealContract = useDealContract(historyKeeper.address, Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
+
+  useEffect(() => {
+    ordersUserService
+      .getOrderUsersByUser(user.chatId)
+      .then(res => setCurrentOrders(res))
+      .catch(e => console.log(e))
+    //
+    dealsService
+      .getDealsByUser(user.chatId)
+      .then(res => setCurrentDeals(res))
+      .catch(err => console.log(err))
+  }, [])
+
   useEffect(() => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
 
-    client.client?.getBalance(Address.parse(wallet as string))
-        .then(res=>setBalance(Number(fromNano(res))))
-    ordersUserService.getOrderUsersByUser(user.id)
-        .then(res=>setCurrentOrders(res))
-        .catch(e=>console.log(e))
 
-    // dealsService.getDealsByUser(user.id)
-    //     .then(res=>setCurrentDeals(res))
-    //     .catch(err=>console.log(err))
-
-  }, [connected, client])
+    client.client?.getBalance(Address.parse(wallet as string)).then(res => setBalance(Number(fromNano(res))))
+  }, [client])
 
 
-  // console.log(user)
-  // TODO convert deal to order
   const getOrders = () => {
     return currentOrders.map((item, index) => {
-      return <OrderListViewSmall orderUser={item} key={index}></OrderListViewSmall>
+      return <OrderListViewSmall order={item} key={index}></OrderListViewSmall>
     })
   }
 
   const getDeals = () => {
     return currentDeals.map((item, index) => {
-      return <DealListViewSmall dealUser={{
-        person: user,
-        deal: item
-      }} key={index}></DealListViewSmall>
+      return <DealListViewSmall dealUser={item} key={index}></DealListViewSmall>
     })
   }
-
-
 
   const handleGetUser = async () => {
     const userId = tg.initDataUnsafe?.user?.id
@@ -116,9 +107,9 @@ export const Profile = () => {
     try {
       const avatarUrl = await getAvatar(userId)
       setUser({
-        id: userId,
+        chatId: userId,
         username: username,
-        avatar: avatarUrl,
+        avatarURL: avatarUrl,
         wallet,
       })
     } catch (error) {
@@ -128,7 +119,7 @@ export const Profile = () => {
 
   useEffect(() => {
     if (tg.initDataUnsafe?.user?.id) {
-      if (!user.id) {
+      if (!user.chatId) {
         handleGetUser()
       }
     } else {
@@ -137,8 +128,6 @@ export const Profile = () => {
   }, [tg.initDataUnsafe?.user?.id])
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")
-
-  // for filter button
 
   const handleClickSwitchOnlyBitton = () => {
     if (viewOnlyFilter === "buy") {
@@ -155,7 +144,7 @@ export const Profile = () => {
   return (
     <div className={classes.profile}>
       <ImageAvatar
-        src={user?.avatar}
+        src={user?.avatarURL}
         size={114}
         style={{
           marginTop: 50,
@@ -220,22 +209,9 @@ export const Profile = () => {
             Only buy
           </button>
         </div>
+        <div className={classes.viewListOrdersContainer}>{getDeals()}</div>
         <div className={classes.viewListOrdersContainer}>{getOrders()}</div>
-        {/*<div className={classes.viewListOrdersContainer}>{getDeals()}</div>*/}
       </div>
-      <Button onClick={()=>{
-        // dealsService.acceptDeal(
-        //     "6410566b384724250566c838",
-        //     "640f29a0d4dfb1303244f9bc",
-        //     "260316435",
-        //     sender.address as Address,
-        //     Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
-        //     historyKeeper)
-        // historyKeeper.sendNewDeal(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
-        // historyKeeper.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
-        console.log("dealContract")
-        dealContract.sendCancel()
-      }}>create contract</Button>
     </div>
   )
 }

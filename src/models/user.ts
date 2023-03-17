@@ -1,15 +1,15 @@
 export type User = {
-    id: number | string,
-    username: string,
-    avatar?: string,
-    wallet?: string | null,
+  chatId: number | string
+  username: string
+  avatarURL?: string
+  wallet?: string | null
 }
 
 export function getEmptyUser(): User {
-    return {
-        id: 260316435,
-        username: "svetender",
-        avatar: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-    }
+  return {
+    chatId: 0,
+    username: "svetender",
+    avatarURL: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
+  }
 }
-export default User;
+export default User

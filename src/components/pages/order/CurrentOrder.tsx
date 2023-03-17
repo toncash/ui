@@ -1,5 +1,3 @@
-const CurrentOrder = ()=>{
-
-}
+const CurrentOrder = () => {}
 
 export default CurrentOrder

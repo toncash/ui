@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import OrderListView from "../../orderListView/OrderListView"
-import {ordersService, ordersUserService} from "../../../config/service-config"
+import { ordersService, ordersUserService } from "../../../config/service-config"
 import Order from "../../../models/order"
 import { MapComponent } from "../../map/MapComponent"
 import classes from "./FindOrders.module.css"
@@ -9,8 +9,8 @@ import { PATH_PROFILE } from "../../../config/routes-config"
 import { useStore } from "@nanostores/react"
 import { userData } from "../../../store/UserData"
 import ButtonBack from "../../buttonBack/ButtonBack"
-import {locationData} from "../../../store/Location";
-import {OrderUser} from "../../../models/order-user";
+import { locationData } from "../../../store/Location"
+import { OrderUser } from "../../../models/order-user"
 
 const FindOrders = () => {
   function order(username: string, amount: number, price: number, currency: string, orderType: string) {
@@ -56,8 +56,8 @@ const FindOrders = () => {
 
   return (
     <div className={classes.orders}>
-      <ButtonBack />
       <div className={classes.ordersHeaders}>
+        <ButtonBack />
         <h1 className={classes.ordersTitle}>Find order</h1>
         <button className={classes.changeMapButton} onClick={handleClickSwitchMapButton}>
           {viewMode === "map" ? "Open a list" : "Open map"}

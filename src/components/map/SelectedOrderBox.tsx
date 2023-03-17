@@ -6,7 +6,6 @@ import { PATH_CHECKOUT } from "../../config/routes-config"
 import { OrderUser } from "../../models/order-user"
 import { useEffect, useMemo, useState } from "react"
 import getAvatar from "../../utils/getAvatar"
-import { Button } from "../styled/styled"
 import { useComputeDistance } from "./useComputeDistance"
 import { convertMetersToKilometers } from "../../utils/formatMeters"
 
@@ -24,7 +23,7 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
   if (!orderUser) return null
   const [avatarUrl, setAvatarUrl] = useState("")
   useEffect(() => {
-    getAvatar(Number(orderUser.person.id)).then(res => setAvatarUrl(res))
+    getAvatar(Number(orderUser.person.chatId)).then(res => setAvatarUrl(res))
   }, [])
   console.log("orderUser")
   console.log(orderUser)
@@ -74,7 +73,11 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
             </div>
           </div>
         </div>
-        <Link to={PATH_CHECKOUT} state={{ order: orderUser.order, person: orderUser.person }}>
+        <Link
+          className={classes.buyTonButton}
+          to={PATH_CHECKOUT}
+          state={{ order: orderUser.order, person: orderUser.person }}
+        >
           Buy TON
         </Link>
       </motion.div>

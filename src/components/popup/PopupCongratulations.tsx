@@ -2,21 +2,27 @@ import classes from "./popupStyle.module.css"
 import iconCongratulations from "../../../public/iconCongratulations.svg"
 import { useState } from "react"
 
-const PopupCongratulations = () => {
-  //   const [open, setOpen] = useState<boolean>(true)
+type PropsType = {
+  flag: boolean
+  hidePopup: () => void
+}
 
-  //   const openPopupCongratulations = () => setOpen(true)
-  //   const closePopupCongratulations = () => setOpen(false)
+const PopupCongratulations = (props: PropsType) => {
+  const { flag, hidePopup } = props
 
-  return (
+  return flag ? (
     <div className={classes.popup}>
       <div className={classes.popupContent}>
         <img src={iconCongratulations} className={classes.popupIcon} />
         <p className={classes.popupTitle}>Congratulations!</p>
         <p className={classes.popupSubtitle}>all went well!</p>
-        <button className={classes.buttonСontinue}>Сontinue</button>
+        <button className={classes.buttonСontinue} onClick={hidePopup}>
+          Сontinue
+        </button>
       </div>
     </div>
+  ) : (
+    <div></div>
   )
 }
 

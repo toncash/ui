@@ -1,4 +1,4 @@
-import {Deal} from "./deal";
+import { Deal } from "./deal"
 
 export enum OrderType {
   BUY,
@@ -22,7 +22,7 @@ export type Order = {
   orderType: OrderType
   orderStatus: OrderStatus
   limit: Limit
-  deals?: Deal [],
+  deals?: Deal[]
   localDateTime?: string
 }
 
@@ -58,11 +58,11 @@ export function createOrder(
     currency,
     orderType,
     orderStatus,
-    limit
+    limit,
   }
 }
 
-export function getEmptyOrder(location: Location) : Order {
+export function getEmptyOrder(location: Location): Order {
   return {
     ownerId: 0,
     amount: 0,
@@ -73,8 +73,8 @@ export function getEmptyOrder(location: Location) : Order {
     orderStatus: OrderStatus.CURRENT,
     limit: {
       min: 0,
-      max: 0
-    }
+      max: 0,
+    },
   }
 }
 

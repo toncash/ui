@@ -9,6 +9,9 @@ export default class OrdersServiceRest implements DataProvider<Order> {
   }
 
   async add(order: Order): Promise<Order> {
+    const x = order.location.x
+    order.location.x = order.location.y
+    order.location.y = x
     const userId = order.ownerId
     return requestRest(`${this.url}?personId=${userId}`, {
       method: "POST",
@@ -50,6 +53,6 @@ function getHeaders(): { "Content-Type": string; Authorization?: string } {
 
 function fetchGet(url: string): Promise<any> {
   return requestRest(url, {
-    method: "GET"
+    method: "GET",
   })
 }

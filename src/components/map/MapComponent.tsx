@@ -18,42 +18,40 @@ export function MapComponent(props: { ordersUsers: OrderUser[] }) {
   const location = useStore(locationData)
   console.log("MapComponent")
   console.log(ordersUsers)
-
+  const centerLocation = !!ordersUsers[0] ? ordersUsers[0].order.location : location
   return (
-    <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_API} libraries={libraries}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={{
-          lat: ordersUsers[0].order.location.x,
-          lng: ordersUsers[0].order.location.y,
-        }}
-        zoom={10}
-        onClick={() => {
-          selectOrder(undefined)
-          console.log(selectedOrder)
-        }}
-        options={{
-          disableDefaultUI: true,
-          clickableIcons: false,
-        }}
-      >
-        {ordersUsers.map((orderUser, i) => (
-          <CustomMarker
-            key={i}
-            lat={orderUser.order.location.x}
-            lng={orderUser.order.location.y}
-            text={`${orderUser.order.amount} TON`}
-            onClick={selectOrder}
-            orderId={orderUser.order.id as string}
-          />
-        ))}
-        {selectedOrder && (
-          <SelectedOrderBox
-            orderUser={ordersUsers.find(o => o.order.id === selectedOrder)}
-            userLocation={{ lat: location.x, lng: location.y }}
-          />
-        )}
-      </GoogleMap>
-    </LoadScript>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={{
+        lat: centerLocation.x,
+        lng: centerLocation.y,
+      }}
+      zoom={10}
+      onClick={() => {
+        selectOrder(undefined)
+        console.log(selectedOrder)
+      }}
+      options={{
+        disableDefaultUI: true,
+        clickableIcons: false,
+      }}
+    >
+      {ordersUsers.map((orderUser, i) => (
+        <CustomMarker
+          key={i}
+          lat={orderUser.order.location.x}
+          lng={orderUser.order.location.y}
+          text={`${orderUser.order.amount} TON`}
+          onClick={selectOrder}
+          orderId={orderUser.order.id as string}
+        />
+      ))}
+      {selectedOrder && (
+        <SelectedOrderBox
+          orderUser={ordersUsers.find(o => o.order.id === selectedOrder)}
+          userLocation={{ lat: location.x, lng: location.y }}
+        />
+      )}
+    </GoogleMap>
   )
 }
