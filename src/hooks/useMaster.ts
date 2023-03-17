@@ -20,5 +20,6 @@ export function useMaster() {
     sendNewAccount: (buyer_address: Address, value: bigint) => {
       return master?.sendNewAccount(sender, value, buyer_address)
     },
+    isDeployed: master?.address ? client?.isContractDeployed( master?.address ) : false
   }
 }

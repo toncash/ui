@@ -32,30 +32,20 @@ export default class DealsUsers {
     await dealContract.sendComplete()
   }
 
-  async acceptDeal(dealId: string, userId: string, buyerAddress: Address, accountContract: any): Promise<Deal> {
+  async acceptDeal(dealId: string | number): Promise<Deal> {
     const { deal } = await this.getDealUser(dealId)
     console.log(deal)
     if (DealStatus[deal.dealStatus] === "CURRENT") {
       // @ts-ignore
       await this.dealService.accept(deal.id)
-      if (deal.sellerId == userId) {
-        console.log("start")
-        console.log("accountContract")
-        console.log(accountContract)
-        const dealContract = await this.createDealContract(buyerAddress, toNano(deal.amount), accountContract)
-        console.log("dealContract")
-        console.log(dealContract)
-        console.log(dealContract.address.toString())
-        console.log("success")
-      }
     }
 
     return deal
   }
 
-  private createDealContract(buyerAddress: Address, amount: bigint, accountContract: any) {
-    return accountContract.sendDeploy(amount, buyerAddress)
-  }
+  // private createDealContract(buyerAddress: Address, amount: bigint, accountContract: any) {
+  //   return accountContract.sendDeploy(amount, buyerAddress)
+  // }
 
   private async isContractDeployed(address: Address): Promise<boolean | undefined> {
     const client = useTonClient()

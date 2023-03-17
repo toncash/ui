@@ -6,6 +6,6 @@ export type DealProps = {
   id?: string | number
   deal: Deal
   order: Order
-  dealOwner: User
   orderOwner: User
+  user: User
 }

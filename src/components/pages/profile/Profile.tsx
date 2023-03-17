@@ -13,15 +13,8 @@ import getAvatar from "../../../utils/getAvatar"
 import { Link } from "react-router-dom"
 import OrderListViewSmall from "../../orderListViewSmall/OrderListViewSmall"
 import { dealsService, ordersUserService } from "../../../config/service-config"
-import { OrderUser } from "../../../models/order-user"
-import { Address, fromNano, toNano } from "ton"
-import { Deal } from "../../../models/deal"
+import { Address, fromNano } from "ton"
 import DealListViewSmall from "../../dealListViewSmall/DealListViewSmall"
-import { Button } from "@mui/material"
-import { useAccount } from "../../../hooks/useAccount"
-import { useCounterContract } from "../../../hooks/useCounterContract"
-import { useDealContract } from "../../../hooks/useDealContract"
-import { useMaster } from "../../../hooks/useMaster"
 import { DealUser } from "../../../models/deal-user"
 import Order from "../../../models/order"
 
@@ -72,14 +65,10 @@ export const Profile = () => {
   const [currentOrders, setCurrentOrders] = useState<Order[]>([])
   const [currentDeals, setCurrentDeals] = useState<DealUser[]>([])
   const user = useStore(userData)
-  let accountContract
-  let dealContract = useDealContract(
-    Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1")
-  )
-  let masterContract
+
   useEffect(() => {
     ordersUserService
-      .getOrderUsersByUser(user.chatId) // TODO собрать сделки которые мне прислали
+      .getOrderUsersByUser(user.chatId)
       .then(res => setCurrentOrders(res))
       .catch(e => console.log(e))
     //
@@ -93,13 +82,12 @@ export const Profile = () => {
     if (!!client.client && !connected) {
       navigate(PATH_LOGIN)
     }
-    // masterContract = useMaster()
+
 
     client.client?.getBalance(Address.parse(wallet as string)).then(res => setBalance(Number(fromNano(res))))
   }, [client])
 
-  // console.log(user)
-  // TODO convert deal to order
+
   const getOrders = () => {
     return currentOrders.map((item, index) => {
       return <OrderListViewSmall order={item} key={index}></OrderListViewSmall>
@@ -140,61 +128,6 @@ export const Profile = () => {
   }, [tg.initDataUnsafe?.user?.id])
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")
-
-  // TODO  вывести сделки
-
-  //  - подставить правильный запрос апи
-
-  // async function getData() {
-  //     const data = await ordersService.getDealsByUser(Number(user.id))
-  //     setAllOrders(data)
-  //   }
-
-  //   const [arrayDeals, setArrayDeals] = useState<Order[]>([])
-
-  //   useEffect(() => {
-  //     getData()
-  //   }, [])
-
-  // - fake data удалить
-
-  const arrayDeals = [
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-      location: "al. Tadeusza Kościuszki 49/51, 90-514 Łódź, Poland",
-      x: 55.7478993,
-      y: 37.673359,
-    },
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-      location: "al. Tadeusza Kościuszki 49/51, 90-514 Łódź, Poland",
-      x: 55.7478993,
-      y: 37.673359,
-    },
-    {
-      src: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Picture.png",
-      id: 32,
-      buyerId: "katya_ulyanova ",
-      amount: "10 000",
-      status: "Сompleted",
-      data: "23.01.2023",
-      location: "al. Tadeusza Kościuszki 49/51, 90-514 Łódź, Poland",
-      x: 55.7478993,
-      y: 37.673359,
-    },
-  ]
-
-  // for filter button
 
   const handleClickSwitchOnlyBitton = () => {
     if (viewOnlyFilter === "buy") {
@@ -279,22 +212,6 @@ export const Profile = () => {
         <div className={classes.viewListOrdersContainer}>{getDeals()}</div>
         <div className={classes.viewListOrdersContainer}>{getOrders()}</div>
       </div>
-      <Button
-        onClick={() => {
-          // dealsService.acceptDeal(
-          //     "6410566b384724250566c838",
-          //     "640f29a0d4dfb1303244f9bc",
-          //     "260316435",
-          //     sender.address as Address,
-          //     Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"),
-          //     accountContract)
-          // masterContract.sendNewAccount(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"), toNano(1))
-          // // accountContract.getDealAddress(Address.parse("0:a9b8202f715bb610544138ff97f0f7793a00cc4a4173ae807593184b03639ce1"))
-          // // console.log("dealContract")
-        }}
-      >
-        create contract
-      </Button>
     </div>
   )
 }

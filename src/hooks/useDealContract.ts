@@ -25,7 +25,7 @@ export function useDealContract(buyer_address: Address) {
       code
     )
     return client.open(contract) as OpenedContract<Account>
-  }, [client, wallet])
+  }, [client, wallet, buyer_address])
 
   const dealContract = useAsyncInitialize(async () => {
     if (!account || !client) return
@@ -50,5 +50,8 @@ export function useDealContract(buyer_address: Address) {
       return dealContract?.sendComplete(sender)
     },
     address: dealContract?.address,
+
+      isDeployed: dealContract?.address ? client?.isContractDeployed(dealContract?.address) : false,
+      balance: async ()=>dealContract?.address? await client?.getBalance(dealContract?.address) : 0
   }
 }
