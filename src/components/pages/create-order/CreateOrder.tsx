@@ -349,7 +349,7 @@ export const CreateOrder = () => {
   })
 
   useEffect(() => {
-    orderUser.order.ownerId = Number(user.id)
+    orderUser.order.ownerId = Number(user.chatId)
     setOrderUser({ ...orderUser })
   }, [])
 

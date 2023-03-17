@@ -15,7 +15,7 @@ export default class OrdersUserServiceRest {
         return res
     }
 
-    async getByOrderId(orderId: string): Promise<OrderUser> {
+    async getByOrderId(orderId: string | number): Promise<OrderUser> {
         return fetchGet(`${this.url}/${orderId}`)
     }
 

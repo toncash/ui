@@ -21,7 +21,7 @@ export function SelectedOrderBox({ orderUser }: CustomMarkerProps) {
   if (!orderUser) return null
   const [avatarUrl, setAvatarUrl] = useState("")
   useEffect(()=>{
-    getAvatar(Number(orderUser.person.id))
+    getAvatar(Number(orderUser.person.chatId))
         .then(res=>setAvatarUrl(res))
   }, [])
   console.log("orderUser")

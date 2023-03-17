@@ -1,6 +1,8 @@
 export enum DealStatus {
     CURRENT,
     PENDING,
+    DENIED,
+    CANCEL,
     FINISH,
     BAD,
 }

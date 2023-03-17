@@ -9,7 +9,7 @@ export default class UsersServiceRest implements DataProvider<User> {
     }
 
     async add(user: User): Promise<User> {
-        return requestRest(`${this.url}/${user.id}`, {
+        return requestRest(`${this.url}/${user.chatId}`, {
             method: "POST",
             headers: getHeaders(),
             body: JSON.stringify(user),

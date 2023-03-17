@@ -37,8 +37,8 @@ const CheckoutDeal = ()=> {
 
     useEffect(()=>{
         deal.dealStatus = DealStatus.CURRENT
-        deal.sellerId = order.orderType===OrderType.SELL ? order.ownerId : user.id
-        deal.buyerId = order.orderType===OrderType.BUY ? order.ownerId : user.id
+        deal.sellerId = order.orderType===OrderType.SELL ? order.ownerId : user.chatId
+        deal.buyerId = order.orderType===OrderType.BUY ? order.ownerId : user.chatId
         setDeal({...deal})
     }, [])
 
@@ -49,9 +49,8 @@ const CheckoutDeal = ()=> {
             return "Amount too big"
         }
 
-        return ""
-
-    }
+    return ""
+  }
 
     function handleChangeAmountToPay(event: any){
         const value = Number(event.target.value)
@@ -86,14 +85,14 @@ const CheckoutDeal = ()=> {
         setErrorAmount(message)
     }
 
-    return (
-        <div>
-            <Link className={classes.backButton} to={PATH_PROFILE}>
-                go back
-            </Link>
-            <div>
-                <h1 className={classes.ordersTitle}>Checkout</h1>
-            </div>
+  return (
+    <div>
+      <Link className={classes.backButton} to={PATH_PROFILE}>
+        go back
+      </Link>
+      <div>
+        <h1 className={classes.ordersTitle}>Checkout</h1>
+      </div>
 
             <div>
                 <UserInfoShort user={orderUser.person} order={orderUser.order}/>

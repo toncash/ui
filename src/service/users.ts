@@ -13,7 +13,7 @@ export default class Users {
         return this.usersService.remove(id)
     }
 
-    getUser(orderId: string): Promise<User> {
+    getUser(orderId: string | number): Promise<User> {
         return this.usersService.get(orderId)
     }
 

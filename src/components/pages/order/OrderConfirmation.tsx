@@ -39,7 +39,7 @@ const OrderConfimation = () => {
   // TODO дописать логику кнопки конфирм
 
   const handleConfirm = async () => {
-    await dealRequest(user.id.toString(), deal)
+    await dealRequest(user.chatId.toString(), deal)
     showPopup()
     navigate(PATH_PROFILE)
   }
