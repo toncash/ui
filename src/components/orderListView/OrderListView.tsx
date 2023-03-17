@@ -9,12 +9,25 @@ import { OrderUser } from "../../models/order-user"
 import getAvatar from "../../utils/getAvatar"
 import { PATH_CHECKOUT } from "../../config/routes-config"
 import { Link } from "react-router-dom"
+import {useComputeDistance} from "../map/useComputeDistance";
+import {useStore} from "@nanostores/react";
+import {locationData} from "../../store/Location";
 
 const OrderListView = ({ orderUser }: { orderUser: OrderUser }) => {
   const [avatarUrl, setAvatarUrl] = useState("")
+  const location = useStore(locationData)
+
+  const distance = useComputeDistance({
+    lat: orderUser.order.location.x,
+    lng: orderUser.order.location.y
+  }, {
+    lat: location.x,
+    lng: location.y
+  })
   useEffect(() => {
     getAvatar(Number(orderUser.person.chatId)).then(res => setAvatarUrl(res))
-  }, [])
+    console.log(distance)
+  }, [location])
   return (
     <Link
       to={PATH_CHECKOUT}
@@ -26,7 +39,7 @@ const OrderListView = ({ orderUser }: { orderUser: OrderUser }) => {
           <ImageAvatar src={avatarUrl} size={36} />
           <div>
             <p className={classes.userName}>@{orderUser.person?.username}</p>
-            <p className={classes.userDistance}>500m away</p>
+            <p className={classes.userDistance}>{distance}m away</p>
           </div>
         </div>
         <div className={classes.infoContainer}>
