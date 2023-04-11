@@ -22,9 +22,9 @@ const DealCurrent = (props: DealProps) => {
   const [amountReceive, setAmountReceive] = useState("")
   const [client, setClient] = useState<User>(getEmptyUser())
 
-  const masterContract = useMaster()
-  const accountContract = useAccount()
-  const dealContract = useDealContract(Address.parse(deal.addressBuyer ? deal.addressBuyer : ""))
+  // const masterContract = useMaster()
+  // const accountContract = useAccount()
+  // const dealContract = useDealContract(Address.parse(deal.addressBuyer ? deal.addressBuyer : ""))
 
   async function getData() {
     if (orderOwner.chatId == user.chatId) {
@@ -106,20 +106,20 @@ const DealCurrent = (props: DealProps) => {
           </button>
           <button
             className={classes.buttonValueCame}
-            onClick={async () => {
-              if (!deal.id) {
-                return
-              }
-              await dealsService.acceptDeal(deal.id)
-              if (!deal.addressBuyer) {
-                return
-              }
-              if (!accountContract.isDeployed) {
-                await masterContract.sendNewAccount(Address.parse(deal.addressBuyer), toNano(deal.amount))
-              } else if (!dealContract.isDeployed || (await dealContract.balance()) == 0) {
-                await accountContract.sendNewDeal(Address.parse(deal.addressBuyer), toNano(deal.amount))
-              }
-            }}
+            // onClick={async () => {
+            //   if (!deal.id) {
+            //     return
+            //   }
+            //   await dealsService.acceptDeal(deal.id)
+            //   if (!deal.addressBuyer) {
+            //     return
+            //   }
+            //   if (!accountContract.isDeployed) {
+            //     await masterContract.sendNewAccount(Address.parse(deal.addressBuyer), toNano(deal.amount))
+            //   } else if (!dealContract.isDeployed || (await dealContract.balance()) == 0) {
+            //     await accountContract.sendNewDeal(Address.parse(deal.addressBuyer), toNano(deal.amount))
+            //   }
+            // }}
           >
             Accept
           </button>

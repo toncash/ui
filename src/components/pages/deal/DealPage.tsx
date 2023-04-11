@@ -37,22 +37,27 @@ const DealPage = () => {
   }, [])
 
   if (String(deal.dealStatus) === "CURRENT") {
+    console.log("this is DealCurrent")
     return <DealCurrent deal={deal} order={order} id={id} user={user} orderOwner={orderOwner} />
   }
 
   if (String(deal.dealStatus) === "PENDING") {
+    console.log("this is DealPending")
     return <DealPending deal={deal} order={order} id={id} user={user} orderOwner={orderOwner} />
   }
 
   if (String(deal.dealStatus) === "DENIED") {
+    console.log("this is DealDenied")
     return <DealDenied deal={deal} order={order} id={id} user={user} orderOwner={orderOwner} />
   }
 
   if (String(deal.dealStatus) === "CANCEL") {
+    console.log("this is DealCancel")
     return <DealCancel deal={deal} order={order} id={id} user={user} orderOwner={orderOwner} />
   }
 
   if (String(deal.dealStatus) === "FINISH") {
+    console.log("this is DealFinish")
     return <DealFinish deal={deal} order={order} id={id} user={user} orderOwner={orderOwner} />
   }
 

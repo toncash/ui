@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {useRef, useState} from "react"
 import { GoogleMap, LoadScript } from "@react-google-maps/api"
 import CustomMarker from "./CustomMarker"
 import { SelectedOrderBox } from "./SelectedOrderBox"
@@ -14,18 +14,25 @@ const libraries = ["geometry"] as ["geometry"]
 
 export function MapComponent(props: { ordersUsers: OrderUser[] }) {
   const [selectedOrder, selectOrder] = useState<string>()
+    const refMap = useRef<GoogleMap>(null)
   let { ordersUsers } = props
   const location = useStore(locationData)
-  console.log("MapComponent")
-  console.log(ordersUsers)
-  const centerLocation = !!ordersUsers[0] ? ordersUsers[0].order.location : location
+    refMap.current?.state.map?.setCenter({
+
+    })
+  let centerLocation = refMap.current?.state.map?.getCenter() ? refMap.current?.state.map?.getCenter() :
+      {
+        lat: location.x,
+        lng: location.y,
+      }
+
   return (
     <GoogleMap
+        ref={refMap}
       mapContainerStyle={containerStyle}
-      center={{
-        lat: centerLocation.x,
-        lng: centerLocation.y,
-      }}
+      center={
+          centerLocation
+      }
       zoom={10}
       onClick={() => {
         selectOrder(undefined)
