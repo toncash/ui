@@ -13,6 +13,7 @@ import { useStore } from "@nanostores/react"
 import { locationData } from "../../../store/Location"
 import { userData } from "../../../store/UserData"
 import { Button } from "@mui/material"
+import {MapView} from "../../map/MapView";
 
 const CurrentOrder: FC = () => {
   const [order, setOrder] = useState<Order>({
@@ -36,11 +37,12 @@ const CurrentOrder: FC = () => {
   const user = useStore(userData)
 
   async function getData() {
-    console.log("start")
     console.log(id)
-    const { order, person } = await ordersUserService.getOrderUser(id as string)
-    setOrder(order)
-    setPerson(person)
+    const orderUser = await ordersUserService.getOrderUser(id as string)
+    console.log("orderUser")
+    console.log(orderUser)
+    setOrder(orderUser.order)
+    setPerson(orderUser.person)
     if (user.chatId === person.chatId) {
       setAvatarUrl("../my_order.png")
     } else {
@@ -51,7 +53,6 @@ const CurrentOrder: FC = () => {
   useEffect(() => {
     getData()
   }, [])
-
   return (
     <div>
       <section className={classes.orderPage}>
@@ -102,7 +103,7 @@ const CurrentOrder: FC = () => {
       </section>
       <div className={classesMap.orders} style={{ height: "300px" }}>
         <div className={classesMap.viewListOrdersContainer}>
-          <MapComponent ordersUsers={[{ order, person }]} />
+          <MapView order={order} />
         </div>
       </div>
     </div>

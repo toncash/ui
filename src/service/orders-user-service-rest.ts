@@ -11,7 +11,7 @@ export default class OrdersUserServiceRest {
 
   async getByGeo(lat: number, lng: number): Promise<OrderUser[]> {
     const res = await fetchGet(`${this.url}/location?location=${lat},${lng}&distance=90.5`)
-
+    console.log("getByGeo - ", res)
     return res
   }
 

@@ -47,7 +47,7 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
         animate={{ scale: 1 }}
         transition={{
           type: "spring",
-          duration: 0.25,
+          duration: .65,
         }}
       >
         <div className={classes.userCard}>

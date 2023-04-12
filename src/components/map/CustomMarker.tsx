@@ -18,6 +18,7 @@ const getPixelPositionOffset = (width: number, height: number) => ({
 export default function CustomMarker({ orderId, text, lat, lng, onClick }: CustomMarkerProps) {
   const handleClick = useCallback<React.MouseEventHandler<HTMLDivElement>>(
     e => {
+        console.log(e)
       e.stopPropagation()
       e.preventDefault()
       onClick(orderId)
@@ -32,7 +33,7 @@ export default function CustomMarker({ orderId, text, lat, lng, onClick }: Custo
         lng,
       }}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-      getPixelPositionOffset={getPixelPositionOffset}
+      // getPixelPositionOffset={getPixelPositionOffset}
     >
       <div className={classes.priceTag} onClick={handleClick}>
         {text}

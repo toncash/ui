@@ -13,15 +13,19 @@ export default class OrdersServiceRest implements DataProvider<Order> {
     order.location.x = order.location.y
     order.location.y = x
     const userId = order.ownerId
+    console.log("order created - ", order)
     return requestRest(`${this.url}?personId=${userId}`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify(order),
     })
+
   }
 
   async get(orderId: string): Promise<Order> {
-    return fetchGet(`${this.url}/${orderId}`)
+    const order = fetchGet(`${this.url}/${orderId}`)
+    console.log("order created - " + await order)
+    return order
   }
 
   async getByUser(userId: number): Promise<Order[]> {

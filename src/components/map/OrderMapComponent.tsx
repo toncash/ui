@@ -22,6 +22,10 @@ export function OrderMapComponent(props: LocationProps) {
 
   const refMap = useRef<GoogleMap>(null)
   const location = useStore(locationData)
+    let centerLocation = {
+        lat: location.x,
+        lng: location.y
+    }
   console.log("location - ", location)
   const handleConfirm = () => {
     const mapCenter = refMap.current?.state.map?.getCenter()
@@ -38,7 +42,11 @@ export function OrderMapComponent(props: LocationProps) {
         ref={refMap}
         mapContainerStyle={containerStyle}
         zoom={10}
-        center={{ lat: location.x, lng: location.y }}
+        center={
+            !refMap.current?.state.map?.getCenter() ?
+                centerLocation
+                : refMap.current?.state.map?.getCenter()
+        }
       >
         <GoogleMapRedMarker />
       </GoogleMap>

@@ -69,7 +69,11 @@ export const Profile = () => {
   useEffect(() => {
     ordersUserService
       .getOrderUsersByUser(user.chatId)
-      .then(res => setCurrentOrders(res))
+      .then(res => {
+        setCurrentOrders(res)
+        console.log("profile")
+        console.log(res)
+      })
       .catch(e => console.log(e))
     //
     dealsService

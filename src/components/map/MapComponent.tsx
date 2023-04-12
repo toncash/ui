@@ -1,4 +1,4 @@
-import {useRef, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import { GoogleMap, LoadScript } from "@react-google-maps/api"
 import CustomMarker from "./CustomMarker"
 import { SelectedOrderBox } from "./SelectedOrderBox"
@@ -15,18 +15,19 @@ const libraries = ["geometry"] as ["geometry"]
 export function MapComponent(props: { ordersUsers: OrderUser[] }) {
   const [selectedOrder, selectOrder] = useState<string>()
     const refMap = useRef<GoogleMap>(null)
-  let { ordersUsers } = props
+
+    let ordersUsers = useRef<OrderUser []>([...props.ordersUsers])
   const location = useStore(locationData)
-    refMap.current?.state.map?.setCenter({
-
-    })
-  let centerLocation = refMap.current?.state.map?.getCenter() ? refMap.current?.state.map?.getCenter() :
+    const mapCenter = refMap.current?.state.map?.getCenter()
+  let [centerLocation, setCenterLocation] = useState(
       {
-        lat: location.x,
-        lng: location.y,
+          lat: location.x,
+          lng: location.y
       }
+  )
 
-  return (
+    console.log(ordersUsers.current)
+  return ordersUsers.current?(
     <GoogleMap
         ref={refMap}
       mapContainerStyle={containerStyle}
@@ -43,7 +44,17 @@ export function MapComponent(props: { ordersUsers: OrderUser[] }) {
         clickableIcons: false,
       }}
     >
-      {ordersUsers.map((orderUser, i) => (
+        {/*<CustomMarker*/}
+        {/*    */}
+        {/*    lat={34.644934096093735}*/}
+        {/*    lng={31.202137805176825}*/}
+        {/*    text={"123 TON"}*/}
+        {/*    */}
+        {/*>*/}
+
+        {/*</CustomMarker>*/}
+      {ordersUsers.current.map((orderUser, i) => (
+          orderUser.order.id!==selectedOrder?
         <CustomMarker
           key={i}
           lat={orderUser.order.location.x}
@@ -51,14 +62,18 @@ export function MapComponent(props: { ordersUsers: OrderUser[] }) {
           text={`${orderUser.order.amount} TON`}
           onClick={selectOrder}
           orderId={orderUser.order.id as string}
-        />
+        /> :
+              <SelectedOrderBox
+                  orderUser={ordersUsers.current.find(o => o.order.id === selectedOrder)}
+                  userLocation={{ lat: location.x, lng: location.y }}
+              />
       ))}
-      {selectedOrder && (
-        <SelectedOrderBox
-          orderUser={ordersUsers.find(o => o.order.id === selectedOrder)}
-          userLocation={{ lat: location.x, lng: location.y }}
-        />
-      )}
+      {/*{selectedOrder && (*/}
+      {/*  <SelectedOrderBox*/}
+      {/*    orderUser={ordersUsers.find(o => o.order.id === selectedOrder)}*/}
+      {/*    userLocation={{ lat: location.x, lng: location.y }}*/}
+      {/*  />*/}
+      {/*)}*/}
     </GoogleMap>
-  )
+  ): (<div>loading</div>)
 }

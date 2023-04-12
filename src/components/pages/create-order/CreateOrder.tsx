@@ -14,6 +14,7 @@ import { OrderUser } from "../../../models/order-user"
 import { locationData } from "../../../store/Location"
 import classes from "./CreateOrder.module.css"
 import ButtonBack from "../../buttonBack/ButtonBack"
+import {MapView} from "../../map/MapView";
 
 export const TextTitle = styled.div`
   margin: auto;
@@ -246,7 +247,7 @@ const StepTwo = (props: Step) => {
         <h1 className={classes.orderTitle}>New order</h1>
       </div>
 
-      <MapComponent ordersUsers={[orderUser]} />
+      <MapView order={orderUser.order} />
 
       <button onClick={() => setStep(2)} className={classes.buttonLocation}>
         Choose your location:
