@@ -1,5 +1,5 @@
-import { useCallback } from "react"
-import { OverlayView } from "@react-google-maps/api"
+import React, { useCallback } from "react"
+import { OverlayViewF, OverlayView } from "@react-google-maps/api"
 import classes from "./Map.module.css"
 
 interface CustomMarkerProps {
@@ -18,7 +18,7 @@ const getPixelPositionOffset = (width: number, height: number) => ({
 export default function CustomMarker({ orderId, text, lat, lng, onClick }: CustomMarkerProps) {
   const handleClick = useCallback<React.MouseEventHandler<HTMLDivElement>>(
     e => {
-        console.log(e)
+      console.log(e)
       e.stopPropagation()
       e.preventDefault()
       onClick(orderId)
@@ -27,17 +27,18 @@ export default function CustomMarker({ orderId, text, lat, lng, onClick }: Custo
   )
 
   return (
-    <OverlayView
+    <OverlayViewF
+      children={
+        <div className={classes.priceTag} onClick={handleClick}>
+          {text}
+        </div>
+      }
       position={{
         lat,
         lng,
       }}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-      // getPixelPositionOffset={getPixelPositionOffset}
-    >
-      <div className={classes.priceTag} onClick={handleClick}>
-        {text}
-      </div>
-    </OverlayView>
+      getPixelPositionOffset={getPixelPositionOffset}
+    />
   )
 }

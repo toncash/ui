@@ -13,7 +13,7 @@ import { useStore } from "@nanostores/react"
 import { locationData } from "../../../store/Location"
 import { userData } from "../../../store/UserData"
 import { Button } from "@mui/material"
-import {MapView} from "../../map/MapView";
+import { MapView } from "../../map/MapView"
 
 const CurrentOrder: FC = () => {
   const [order, setOrder] = useState<Order>({
@@ -103,7 +103,7 @@ const CurrentOrder: FC = () => {
       </section>
       <div className={classesMap.orders} style={{ height: "300px" }}>
         <div className={classesMap.viewListOrdersContainer}>
-          <MapView order={order} />
+          <MapView order={order} startLocation={order.location} />
         </div>
       </div>
     </div>

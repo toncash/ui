@@ -19,12 +19,11 @@ export default class OrdersServiceRest implements DataProvider<Order> {
       headers: getHeaders(),
       body: JSON.stringify(order),
     })
-
   }
 
   async get(orderId: string): Promise<Order> {
     const order = fetchGet(`${this.url}/${orderId}`)
-    console.log("order created - " + await order)
+    console.log("order created - " + (await order))
     return order
   }
 

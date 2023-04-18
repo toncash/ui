@@ -5,6 +5,7 @@ import { OrderUser } from "../../models/order-user"
 import { useStore } from "@nanostores/react"
 import { locationData } from "../../store/Location"
 import classes from "./style.module.css"
+import { options } from "./optionMap"
 
 const containerStyle = {
   width: "100%",
@@ -22,11 +23,11 @@ export function OrderMapComponent(props: LocationProps) {
 
   const refMap = useRef<GoogleMap>(null)
   const location = useStore(locationData)
-    let centerLocation = {
-        lat: location.x,
-        lng: location.y
-    }
-  console.log("location - ", location)
+  let centerLocation = {
+    lat: location.x,
+    lng: location.y,
+  }
+
   const handleConfirm = () => {
     const mapCenter = refMap.current?.state.map?.getCenter()
     if (!mapCenter) throw Error("Missing map center")
@@ -42,11 +43,8 @@ export function OrderMapComponent(props: LocationProps) {
         ref={refMap}
         mapContainerStyle={containerStyle}
         zoom={10}
-        center={
-            !refMap.current?.state.map?.getCenter() ?
-                centerLocation
-                : refMap.current?.state.map?.getCenter()
-        }
+        center={!refMap.current?.state.map?.getCenter() ? centerLocation : refMap.current?.state.map?.getCenter()}
+        options={options}
       >
         <GoogleMapRedMarker />
       </GoogleMap>

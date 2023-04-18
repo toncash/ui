@@ -14,7 +14,7 @@ import { OrderUser } from "../../../models/order-user"
 import { locationData } from "../../../store/Location"
 import classes from "./CreateOrder.module.css"
 import ButtonBack from "../../buttonBack/ButtonBack"
-import {MapView} from "../../map/MapView";
+import { MapView } from "../../map/MapView"
 
 export const TextTitle = styled.div`
   margin: auto;
@@ -233,6 +233,7 @@ const StepTwo = (props: Step) => {
   const [errorLimitMinMessage, setErrorLimitMinMessage] = useState("")
   const [errorLimitMaxMessage, setErrorLimitMaxMessage] = useState("")
   const navigate = useNavigate()
+  const location = useStore(locationData)
   function validateFn(value: number) {
     if (value > 0) {
       return ""
@@ -247,7 +248,7 @@ const StepTwo = (props: Step) => {
         <h1 className={classes.orderTitle}>New order</h1>
       </div>
 
-      <MapView order={orderUser.order} />
+      <MapView order={orderUser.order} startLocation={location} />
 
       <button onClick={() => setStep(2)} className={classes.buttonLocation}>
         Choose your location:

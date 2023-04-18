@@ -40,7 +40,7 @@ const App = () => {
     } catch (ex) {
       setErrorLocationData("catch")
     }
-  }, [location])
+  }, [])
 
   return (
     <StyledApp>

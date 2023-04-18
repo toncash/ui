@@ -26,7 +26,6 @@ const OrderListView = ({ orderUser }: { orderUser: OrderUser }) => {
   )
   useEffect(() => {
     getAvatar(Number(orderUser.person.chatId)).then(res => setAvatarUrl(res))
-    console.log(distance)
   }, [location])
   return (
     <Link

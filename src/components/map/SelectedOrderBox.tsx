@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { OverlayView } from "@react-google-maps/api"
+import { OverlayViewF, OverlayView } from "@react-google-maps/api"
 import classes from "./Map.module.css"
 import { Link } from "react-router-dom"
 import { PATH_CHECKOUT } from "../../config/routes-config"
@@ -25,8 +25,6 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
   useEffect(() => {
     getAvatar(Number(orderUser.person.chatId)).then(res => setAvatarUrl(res))
   }, [])
-  console.log("orderUser")
-  console.log(orderUser)
 
   const orderLocation = {
     lat: orderUser.order.location.x,
@@ -36,7 +34,7 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
   const distance = useComputeDistance(orderLocation, userLocation)
 
   return (
-    <OverlayView
+    <OverlayViewF
       position={orderLocation}
       mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       getPixelPositionOffset={getPixelPositionOffset}
@@ -47,7 +45,7 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
         animate={{ scale: 1 }}
         transition={{
           type: "spring",
-          duration: .65,
+          duration: 0.65,
         }}
       >
         <div className={classes.userCard}>
@@ -55,7 +53,7 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
           <div className={classes.userCardRight}>
             <div className={classes.userSlug}>@{orderUser.person.username}</div>
             <div className={classes.userInfo}>
-              {distance ? `${convertMetersToKilometers(distance)} away` : "Distance unknown"}, сompletion:{" "}
+              {distance !== undefined ? `${convertMetersToKilometers(distance)} away` : "Distance unknown"}, сompletion:{" "}
               <span className={classes.userSuccessPercent}>97%</span>
             </div>
           </div>
@@ -81,6 +79,6 @@ export function SelectedOrderBox({ orderUser, userLocation }: CustomMarkerProps)
           Buy TON
         </Link>
       </motion.div>
-    </OverlayView>
+    </OverlayViewF>
   )
 }

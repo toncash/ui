@@ -19,14 +19,16 @@ const FindOrders = () => {
   const user = useStore(userData)
   const location = useStore(locationData)
   async function getData() {
+    console.log("my location + ", location)
     const data = await ordersUserService.getOrderUsersByGeo(location.x, location.y)
-    console.log("allOrders2")
-    console.log(data)
     setAllOrders(data)
+    console.log(data)
   }
 
   useEffect(() => {
-    getData()
+    if (allOrders.length === 0) {
+      getData()
+    }
   }, [location])
 
   const [viewOnlyFilter, setViewOnlyFilter] = useState<"buy" | "sell">("sell")

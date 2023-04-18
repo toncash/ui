@@ -10,7 +10,6 @@ export default class OrderUsers {
   }
 
   getOrderUsersByGeo(x: number, y: number): Promise<OrderUser[]> {
-    console.log("step1")
     return this.ordersUserService.getByGeo(x, y)
   }
 

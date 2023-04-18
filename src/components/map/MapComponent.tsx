@@ -1,10 +1,11 @@
-import {useEffect, useRef, useState} from "react"
-import { GoogleMap, LoadScript } from "@react-google-maps/api"
+import React, { useEffect, useMemo, useRef, useState } from "react"
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api"
 import CustomMarker from "./CustomMarker"
 import { SelectedOrderBox } from "./SelectedOrderBox"
 import { OrderUser } from "../../models/order-user"
 import { useStore } from "@nanostores/react"
 import { locationData } from "../../store/Location"
+import { options } from "./optionMap"
 
 const containerStyle = {
   display: "flex",
@@ -14,66 +15,69 @@ const libraries = ["geometry"] as ["geometry"]
 
 export function MapComponent(props: { ordersUsers: OrderUser[] }) {
   const [selectedOrder, selectOrder] = useState<string>()
-    const refMap = useRef<GoogleMap>(null)
 
-    let ordersUsers = useRef<OrderUser []>([...props.ordersUsers])
+  let { ordersUsers } = props
+
   const location = useStore(locationData)
-    const mapCenter = refMap.current?.state.map?.getCenter()
-  let [centerLocation, setCenterLocation] = useState(
-      {
-          lat: location.x,
-          lng: location.y
-      }
+  const centerLocation = useMemo(
+    () => ({
+      lat: location.x,
+      lng: location.y,
+    }),
+    []
   )
+  const onZoomChanged = () => {
+    // console.log("onZoomChanged")
+  }
+  const handleDragStarted = () => {
+    // console.log("handleDragStarted") //
+  }
+  const handleDragEnded = () => {
+    // console.log("handleDragEnded") //
+  }
+  const onBoundsChanged = () => {
+    // console.log("onBoundsChanged") //
+  }
+  const onLoad = () => {
+    // console.log("onLoad")
+  }
 
-    console.log(ordersUsers.current)
-  return ordersUsers.current?(
+  console.log(ordersUsers)
+  return ordersUsers ? (
     <GoogleMap
-        ref={refMap}
+      onZoomChanged={onZoomChanged}
+      onDragStart={handleDragStarted}
+      onDragEnd={handleDragEnded}
+      onLoad={onLoad}
+      onBoundsChanged={onBoundsChanged}
       mapContainerStyle={containerStyle}
-      center={
-          centerLocation
-      }
-      zoom={10}
+      center={centerLocation}
+      zoom={15}
       onClick={() => {
         selectOrder(undefined)
-        console.log(selectedOrder)
       }}
-      options={{
-        disableDefaultUI: true,
-        clickableIcons: false,
-      }}
+      options={options}
     >
-        {/*<CustomMarker*/}
-        {/*    */}
-        {/*    lat={34.644934096093735}*/}
-        {/*    lng={31.202137805176825}*/}
-        {/*    text={"123 TON"}*/}
-        {/*    */}
-        {/*>*/}
-
-        {/*</CustomMarker>*/}
-      {ordersUsers.current.map((orderUser, i) => (
-          orderUser.order.id!==selectedOrder?
-        <CustomMarker
-          key={i}
-          lat={orderUser.order.location.x}
-          lng={orderUser.order.location.y}
-          text={`${orderUser.order.amount} TON`}
-          onClick={selectOrder}
-          orderId={orderUser.order.id as string}
-        /> :
-              <SelectedOrderBox
-                  orderUser={ordersUsers.current.find(o => o.order.id === selectedOrder)}
-                  userLocation={{ lat: location.x, lng: location.y }}
-              />
-      ))}
-      {/*{selectedOrder && (*/}
-      {/*  <SelectedOrderBox*/}
-      {/*    orderUser={ordersUsers.find(o => o.order.id === selectedOrder)}*/}
-      {/*    userLocation={{ lat: location.x, lng: location.y }}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {ordersUsers.map((orderUser, i) =>
+        orderUser.order.id !== selectedOrder ? (
+          <CustomMarker
+            key={i}
+            lat={orderUser.order.location.x}
+            lng={orderUser.order.location.y}
+            text={`${orderUser.order.amount} TON`}
+            onClick={selectOrder}
+            orderId={orderUser.order.id as string}
+          />
+        ) : (
+          <SelectedOrderBox
+            key={i}
+            orderUser={ordersUsers.find(o => o.order.id === selectedOrder)}
+            userLocation={{ lat: location.x, lng: location.y }}
+          />
+        )
+      )}
     </GoogleMap>
-  ): (<div>loading</div>)
+  ) : (
+    <div>loading</div>
+  )
 }

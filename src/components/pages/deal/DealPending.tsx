@@ -98,7 +98,7 @@ const DealPending = (props: DealProps) => {
           <p className={classes.infoItemValue}>{isDealOwner ? amountPay : amountReceive}</p>
         </div>
       </div>
-      <MapView order={order} />
+      <MapView order={order} startLocation={order.location}/>
       {!isDealOwner ? (
         <div className={classes.buttonContainer}>
           <button

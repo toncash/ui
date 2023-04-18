@@ -18,8 +18,9 @@ const libraries = ["geometry"] as ["geometry"]
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <TonConnectUIProvider manifestUrl={manifestUrl}>
     <QueryClientProvider client={queryClient}>
-      <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_API} libraries={libraries} />
-      <App />
+      <LoadScript googleMapsApiKey={import.meta.env.VITE_MAP_API} libraries={libraries}>
+        <App />
+      </LoadScript>
     </QueryClientProvider>
   </TonConnectUIProvider>
 )
